@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
     @Environment(\.managedObjectContext) var context
-    @FetchRequest(fetchRequest: Scheduler.getSchedulers()) var schedulers: FetchedResults<Scheduler>
+    @FetchRequest(fetchRequest: Scheduler.fetchRequest(.all)) var schedulers: FetchedResults<Scheduler>
     
     @State private var newScheduler = ""
     
@@ -19,28 +19,19 @@ struct ContentView: View {
             List{
                 HStack{
                     TextField("New Scheduler", text: $newScheduler)
-                    Button(action: {
-                        let scheduler = Scheduler(context: context)
-                        scheduler.name_ = newScheduler
-                        scheduler.createdAt = Date()
-                        
-                        do {
-                            try context.save()
-                        }catch{
-                            print(error)
-                        }
-                        newScheduler = ""
-                    }, label: {
+                    Button(action: addNewScheduler, label: {
                         Image(systemName: "plus.circle")
                             .imageScale(.large)
                     })
                 }
                 ForEach(schedulers){ scheduler in
-                    VStack{
-                        Text(scheduler.name_!)
-                            .font(.largeTitle)
-                        Text("\(scheduler.createdAt!)")
-                            .font(.caption)
+                    NavigationLink(destination: SchedulerView(context: context).environmentObject(scheduler)){
+                        VStack{
+                            Text(scheduler.name ?? "untitled")
+                                .font(.largeTitle)
+                            Text("\(scheduler.createdAt!)")
+                                .font(.caption)
+                        }
                     }
                 }
             }.navigationTitle(Text("TODO TEST LIST"))
@@ -49,4 +40,18 @@ struct ContentView: View {
             }),trailing: EditButton())
         }
     }
-}
+    
+    private func addNewScheduler() -> (Void){
+        let scheduler = Scheduler(context: context)
+        scheduler.name = newScheduler
+        scheduler.createdAt = Date()
+       
+        do {
+            try context.save()
+        }catch{
+            print(error)
+        }
+        newScheduler = ""
+        }
+    }
+

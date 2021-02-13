@@ -2,18 +2,18 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20C69" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Scheduler" representedClassName="Scheduler" syncable="YES" codeGenerationType="class">
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="name_" optional="YES" attributeType="String"/>
-        <relationship name="todoTasks_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TodoTask" inverseName="scheduler" inverseEntity="TodoTask"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="todoTasks_" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TodoTask" inverseName="scheduler" inverseEntity="TodoTask"/>
     </entity>
     <entity name="TodoTask" representedClassName="TodoTask" syncable="YES" codeGenerationType="class">
         <attribute name="color_" optional="YES" attributeType="Transformable" valueTransformerName="SerializableColorTransformer" customClassName="SerializableColor"/>
-        <attribute name="endTime_" attributeType="String"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="startTime_" attributeType="String"/>
+        <attribute name="endTime_" optional="YES" attributeType="String"/>
+        <attribute name="name_" optional="YES" attributeType="String"/>
+        <attribute name="startTime_" optional="YES" attributeType="String"/>
         <relationship name="scheduler" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Scheduler" inverseName="todoTasks_" inverseEntity="Scheduler"/>
     </entity>
     <elements>
-        <element name="Scheduler" positionX="-161" positionY="148" width="128" height="88"/>
+        <element name="Scheduler" positionX="-161" positionY="148" width="128" height="74"/>
         <element name="TodoTask" positionX="5" positionY="-20" width="128" height="104"/>
     </elements>
 </model>

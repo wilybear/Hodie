@@ -19,13 +19,7 @@ extension Scheduler : Comparable{
         request.predicate = predicate
         return request
     }
-    
-    static func getSchedulers() -> NSFetchRequest<Scheduler> {
-        let request = NSFetchRequest<Scheduler>(entityName: "Scheduler")
-        request.sortDescriptors = [NSSortDescriptor(key:"createdAt", ascending: true)]
-        return request
-    }
-    
+
     var todoTasks: Set<TodoTask>{
         get{ todoTasks_ as? Set<TodoTask> ?? [] }
         set{ todoTasks_ = newValue as NSSet}

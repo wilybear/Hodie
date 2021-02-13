@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		376BAF0325D69FF00010270F /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376BAF0225D69FF00010270F /* FoundationExtensions.swift */; };
+		376BAF0625D6A2170010270F /* SchedulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376BAF0525D6A2170010270F /* SchedulerView.swift */; };
+		376BAF0E25D6AD070010270F /* TaskEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376BAF0D25D6AD070010270F /* TaskEditorView.swift */; };
 		37DA0F8B25D4252A003CFB66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA0F8A25D4252A003CFB66 /* AppDelegate.swift */; };
 		37DA0F8D25D4252A003CFB66 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA0F8C25D4252A003CFB66 /* SceneDelegate.swift */; };
 		37DA0F8F25D4252A003CFB66 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA0F8E25D4252A003CFB66 /* ContentView.swift */; };
@@ -20,18 +23,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		376BAF0225D69FF00010270F /* FoundationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FoundationExtensions.swift; path = Hodie/Extension/FoundationExtensions.swift; sourceTree = SOURCE_ROOT; };
+		376BAF0525D6A2170010270F /* SchedulerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SchedulerView.swift; path = Hodie/SchedulerView.swift; sourceTree = SOURCE_ROOT; };
+		376BAF0D25D6AD070010270F /* TaskEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TaskEditorView.swift; path = Hodie/TaskEditorView.swift; sourceTree = SOURCE_ROOT; };
 		37DA0F8725D4252A003CFB66 /* Hodie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hodie.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		37DA0F8A25D4252A003CFB66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		37DA0F8C25D4252A003CFB66 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		37DA0F8E25D4252A003CFB66 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		37DA0F8A25D4252A003CFB66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Hodie/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
+		37DA0F8C25D4252A003CFB66 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = Hodie/SceneDelegate.swift; sourceTree = SOURCE_ROOT; };
+		37DA0F8E25D4252A003CFB66 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = Hodie/ContentView.swift; sourceTree = SOURCE_ROOT; };
 		37DA0F9125D4252A003CFB66 /* hodie.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = hodie.xcdatamodel; sourceTree = "<group>"; };
 		37DA0F9325D4252B003CFB66 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		37DA0F9625D4252B003CFB66 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		37DA0F9925D4252B003CFB66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		37DA0F9B25D4252B003CFB66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		37DA0FD025D5250F003CFB66 /* TodoTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTask.swift; sourceTree = "<group>"; };
-		37DA0FD325D5251C003CFB66 /* Scheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scheduler.swift; sourceTree = "<group>"; };
-		37DA0FD725D65CBD003CFB66 /* SerializableColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerializableColor.swift; sourceTree = "<group>"; };
+		37DA0FD025D5250F003CFB66 /* TodoTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TodoTask.swift; path = Hodie/Model/TodoTask.swift; sourceTree = SOURCE_ROOT; };
+		37DA0FD325D5251C003CFB66 /* Scheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Scheduler.swift; path = Hodie/Model/Scheduler.swift; sourceTree = SOURCE_ROOT; };
+		37DA0FD725D65CBD003CFB66 /* SerializableColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SerializableColor.swift; path = Hodie/Extension/SerializableColor.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +51,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		376BAF0925D6A9650010270F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				37DA0F8E25D4252A003CFB66 /* ContentView.swift */,
+				376BAF0525D6A2170010270F /* SchedulerView.swift */,
+				376BAF0D25D6AD070010270F /* TaskEditorView.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		376BAF0A25D6A9920010270F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				37DA0FD025D5250F003CFB66 /* TodoTask.swift */,
+				37DA0FD325D5251C003CFB66 /* Scheduler.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		376BAF0B25D6AA760010270F /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				376BAF0225D69FF00010270F /* FoundationExtensions.swift */,
+				37DA0FD725D65CBD003CFB66 /* SerializableColor.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		37DA0F7E25D4252A003CFB66 = {
 			isa = PBXGroup;
 			children = (
@@ -64,17 +98,16 @@
 		37DA0F8925D4252A003CFB66 /* Hodie */ = {
 			isa = PBXGroup;
 			children = (
+				376BAF0B25D6AA760010270F /* Extension */,
+				376BAF0A25D6A9920010270F /* Model */,
+				376BAF0925D6A9650010270F /* View */,
 				37DA0F8A25D4252A003CFB66 /* AppDelegate.swift */,
 				37DA0F8C25D4252A003CFB66 /* SceneDelegate.swift */,
-				37DA0F8E25D4252A003CFB66 /* ContentView.swift */,
 				37DA0F9325D4252B003CFB66 /* Assets.xcassets */,
 				37DA0F9825D4252B003CFB66 /* LaunchScreen.storyboard */,
 				37DA0F9B25D4252B003CFB66 /* Info.plist */,
 				37DA0F9025D4252A003CFB66 /* hodie.xcdatamodeld */,
-				37DA0FD725D65CBD003CFB66 /* SerializableColor.swift */,
 				37DA0F9525D4252B003CFB66 /* Preview Content */,
-				37DA0FD025D5250F003CFB66 /* TodoTask.swift */,
-				37DA0FD325D5251C003CFB66 /* Scheduler.swift */,
 			);
 			path = Hodie;
 			sourceTree = "<group>";
@@ -160,7 +193,10 @@
 				37DA0FD825D65CBD003CFB66 /* SerializableColor.swift in Sources */,
 				37DA0F8B25D4252A003CFB66 /* AppDelegate.swift in Sources */,
 				37DA0F8D25D4252A003CFB66 /* SceneDelegate.swift in Sources */,
+				376BAF0625D6A2170010270F /* SchedulerView.swift in Sources */,
+				376BAF0E25D6AD070010270F /* TaskEditorView.swift in Sources */,
 				37DA0FD125D5250F003CFB66 /* TodoTask.swift in Sources */,
+				376BAF0325D69FF00010270F /* FoundationExtensions.swift in Sources */,
 				37DA0FD425D5251C003CFB66 /* Scheduler.swift in Sources */,
 				37DA0F8F25D4252A003CFB66 /* ContentView.swift in Sources */,
 				37DA0F9225D4252A003CFB66 /* hodie.xcdatamodeld in Sources */,
