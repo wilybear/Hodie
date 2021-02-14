@@ -11,15 +11,12 @@ import CoreData
 struct SchedulerView: View {
     @Environment(\.managedObjectContext) var context
     @EnvironmentObject var scheduler: Scheduler
-    @State private var newName = ""
-    @State private var isPresent = false
-    @State private var isUpdatePresent = false
-    @State private var newTask: TodoTask
     
-    init (context: NSManagedObjectContext){
-        _newTask = State(wrappedValue: TodoTask(context: context))
-    }
-    
+    @State private var showingEditorView = false
+    @State private var selelctedTask: TodoTask?
+    @State private var confirmDeletePresent = false
+
+
     var body : some View {
         NavigationView{
             List{
@@ -29,27 +26,28 @@ struct SchedulerView: View {
                         Text("\(DateFormatter.timeFormatter.string(from: todoTask.startTime) ) ~ \(DateFormatter.timeFormatter.string(from: todoTask.endTime))")
                     }.foregroundColor(todoTask.color.color)
                     .onLongPressGesture {
-                        isPresent = true
-                    }
-                    .sheet(isPresented: $isUpdatePresent){
-                        TaskEditorView(task: Binding<TodoTask>(
-                                        get:{
-                                            scheduler.todoTasks.getObject(matching: todoTask)
-                                        },
-                                        set:{
-                                            scheduler.todoTasks.update(with: $0)
-                                        }
-                        ),isPresent: $isPresent)
+                        selelctedTask = todoTask
+                        showingEditorView = true
                     }
                 }
-            } .navigationBarItems(leading: Button(action: {
-                isPresent = true
+            }
+            .sheet(item: $selelctedTask, onDismiss: {
+                selelctedTask = nil
+                context.rollback()  //if adding new Tasks is canceled
+            }){
+                TaskEditorView(task: $0)
+            }
+            .navigationBarItems(leading: Button(action: {
+                selelctedTask = TodoTask(context: context)
+                showingEditorView = true
             }, label: {
                 Image(systemName: "plus.circle")
             }),trailing: EditButton())
-            .sheet(isPresented: $isPresent){
-                TaskEditorView(task: $newTask,isPresent: $isPresent)
-            }
+           /*
+             .sheet(isPresented: $showingEditorView, content: {
+                 TaskEditorView(task: selelctedTask ?? TodoTask(context: context), context: context)
+             })
+             **/
         }
     }
 }

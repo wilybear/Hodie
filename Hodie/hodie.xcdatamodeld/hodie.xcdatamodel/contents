@@ -9,7 +9,7 @@
         <attribute name="color_" optional="YES" attributeType="Transformable" valueTransformerName="SerializableColorTransformer" customClassName="SerializableColor"/>
         <attribute name="endTime_" optional="YES" attributeType="String"/>
         <attribute name="name_" optional="YES" attributeType="String"/>
-        <attribute name="startTime_" optional="YES" attributeType="String"/>
+        <attribute name="startTime_" optional="YES" attributeType="String" defaultValueString=""/>
         <relationship name="scheduler" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Scheduler" inverseName="todoTasks_" inverseEntity="Scheduler"/>
     </entity>
     <elements>

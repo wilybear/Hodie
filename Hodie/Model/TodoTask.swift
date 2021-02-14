@@ -9,6 +9,15 @@ import Foundation
 import SwiftUI
 
 extension TodoTask: Comparable{
+    
+    // initialize default value
+    public override func awakeFromInsert() {
+        startTime_ = DateFormatter.timeFormatter.string(from: Date())
+        endTime_ = DateFormatter.timeFormatter.string(from: Date().addingTimeInterval(3600))
+        color_ = SerializableColor.init(from: Color.black)
+        print("awake from insert is called")
+    }
+    
     public static func < (lhs: TodoTask, rhs: TodoTask) -> Bool {
         lhs.startTime < rhs.startTime
     }

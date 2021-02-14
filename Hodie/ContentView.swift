@@ -13,6 +13,9 @@ struct ContentView: View {
     @FetchRequest(fetchRequest: Scheduler.fetchRequest(.all)) var schedulers: FetchedResults<Scheduler>
     
     @State private var newScheduler = ""
+    init(){
+        print("contentView init called")
+    }
     
     var body: some View {
         NavigationView{
@@ -25,7 +28,7 @@ struct ContentView: View {
                     })
                 }
                 ForEach(schedulers){ scheduler in
-                    NavigationLink(destination: SchedulerView(context: context).environmentObject(scheduler)){
+                    NavigationLink(destination: SchedulerView().environmentObject(scheduler)){
                         VStack{
                             Text(scheduler.name ?? "untitled")
                                 .font(.largeTitle)
@@ -38,6 +41,8 @@ struct ContentView: View {
             .navigationBarItems(leading: Button(action: {}, label: {
                 Image(systemName: "plus.circle")
             }),trailing: EditButton())
+        }.onAppear{
+            whereIsMySQLite()
         }
     }
     
@@ -52,6 +57,16 @@ struct ContentView: View {
             print(error)
         }
         newScheduler = ""
-        }
     }
+}
+func whereIsMySQLite() {
+    let path = FileManager
+        .default
+        .urls(for: .applicationSupportDirectory, in: .userDomainMask)
+        .last?
+        .absoluteString
+        .replacingOccurrences(of: "file://", with: "")
+        .removingPercentEncoding
 
+    print("check out lLLL\(path ?? "Not found")")
+}

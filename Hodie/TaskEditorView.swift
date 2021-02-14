@@ -6,37 +6,36 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct TaskEditorView: View {
     
+    @Environment(\.presentationMode) var presentationMode
+    
     @EnvironmentObject var scheduler: Scheduler
     @Environment(\.managedObjectContext) var context
-    @Binding var task: TodoTask
-
     @State private var draft: TodoTask
     @State private var color: Color
-    @Binding var isPresent:Bool
     
-    init(task: Binding<TodoTask>,isPresent: Binding<Bool>){
-        _task = task
-        _isPresent = isPresent
-        _draft = State(wrappedValue: task.wrappedValue)
-        _color = State(wrappedValue: task.wrappedValue.color.color)
+    init(task: TodoTask){
+        _draft = State(wrappedValue: task)
+        _color = State(wrappedValue: _draft.wrappedValue.color.color)
+        print("init of Task Editor View is called")
     }
     
     var body: some View {
         VStack{
             HStack{
                 Button(action: {
-                    isPresent = false
+                    presentationMode.wrappedValue.dismiss()
                 }){
                     Text("Cancel")
                 }
                 .padding()
                 Spacer()
                 Button(action: {
-                    addTask()
-                    isPresent = false      
+                    saveTask()
+                    presentationMode.wrappedValue.dismiss()
                 }){
                     Text("Done")
                 }
@@ -47,6 +46,7 @@ struct TaskEditorView: View {
                     TextField("task", text: $draft.name )
                 }
                 Section(header: Text("Time")){
+                    // TODO: start time should always faster than end time
                     DatePicker("start time", selection:$draft.startTime, displayedComponents: .hourAndMinute)
                     DatePicker("end time", selection:$draft.endTime, displayedComponents: .hourAndMinute)
                 }
@@ -58,9 +58,9 @@ struct TaskEditorView: View {
     }
     
     @discardableResult
-    private func addTask()->Bool{
+    private func saveTask()->Bool{
         draft.color = SerializableColor(from: color)
-        scheduler.todoTasks.insert(draft)
+        scheduler.todoTasks.update(with: draft)
     
         do {
             try context.save()

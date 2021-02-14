@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "closure #1 in closure #3 in closure #1 in closure #1 in closure #1 in SchedulerView.body.getter:SchedulerView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "scheduler.todoTasks.getObject(matching: todoTask)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in closure #1 in closure #1 in closure #1 in SchedulerView.body.getter:SchedulerView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "selelctedTask">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #4 in closure #1 in SchedulerView.body.getter:SchedulerView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "selelctedTask ?? TodoTask(context: context)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TaskEditorView.init(task:isPresent:):TaskEditorView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "task.name">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
