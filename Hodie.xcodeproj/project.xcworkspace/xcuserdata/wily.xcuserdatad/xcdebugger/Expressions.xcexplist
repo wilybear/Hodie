@@ -3,6 +3,17 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "Date.asDegrees.getter:FoundationExtensions.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Date.asRadians.getter:FoundationExtensions.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "ratio * 360">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in closure #3 in closure #1 in closure #1 in closure #1 in SchedulerView.body.getter:SchedulerView.swift">
          <PersistentStrings>
             <PersistentString
@@ -11,12 +22,26 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #2 in closure #1 in closure #1 in closure #1 in SchedulerView.body.getter:SchedulerView.swift">
+         contextName = "AngledText.unavailableRadius():CircleText.swift">
          <PersistentStrings>
             <PersistentString
-               value = "selelctedTask">
+               value = "CGFloat(angle.radians / 2 )">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in SectorFormView.body.getter:SectorFormView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "min(geometry.size.width, geometry.size.height) / 2">
+            </PersistentString>
+            <PersistentString
+               value = "geometry.size">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in closure #1 in closure #1 in SchedulerView.body.getter:SchedulerView.swift">
       </ContextState>
       <ContextState
          contextName = "closure #4 in closure #1 in SchedulerView.body.getter:SchedulerView.swift">
@@ -27,10 +52,54 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "AngledText.unavailableRadius.getter:CircleText.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "sizes.map{$0.height}">
+            </PersistentString>
+            <PersistentString
+               value = "sizes.map{$0.height}.max()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in AngledText.body.getter:CircleText.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "unavailableRadius ()">
+            </PersistentString>
+            <PersistentString
+               value = "todoTask.startAngle.degrees">
+            </PersistentString>
+            <PersistentString
+               value = "unavailableRadius">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "TaskEditorView.init(task:isPresent:):TaskEditorView.swift">
          <PersistentStrings>
             <PersistentString
                value = "task.name">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SectorFormShape.startAngle.getter:SectorFormView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "todoTask.startTime.asRadians">
+            </PersistentString>
+            <PersistentString
+               value = "(ratio * 360) * .pi / Double(180)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in closure #1 in closure #1 in closure #1 in SchedulerView.body.getter:SchedulerView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "selelctedTask">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

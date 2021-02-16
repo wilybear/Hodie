@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import CoreData
 
 extension TodoTask: Comparable{
     
@@ -43,3 +44,5 @@ extension TodoTask: Comparable{
     }
     
 }
+
+

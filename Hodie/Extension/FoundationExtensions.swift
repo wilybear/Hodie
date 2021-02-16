@@ -33,3 +33,17 @@ extension Set where Element: Identifiable{
         return self[index!]
     }
 }
+extension Double{
+    var perimeter: Double{
+        return self * 2 * .pi
+    }
+}
+
+extension Date{
+    var asRadians: Double {
+        let currentDateComponent = Calendar(identifier: .gregorian).dateComponents([.hour, .minute], from: self)
+        let minutes = (currentDateComponent.hour! * 60) + currentDateComponent.minute!
+        let ratio = Double(minutes) / Double(1440)
+        return (ratio * 360 - 90) * .pi / Double(180)
+    }
+}

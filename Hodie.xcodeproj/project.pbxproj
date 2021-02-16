@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37586E2125DA7E880010E381 /* NSManagedContextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37586E2025DA7E880010E381 /* NSManagedContextExtensions.swift */; };
+		37586E2625DAA1C40010E381 /* ScaleAndFade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37586E2525DAA1C40010E381 /* ScaleAndFade.swift */; };
+		37586E2925DAA3070010E381 /* SectorFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37586E2825DAA3070010E381 /* SectorFormView.swift */; };
+		37586E2C25DAB3780010E381 /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37586E2B25DAB3780010E381 /* ClockView.swift */; };
+		37586E2F25DAB6190010E381 /* CircleText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37586E2E25DAB6190010E381 /* CircleText.swift */; };
 		376BAF0325D69FF00010270F /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376BAF0225D69FF00010270F /* FoundationExtensions.swift */; };
 		376BAF0625D6A2170010270F /* SchedulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376BAF0525D6A2170010270F /* SchedulerView.swift */; };
 		376BAF0E25D6AD070010270F /* TaskEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376BAF0D25D6AD070010270F /* TaskEditorView.swift */; };
@@ -23,6 +28,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		37586E2025DA7E880010E381 /* NSManagedContextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedContextExtensions.swift; sourceTree = "<group>"; };
+		37586E2525DAA1C40010E381 /* ScaleAndFade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleAndFade.swift; sourceTree = "<group>"; };
+		37586E2825DAA3070010E381 /* SectorFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectorFormView.swift; sourceTree = "<group>"; };
+		37586E2B25DAB3780010E381 /* ClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockView.swift; sourceTree = "<group>"; };
+		37586E2E25DAB6190010E381 /* CircleText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleText.swift; sourceTree = "<group>"; };
 		376BAF0225D69FF00010270F /* FoundationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FoundationExtensions.swift; path = Hodie/Extension/FoundationExtensions.swift; sourceTree = SOURCE_ROOT; };
 		376BAF0525D6A2170010270F /* SchedulerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SchedulerView.swift; path = Hodie/SchedulerView.swift; sourceTree = SOURCE_ROOT; };
 		376BAF0D25D6AD070010270F /* TaskEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TaskEditorView.swift; path = Hodie/TaskEditorView.swift; sourceTree = SOURCE_ROOT; };
@@ -57,6 +67,10 @@
 				37DA0F8E25D4252A003CFB66 /* ContentView.swift */,
 				376BAF0525D6A2170010270F /* SchedulerView.swift */,
 				376BAF0D25D6AD070010270F /* TaskEditorView.swift */,
+				37586E2525DAA1C40010E381 /* ScaleAndFade.swift */,
+				37586E2825DAA3070010E381 /* SectorFormView.swift */,
+				37586E2B25DAB3780010E381 /* ClockView.swift */,
+				37586E2E25DAB6190010E381 /* CircleText.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -75,6 +89,7 @@
 			children = (
 				376BAF0225D69FF00010270F /* FoundationExtensions.swift */,
 				37DA0FD725D65CBD003CFB66 /* SerializableColor.swift */,
+				37586E2025DA7E880010E381 /* NSManagedContextExtensions.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -194,10 +209,15 @@
 				37DA0F8B25D4252A003CFB66 /* AppDelegate.swift in Sources */,
 				37DA0F8D25D4252A003CFB66 /* SceneDelegate.swift in Sources */,
 				376BAF0625D6A2170010270F /* SchedulerView.swift in Sources */,
+				37586E2625DAA1C40010E381 /* ScaleAndFade.swift in Sources */,
+				37586E2F25DAB6190010E381 /* CircleText.swift in Sources */,
+				37586E2925DAA3070010E381 /* SectorFormView.swift in Sources */,
 				376BAF0E25D6AD070010270F /* TaskEditorView.swift in Sources */,
+				37586E2125DA7E880010E381 /* NSManagedContextExtensions.swift in Sources */,
 				37DA0FD125D5250F003CFB66 /* TodoTask.swift in Sources */,
 				376BAF0325D69FF00010270F /* FoundationExtensions.swift in Sources */,
 				37DA0FD425D5251C003CFB66 /* Scheduler.swift in Sources */,
+				37586E2C25DAB3780010E381 /* ClockView.swift in Sources */,
 				37DA0F8F25D4252A003CFB66 /* ContentView.swift in Sources */,
 				37DA0F9225D4252A003CFB66 /* hodie.xcdatamodeld in Sources */,
 			);

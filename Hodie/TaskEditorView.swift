@@ -61,7 +61,6 @@ struct TaskEditorView: View {
     private func saveTask()->Bool{
         draft.color = SerializableColor(from: color)
         scheduler.todoTasks.update(with: draft)
-    
         do {
             try context.save()
         }catch{
