@@ -97,6 +97,10 @@ public class SerializableColor: NSObject, NSCoding, NSSecureCoding {
       return UIColor(red: CGFloat(r), green: CGFloat(g), blue: CGFloat(b), alpha: CGFloat(a))
     }
   }
+  // To determine text color white or black
+  var isDarkColor: Bool {
+    (0.2126 * r + 0.7152 * g + 0.0722 * b) < 0.50
+  }
 }
 
 // MARK: Transformer Class

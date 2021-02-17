@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct SectorFormView : View {
-    var todoTask: TodoTask
+    @Binding var todoTask: TodoTask
     var body: some View{
         //TODO: Animation
         GeometryReader{ geometry in
             ZStack{
-                SectorFormShape(todoTask: todoTask).fill(todoTask.color.color)
-                AngledText(todoTask: todoTask, radius: min(geometry.size.width, geometry.size.height) / 2)
+                SectorFormShape(todoTask: $todoTask).fill(todoTask.color.color)
+                AngledText(todoTask: $todoTask, radius: min(geometry.size.width, geometry.size.height) / 2)
                     .bold()
+                    .foregroundColor(todoTask.color.isDarkColor ? .white : .black)
             }
         }
     }
@@ -34,9 +35,8 @@ extension TodoTask{
 }
 
 struct SectorFormShape: Shape {
-    var todoTask: TodoTask
+    @Binding var todoTask: TodoTask
 
-    
     func path(in rect: CGRect) -> Path {
         let center = CGPoint(x: rect.midX, y: rect.midY)
         let radius = min(rect.width, rect.height) / 2
@@ -54,11 +54,6 @@ struct SectorFormShape: Shape {
     }
 }
 
-//struct TextInSectorForm: View {
-//    public var text: String
-//    
-//    internal var textModifier: (Text) -> Text = { $0 }
-//}
 
 //extension Ring.Wedge {
 //    var startColor: Color {

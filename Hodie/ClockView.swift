@@ -18,10 +18,14 @@ struct ClockView: View {
     var body: some View {
         GeometryReader{ geometry in
             ZStack{
-                Circle().fill(Color.gray)
+                Circle().stroke(Color.brightWhite)
                     .padding()
                 ForEach(scheduler.todoTasks.sorted(), id: \.self){ todoTask in
-                    SectorFormView(todoTask: todoTask)
+                    SectorFormView(todoTask: Binding<TodoTask>(get: {
+                        scheduler.todoTasks.first(where: {$0 == todoTask})!
+                    }, set: {
+                        scheduler.todoTasks.update(with: $0)
+                    }) )
                     .onLongPressGesture {
                         longPressHandler(todoTask)
                     }

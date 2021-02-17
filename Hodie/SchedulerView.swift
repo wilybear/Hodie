@@ -15,10 +15,11 @@ struct SchedulerView: View {
     @State private var showingEditorView = false
     @State private var selelctedTask: TodoTask?
     @State private var confirmDeletePresent = false
-
+    
     // TODO: Linear Calendar should be added
     var body : some View {
         NavigationView{
+            HS
             ClockView(longPressAction: { todoTask in
                 selelctedTask = todoTask
                 showingEditorView = true
@@ -37,6 +38,7 @@ struct SchedulerView: View {
             }, label: {
                 Image(systemName: "plus.circle")
             }),trailing: EditButton())
+//            .background(LinearGradient(gradient: Gradient(colors: Color.BackgroundColors), startPoint: .top, endPoint: .bottom))
            /*
              .sheet(isPresented: $showingEditorView, content: {
                  TaskEditorView(task: selelctedTask ?? TodoTask(context: context), context: context)

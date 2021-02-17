@@ -45,15 +45,15 @@ extension Array {
 
 public struct AngledText: View {
 
-    public var text: String {
-        todoTask.name
-    }
-    public var todoTask: TodoTask
-    public var radius: CGFloat
-    public var angle: Angle {
+
+    @Binding var todoTask: TodoTask
+    var radius: CGFloat
+    private var angle: Angle {
         todoTask.midAngle
     }
-
+    private var text: String {
+        todoTask.name
+    }
     internal var textModifier: (Text) -> Text = { $0 }
     internal var spacing: CGFloat = 0
 

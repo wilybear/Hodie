@@ -51,8 +51,9 @@ struct TaskEditorView: View {
                     DatePicker("end time", selection:$draft.endTime, displayedComponents: .hourAndMinute)
                 }
                 Section(header: Text("Color")){
-                    ColorPicker("Color", selection: $color)
+                    ColorSwatchView(selection: $color)
                 }
+                // TODO: little memo for todotask
             }
         }
     }
@@ -71,3 +72,31 @@ struct TaskEditorView: View {
     }
 }
 
+
+struct ColorSwatchView: View {
+    @Binding var selection: Color
+    
+    var body: some View{
+        let columns = [
+            GridItem(.adaptive(minimum: 60))
+        ]
+        LazyVGrid(columns: columns, spacing:10){
+            ForEach(Color.BrightColors, id: \.self){ color in
+                ZStack{
+                    Circle()
+                        .fill(color)
+                        .frame(width:50, height: 50)
+                        .onTapGesture {
+                            selection = color
+                        }
+                        .padding(10)
+                    if selection == color {
+                        Circle()
+                            .stroke(color, lineWidth: 5)
+                            .frame(width:60, height: 60)
+                    }
+                }
+            }
+        }.padding()
+    }
+}
