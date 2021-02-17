@@ -19,12 +19,20 @@ extension DateFormatter {
             format.dateFormat = "HH:mm"
             return format
     }()
+    
+    static var dateOnlyFormatter : DateFormatter = {
+        let format = DateFormatter()
+        format.locale = Locale(identifier:"ko_KR" )
+        format.dateFormat = "yyyy-MM-dd"
+        return format
+    }()
 }
 
 extension Date{
     static var stringOfCurrentTime: String = {
         DateFormatter.timeFormatter.string(from: Date())
     }()
+
 }
 
 extension Set where Element: Identifiable{

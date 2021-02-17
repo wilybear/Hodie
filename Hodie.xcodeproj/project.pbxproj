@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,9 @@
 		376BAF0325D69FF00010270F /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376BAF0225D69FF00010270F /* FoundationExtensions.swift */; };
 		376BAF0625D6A2170010270F /* SchedulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376BAF0525D6A2170010270F /* SchedulerView.swift */; };
 		376BAF0E25D6AD070010270F /* TaskEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376BAF0D25D6AD070010270F /* TaskEditorView.swift */; };
+		379F48AB25DD2C5F00CA4744 /* HalfModal in Frameworks */ = {isa = PBXBuildFile; productRef = 379F48AA25DD2C5F00CA4744 /* HalfModal */; };
+		379F48AF25DD327B00CA4744 /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 379F48AE25DD327B00CA4744 /* PartialSheet */; };
+		379F48B225DD4A1900CA4744 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379F48B125DD4A1900CA4744 /* DatePickerView.swift */; };
 		37A7CE0925DC26010015C3DF /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A7CE0825DC26010015C3DF /* ColorExtension.swift */; };
 		37DA0F8B25D4252A003CFB66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA0F8A25D4252A003CFB66 /* AppDelegate.swift */; };
 		37DA0F8D25D4252A003CFB66 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA0F8C25D4252A003CFB66 /* SceneDelegate.swift */; };
@@ -37,6 +40,7 @@
 		376BAF0225D69FF00010270F /* FoundationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FoundationExtensions.swift; path = Hodie/Extension/FoundationExtensions.swift; sourceTree = SOURCE_ROOT; };
 		376BAF0525D6A2170010270F /* SchedulerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SchedulerView.swift; path = Hodie/SchedulerView.swift; sourceTree = SOURCE_ROOT; };
 		376BAF0D25D6AD070010270F /* TaskEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TaskEditorView.swift; path = Hodie/TaskEditorView.swift; sourceTree = SOURCE_ROOT; };
+		379F48B125DD4A1900CA4744 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		37A7CE0825DC26010015C3DF /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		37DA0F8725D4252A003CFB66 /* Hodie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hodie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37DA0F8A25D4252A003CFB66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Hodie/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
@@ -57,6 +61,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				379F48AF25DD327B00CA4744 /* PartialSheet in Frameworks */,
+				379F48AB25DD2C5F00CA4744 /* HalfModal in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +79,7 @@
 				37586E2825DAA3070010E381 /* SectorFormView.swift */,
 				37586E2B25DAB3780010E381 /* ClockView.swift */,
 				37586E2E25DAB6190010E381 /* AngledText.swift */,
+				379F48B125DD4A1900CA4744 /* DatePickerView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -154,6 +161,10 @@
 			dependencies = (
 			);
 			name = Hodie;
+			packageProductDependencies = (
+				379F48AA25DD2C5F00CA4744 /* HalfModal */,
+				379F48AE25DD327B00CA4744 /* PartialSheet */,
+			);
 			productName = hodie;
 			productReference = 37DA0F8725D4252A003CFB66 /* Hodie.app */;
 			productType = "com.apple.product-type.application";
@@ -181,6 +192,10 @@
 				Base,
 			);
 			mainGroup = 37DA0F7E25D4252A003CFB66;
+			packageReferences = (
+				379F48A925DD2C5F00CA4744 /* XCRemoteSwiftPackageReference "HalfModal" */,
+				379F48AD25DD327B00CA4744 /* XCRemoteSwiftPackageReference "PartialSheet" */,
+			);
 			productRefGroup = 37DA0F8825D4252A003CFB66 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -217,6 +232,7 @@
 				37586E2925DAA3070010E381 /* SectorFormView.swift in Sources */,
 				376BAF0E25D6AD070010270F /* TaskEditorView.swift in Sources */,
 				37586E2125DA7E880010E381 /* NSManagedContextExtensions.swift in Sources */,
+				379F48B225DD4A1900CA4744 /* DatePickerView.swift in Sources */,
 				37DA0FD125D5250F003CFB66 /* TodoTask.swift in Sources */,
 				376BAF0325D69FF00010270F /* FoundationExtensions.swift in Sources */,
 				37A7CE0925DC26010015C3DF /* ColorExtension.swift in Sources */,
@@ -421,6 +437,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		379F48A925DD2C5F00CA4744 /* XCRemoteSwiftPackageReference "HalfModal" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ViktorMaric/HalfModal";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		379F48AD25DD327B00CA4744 /* XCRemoteSwiftPackageReference "PartialSheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AndreaMiotto/PartialSheet";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.11;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		379F48AA25DD2C5F00CA4744 /* HalfModal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 379F48A925DD2C5F00CA4744 /* XCRemoteSwiftPackageReference "HalfModal" */;
+			productName = HalfModal;
+		};
+		379F48AE25DD327B00CA4744 /* PartialSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 379F48AD25DD327B00CA4744 /* XCRemoteSwiftPackageReference "PartialSheet" */;
+			productName = PartialSheet;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		37DA0F9025D4252A003CFB66 /* hodie.xcdatamodeld */ = {

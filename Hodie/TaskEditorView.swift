@@ -12,12 +12,13 @@ struct TaskEditorView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    @EnvironmentObject var scheduler: Scheduler
+    @ObservedObject var scheduler: Scheduler
     @Environment(\.managedObjectContext) var context
     @State private var draft: TodoTask
     @State private var color: Color
     
-    init(task: TodoTask){
+    init(scheduler: Scheduler,task: TodoTask){
+        self.scheduler = scheduler
         _draft = State(wrappedValue: task)
         _color = State(wrappedValue: _draft.wrappedValue.color.color)
         print("init of Task Editor View is called")
@@ -54,6 +55,15 @@ struct TaskEditorView: View {
                     ColorSwatchView(selection: $color)
                 }
                 // TODO: little memo for todotask
+                Section{
+                    Button(action: {
+                        context.delete(draft)
+                        context.saveWithTry()
+                        presentationMode.wrappedValue.dismiss()
+                    }, label: {
+                        Text("Delete")
+                    })
+                }
             }
         }
     }

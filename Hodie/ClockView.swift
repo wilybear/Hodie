@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct ClockView: View {
-    @EnvironmentObject var scheduler: Scheduler
+    @ObservedObject var scheduler: Scheduler
     var longPressHandler: (TodoTask) -> (Void)
     
-    init(longPressAction: @escaping (TodoTask) -> (Void)){
+    init(scheduler: Scheduler,longPressAction: @escaping (TodoTask) -> (Void)){
+        self.scheduler = scheduler
         longPressHandler = longPressAction
     }
     
@@ -22,7 +23,7 @@ struct ClockView: View {
                     .padding()
                 ForEach(scheduler.todoTasks.sorted(), id: \.self){ todoTask in
                     SectorFormView(todoTask: Binding<TodoTask>(get: {
-                        scheduler.todoTasks.first(where: {$0 == todoTask})!
+                        todoTask
                     }, set: {
                         scheduler.todoTasks.update(with: $0)
                     }) )

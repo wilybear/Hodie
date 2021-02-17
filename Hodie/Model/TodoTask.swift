@@ -24,7 +24,7 @@ extension TodoTask: Comparable{
     }
     
     var color: SerializableColor {
-        get{ color_ ?? .init(from: Color.blue)}
+        get{ color_ ?? .init(from: Color.brightRed)}
         set{ color_ = newValue}
     }
     

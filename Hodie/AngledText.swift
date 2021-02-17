@@ -73,7 +73,7 @@ public struct AngledText: View {
     
     private var unavailableRadius : CGFloat {
         let maxHeight = sizes.map{$0.height}.max()
-        return (maxHeight ?? 1) / 2 / tan(CGFloat((todoTask.endAngle - todoTask.startAngle).radians / 2 ))
+        return (maxHeight ?? 1) / 2 / tan(CGFloat(todoTask.interval))
     }
 
     public var body: some View {

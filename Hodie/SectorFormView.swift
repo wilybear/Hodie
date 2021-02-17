@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SectorFormView : View {
     @Binding var todoTask: TodoTask
+    
     var body: some View{
         //TODO: Animation
         GeometryReader{ geometry in
@@ -30,7 +31,10 @@ extension TodoTask{
         Angle(radians: endTime.asRadians)
     }
     var midAngle: Angle{
-        Angle(radians: startTime.asRadians + (endTime.asRadians - startTime.asRadians)/2 )
+        return Angle(radians: startTime.asRadians +  interval)
+    }
+    var interval: Double {
+        return endTime > startTime ? (endTime.asRadians - startTime.asRadians)/2 : (endTime.asRadians - startTime.asRadians + 360 * .pi/180)/2
     }
 }
 

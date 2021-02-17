@@ -6,58 +6,49 @@
 //
 
 import SwiftUI
+import PartialSheet
+import CoreData
 
 struct ContentView: View {
     
     @Environment(\.managedObjectContext) var context
-    @FetchRequest(fetchRequest: Scheduler.fetchRequest(.all)) var schedulers: FetchedResults<Scheduler>
+    @State private var selectedDate: Date = Date()
     
-    @State private var newScheduler = ""
-    init(){
-        print("contentView init called")
-    }
+    @EnvironmentObject var partialSheetManager: PartialSheetManager
     
     var body: some View {
-        NavigationView{
-            List{
-                HStack{
-                    TextField("New Scheduler", text: $newScheduler)
-                    Button(action: addNewScheduler, label: {
-                        Image(systemName: "plus.circle")
-                            .imageScale(.large)
-                    })
-                }
-                ForEach(schedulers){ scheduler in
-                    NavigationLink(destination: SchedulerView().environmentObject(scheduler)){
-                        VStack{
-                            Text(scheduler.name ?? "untitled")
-                                .font(.largeTitle)
-                            Text("\(scheduler.createdAt!)")
-                                .font(.caption)
-                        }
+        VStack{
+            HStack{
+                Button(action: {
+                    withAnimation{
+                        selectedDate = Calendar.current.date(byAdding: .day,value: -1, to: selectedDate)!
                     }
-                }
-            }.navigationTitle(Text("TODO TEST LIST"))
-            .navigationBarItems(leading: Button(action: {}, label: {
-                Image(systemName: "plus.circle")
-            }),trailing: EditButton())
-        }.onAppear{
-            whereIsMySQLite()
+                }, label: {
+                    Image(systemName: "arrowtriangle.left")
+                })
+                .padding([.leading])
+                Text(DateFormatter.dateOnlyFormatter.string(from: selectedDate))
+                    .onTapGesture {
+                        partialSheetManager.showPartialSheet(content:{ DatePickerView(selectedDate: $selectedDate)})
+                    }
+                Button(action: {
+                    withAnimation{
+                        selectedDate = Calendar.current.date(byAdding: .day,value: 1, to: selectedDate)!
+                    }
+                }, label: {
+                    Image(systemName: "arrowtriangle.right")
+                })
+                Spacer()
+            }
+            .padding()
+            SchedulerView(selectedDate: selectedDate)
+            .onAppear{
+                whereIsMySQLite()
+            }
         }
+        .addPartialSheet()
     }
     
-    private func addNewScheduler() -> (Void){
-        let scheduler = Scheduler(context: context)
-        scheduler.name = newScheduler
-        scheduler.createdAt = Date()
-       
-        do {
-            try context.save()
-        }catch{
-            print(error)
-        }
-        newScheduler = ""
-    }
 }
 func whereIsMySQLite() {
     let path = FileManager

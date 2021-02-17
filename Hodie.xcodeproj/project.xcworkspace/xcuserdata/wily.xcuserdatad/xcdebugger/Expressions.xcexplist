@@ -41,7 +41,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #2 in closure #1 in closure #1 in SchedulerView.body.getter:SchedulerView.swift">
+         contextName = "closure #1 in closure #1 in closure #1 in AngledText.body.getter:CircleText.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "unavailableRadius ()">
+            </PersistentString>
+            <PersistentString
+               value = "unavailableRadius">
+            </PersistentString>
+            <PersistentString
+               value = "todoTask.startAngle.degrees">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "closure #4 in closure #1 in SchedulerView.body.getter:SchedulerView.swift">
@@ -63,18 +74,7 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #1 in closure #1 in AngledText.body.getter:CircleText.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "unavailableRadius ()">
-            </PersistentString>
-            <PersistentString
-               value = "todoTask.startAngle.degrees">
-            </PersistentString>
-            <PersistentString
-               value = "unavailableRadius">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "closure #2 in closure #1 in closure #1 in SchedulerView.body.getter:SchedulerView.swift">
       </ContextState>
       <ContextState
          contextName = "TaskEditorView.init(task:isPresent:):TaskEditorView.swift">
@@ -85,13 +85,35 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "ContentView.scheduler.getter:ContentView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "schedulerRequest.wrappedValue">
+            </PersistentString>
+            <PersistentString
+               value = "schedulerRequest.wrappedValue.isEmpty ">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "SectorFormShape.startAngle.getter:SectorFormView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "todoTask.startTime.asRadians">
+               value = "(ratio * 360) * .pi / Double(180)">
             </PersistentString>
             <PersistentString
-               value = "(ratio * 360) * .pi / Double(180)">
+               value = "todoTask.startTime.asRadians">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ContentView.init():ContentView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Scheduler.predicateDate(at: _selectedDate.wrappedValue)">
+            </PersistentString>
+            <PersistentString
+               value = "result">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -100,6 +122,28 @@
          <PersistentStrings>
             <PersistentString
                value = "selelctedTask">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in AngledText.body.getter:AngledText.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = " unavailableRadius ">
+            </PersistentString>
+            <PersistentString
+               value = "distance(at: item.index)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AngledText.unavailableRadius.getter:AngledText.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "todoTask.name">
+            </PersistentString>
+            <PersistentString
+               value = "todoTask.interval">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

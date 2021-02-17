@@ -10,12 +10,12 @@ import CoreData
 
 extension Scheduler : Comparable{
     public static func < (lhs: Scheduler, rhs: Scheduler) -> Bool {
-        lhs.createdAt! < rhs.createdAt!
+        lhs.date < rhs.date
     }
 
     static func fetchRequest(_ predicate: NSPredicate) -> NSFetchRequest<Scheduler> {
         let request = NSFetchRequest<Scheduler>(entityName: "Scheduler")
-        request.sortDescriptors = [NSSortDescriptor(key:"createdAt", ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(key:"date_", ascending: true)]
         request.predicate = predicate
         return request
     }
@@ -25,5 +25,13 @@ extension Scheduler : Comparable{
         set{ todoTasks_ = newValue as NSSet}
     }
     
+    var date: Date {
+        get{DateFormatter.dateOnlyFormatter.date(from: date_!)!}
+        set{ date_ = DateFormatter.dateOnlyFormatter.string(from: newValue)}
+    }
     
+    static func predicateDate(at date: Date) -> NSPredicate {
+        let stringDate = DateFormatter.dateOnlyFormatter.string(from: date)
+        return NSPredicate(format: "date_ = %@", stringDate)
+    }
 }
