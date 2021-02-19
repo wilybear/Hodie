@@ -55,10 +55,10 @@ struct TaskEditorView: View {
             }
             Form{
                 Section{
-                    TextField("Task Name", text: $textData.taskName )
-                        .onChange(of: textData.taskName, perform: { value in
+                    TextField("Task Name", text: $draft.name )
+                        .onChange(of: draft.name, perform: { value in
                             if value.count > taskNameLimit {
-                                textData.taskName = String(value.prefix(taskNameLimit))
+                                draft.name 	= String(value.prefix(taskNameLimit))
                             }
                         })
                 }

@@ -37,7 +37,7 @@ struct SchedulerView: View {
     
     var body : some View {
         ZStack{
-            ClockView(scheduler: scheduler,longPressAction: { todoTask in
+            ClockView(scheduler, longPressAction: { todoTask in
                         isCreating = false
                         selelctedTask = todoTask
                     })

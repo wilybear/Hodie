@@ -40,9 +40,7 @@ extension TodoTask: Comparable{
     
     var name:String{
         get{ name_ ?? "" }
-        set{
-            name_ = newValue
-        }
+        set{ name_ = newValue }
     }
     
     var memo:String{
