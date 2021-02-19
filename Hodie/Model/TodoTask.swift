@@ -48,6 +48,20 @@ extension TodoTask: Comparable{
         set{ memo_ = newValue}
     }
     
+    static func fetchRequest(scheduler: Scheduler, time: Date) -> NSFetchRequest<TodoTask> {
+        let request = NSFetchRequest<TodoTask>(entityName: "TodoTask")
+        request.sortDescriptors = [NSSortDescriptor(key:"startTime_", ascending: true)]
+        request.predicate = predicateWithDate(of: scheduler, at: time)
+        return request
+    }
+    
+    private static func predicateWithDate(of scheduler: Scheduler, at time: Date) -> NSPredicate {
+        let format = "scheduler = %@ AND endTime_ >= %@ AND startTime_ <= %@ "
+        let currentTime = DateFormatter.timeFormatter.string(from: time)
+        let args: [Any] = [scheduler,currentTime, currentTime]
+        return NSPredicate(format: format, argumentArray: args)
+    }
+    
 }
 
 

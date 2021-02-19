@@ -20,7 +20,6 @@ struct TaskEditorView: View {
     @State var textData : TextData
     @State private var showingAlert = false
     @State private var taskEditError: EditorAlertMessage = .none
-    @State private var inputText = ""
     
     private let taskNameLimit = 15
     private let memolimit = 50
@@ -55,10 +54,10 @@ struct TaskEditorView: View {
             }
             Form{
                 Section{
-                    TextField("Task Name", text: $draft.name )
-                        .onChange(of: draft.name, perform: { value in
+                    TextField("Task Name", text: $textData.taskName )
+                        .onChange(of: textData.taskName, perform: { value in
                             if value.count > taskNameLimit {
-                                draft.name 	= String(value.prefix(taskNameLimit))
+                                textData.taskName = String(value.prefix(taskNameLimit))
                             }
                         })
                 }
@@ -102,7 +101,8 @@ struct TaskEditorView: View {
     
     @discardableResult
     private func saveTask()->Bool{
-        draft.memo = inputText
+        draft.name = textData.taskName
+        draft.memo = textData.taskMemo
         scheduler.todoTasks.update(with: draft)
         do {
             try context.save()
