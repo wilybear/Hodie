@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "TaskEditorView.saveTask():TaskEditorView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "draft.memo">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "Date.asDegrees.getter:FoundationExtensions.swift">
       </ContextState>
       <ContextState
@@ -47,10 +55,10 @@
                value = "unavailableRadius ()">
             </PersistentString>
             <PersistentString
-               value = "unavailableRadius">
+               value = "todoTask.startAngle.degrees">
             </PersistentString>
             <PersistentString
-               value = "todoTask.startAngle.degrees">
+               value = "unavailableRadius">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -74,17 +82,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #2 in closure #1 in closure #1 in SchedulerView.body.getter:SchedulerView.swift">
-      </ContextState>
-      <ContextState
-         contextName = "TaskEditorView.init(task:isPresent:):TaskEditorView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "task.name">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "ContentView.scheduler.getter:ContentView.swift">
          <PersistentStrings>
             <PersistentString
@@ -96,15 +93,29 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #2 in closure #1 in closure #1 in SchedulerView.body.getter:SchedulerView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "TaskEditorView.init(task:isPresent:):TaskEditorView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "task.name">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "SectorFormShape.startAngle.getter:SectorFormView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "(ratio * 360) * .pi / Double(180)">
-            </PersistentString>
-            <PersistentString
                value = "todoTask.startTime.asRadians">
             </PersistentString>
+            <PersistentString
+               value = "(ratio * 360) * .pi / Double(180)">
+            </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #3 in closure #2 in closure #1 in TaskEditorView.body.getter:TaskEditorView.swift">
       </ContextState>
       <ContextState
          contextName = "ContentView.init():ContentView.swift">

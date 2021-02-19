@@ -19,7 +19,7 @@ struct ClockView: View {
     var body: some View {
         GeometryReader{ geometry in
             ZStack{
-                Circle().stroke(Color.brightWhite)
+                Circle().stroke(Color.lightGray)
                     .padding()
                 ForEach(scheduler.todoTasks.sorted(), id: \.self){ todoTask in
                     SectorFormView(todoTask: Binding<TodoTask>(get: {

@@ -12,14 +12,14 @@ import PartialSheet
 struct SchedulerView: View {
     @Environment(\.managedObjectContext) var context
     
-    @State private var showingEditorView = false
     @State private var selelctedTask: TodoTask?
-    @State private var confirmDeletePresent = false
-    //@Binding var selectedDate: Date
+    @State var isCreating: Bool = false
     
-    var schedulerRequest: FetchRequest<Scheduler>
-    var result: FetchedResults<Scheduler> { schedulerRequest.wrappedValue }
-    var scheduler : Scheduler{
+    private var schedulerRequest: FetchRequest<Scheduler>
+    
+    private var result: FetchedResults<Scheduler> { schedulerRequest.wrappedValue }
+    
+    private var scheduler : Scheduler{
         if result.isEmpty {
             let scheduler = Scheduler(context: context)
             scheduler.date = Date()
@@ -30,41 +30,49 @@ struct SchedulerView: View {
             return result.first!
         }
     }
-    
+
     init(selectedDate: Date){
         schedulerRequest = FetchRequest<Scheduler>(fetchRequest: Scheduler.fetchRequest(Scheduler.predicateDate(at: selectedDate)))
     }
     
-    
-    // TODO: Linear Calendar should be added
     var body : some View {
-        NavigationView{
+        ZStack{
             ClockView(scheduler: scheduler,longPressAction: { todoTask in
+                        isCreating = false
                         selelctedTask = todoTask
-                        showingEditorView = true
                     })
                     .padding()
                     .sheet(item: $selelctedTask, onDismiss: {
                         selelctedTask = nil
                         context.rollback()  //if adding new Tasks is canceled
                     }){
-                        TaskEditorView(scheduler: scheduler,task: $0)
+                        TaskEditorView(scheduler: scheduler,task: $0, isNewTask: $isCreating)
                     }
-                    .navigationBarItems(leading: Button(action: {
-                        // TodoTask(context: context) create TodoTask instance in context, if adding newTask is canceled by user, the instance in context will be rollback
+            VStack{
+                Spacer()
+                HStack{
+                    Spacer()
+                    Button(action: {
+                        isCreating = true
                         selelctedTask = TodoTask(context: context)
-                        showingEditorView = true
                     }, label: {
-                        Image(systemName: "plus.circle")
-                    }),trailing: EditButton())
-            
+                        Text("+")
+                               .font(.system(.largeTitle))
+                               .frame(width: 66, height: 60)
+                               .foregroundColor(Color.white)
+                               .padding(.bottom, 7)
+                    })
+                    .background(LinearGradient(gradient: Gradient(colors: Color.BackgroundColors), startPoint: /*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/, endPoint: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/))
+                    .cornerRadius(38.5)
+                    .padding()
+                    .shadow(color: Color.black.opacity(0.3),
+                            radius: 3,
+                            x: 3,
+                            y: 3)
+                }
+            }
 //            .background(LinearGradient(gradient: Gradient(colors: Color.BackgroundColors), startPoint: .top, endPoint: .bottom))
         }
         
     }
-    
-//    private delete(){
-//        indexSet.forEach{ context.delete(scheduler.todoTasks.sorted()[$0])}
-//        context.saveWithTry()
-//    }
 }

@@ -16,6 +16,7 @@ struct ContentView: View {
     
     @EnvironmentObject var partialSheetManager: PartialSheetManager
     
+    // TODO: multiple scheduler is added
     var body: some View {
         VStack{
             HStack{

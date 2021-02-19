@@ -3,7 +3,7 @@
 //  Hodie
 //
 //  Created by 김현식 on 2021/02/15.
-//
+//  AngledText was wrote by referring to https://git.kabellmunk.dk/prototyping-custom-ui-in-swiftui-talk/custom-ui-prototype-in-swiftui
 
 import SwiftUI
 
@@ -57,43 +57,32 @@ public struct AngledText: View {
     internal var textModifier: (Text) -> Text = { $0 }
     internal var spacing: CGFloat = 0
 
-    @State private var sizes: [CGSize] = []
+    @State private var size: CGSize = CGSize(width: 10000, height: 0)
 
-    private func textRadius(at index: Int) -> CGFloat {
-        radius - size(at: index).height / 2
+    private var availableRadius: CGFloat{
+        radius - unavailableRadius
     }
     
-    private func distance(at index: Int) -> CGFloat{
-        (radius-unavailableRadius) / CGFloat(text.count) * CGFloat(index)
-    }
-    
-    private var letterWidths: [CGFloat] {
-        sizes.map {$0.width}
-    }
-    
+    // unavailable space for text using its height
     private var unavailableRadius : CGFloat {
-        let maxHeight = sizes.map{$0.height}.max()
-        return (maxHeight ?? 1) / 2 / tan(CGFloat(todoTask.interval))
+        size.height / 2 / tan(CGFloat(todoTask.interval))
     }
 
     public var body: some View {
         VStack {
-            ZStack {
-                ForEach(textAsCharacters()) { item in
-                    PropagateSize {
-                        self.textView(char: item)
-                    }
-                    .frame(width: self.size(at: item.index).width,
-                           height: self.size(at: item.index).height)
-                    .rotationEffect(rotationAngle())
-                    .offset(x: cos(CGFloat(angle.radians)) * (distance(at: item.index) + unavailableRadius) ,
-                            y: sin(CGFloat(angle.radians)) * (distance(at: item.index) + unavailableRadius))
-                }
+            PropagateSize{
+                textModifier(Text(text))
             }
-            .frame(width: radius * 2, height: radius * 2)
-            .onPreferenceChange(TextViewSizeKey.self) { sizes in
-                self.sizes = sizes
-            }
+            .frame(width: abs(availableRadius) , height: size.height, alignment: .center)
+            .rotationEffect(rotationAngle())
+            // Midpoint from possible space to end
+            .offset(x: cos(CGFloat(angle.radians)) * (availableRadius/2 + unavailableRadius),
+                    y: sin(CGFloat(angle.radians)) * (availableRadius/2 + unavailableRadius))
+         
+        }
+        .frame(width: radius * 2, height: radius * 2)
+        .onPreferenceChange(TextViewSizeKey.self) { sizes in
+            self.size = sizes.first ?? CGSize(width: 10000, height: 0)
         }
         .accessibility(label: Text(text))
     }
@@ -110,10 +99,10 @@ public struct AngledText: View {
     private func textView(char: IdentifiableCharacter) -> some View {
         textModifier(Text(char.string))
     }
-
-    private func size(at index: Int) -> CGSize {
-        sizes[safe: index] ?? CGSize(width: 1000000, height: 0)
-    }
+//
+//    private func size(at index: Int) -> CGSize {
+//        sizes[safe: index] ?? CGSize(width: 1000000, height: 0)
+//    }
 }
 
 extension AngledText {

@@ -15,7 +15,7 @@ extension TodoTask: Comparable{
     public override func awakeFromInsert() {
         startTime_ = DateFormatter.timeFormatter.string(from: Date())
         endTime_ = DateFormatter.timeFormatter.string(from: Date().addingTimeInterval(3600))
-        color_ = SerializableColor.init(from: Color.black)
+        color_ = SerializableColor.init(from: Color.brightRed)
         print("awake from insert is called")
     }
     
@@ -24,7 +24,7 @@ extension TodoTask: Comparable{
     }
     
     var color: SerializableColor {
-        get{ color_ ?? .init(from: Color.brightRed)}
+        get{ color_ ?? SerializableColor(from:Color.brightRed) }
         set{ color_ = newValue}
     }
     
@@ -39,8 +39,15 @@ extension TodoTask: Comparable{
     }
     
     var name:String{
-        get{ name_ ?? " " }
-        set{ name_ = newValue}
+        get{ name_ ?? "" }
+        set{
+            name_ = newValue
+        }
+    }
+    
+    var memo:String{
+        get{ memo_ ?? "" }
+        set{ memo_ = newValue}
     }
     
 }

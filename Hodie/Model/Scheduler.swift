@@ -26,6 +26,7 @@ extension Scheduler : Comparable{
     }
     
     var date: Date {
+        
         get{DateFormatter.dateOnlyFormatter.date(from: date_!)!}
         set{ date_ = DateFormatter.dateOnlyFormatter.string(from: newValue)}
     }
