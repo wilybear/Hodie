@@ -10,7 +10,7 @@ import SwiftUI
 import CoreData
 
 extension TodoTask: Comparable{
-    
+
     // initialize default value
     public override func awakeFromInsert() {
         startTime_ = DateFormatter.timeFormatter.string(from: Date())
@@ -62,6 +62,9 @@ extension TodoTask: Comparable{
         return NSPredicate(format: format, argumentArray: args)
     }
     
+    
+   
+
 }
 
 

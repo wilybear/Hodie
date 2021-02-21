@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		372979F425E27349003F6673 /* EditorAlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372979F325E27349003F6673 /* EditorAlertType.swift */; };
 		37586E2125DA7E880010E381 /* NSManagedContextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37586E2025DA7E880010E381 /* NSManagedContextExtensions.swift */; };
 		37586E2625DAA1C40010E381 /* ScaleAndFade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37586E2525DAA1C40010E381 /* ScaleAndFade.swift */; };
 		37586E2925DAA3070010E381 /* SectorFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37586E2825DAA3070010E381 /* SectorFormView.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		372979F325E27349003F6673 /* EditorAlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorAlertType.swift; sourceTree = "<group>"; };
 		37586E2025DA7E880010E381 /* NSManagedContextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedContextExtensions.swift; sourceTree = "<group>"; };
 		37586E2525DAA1C40010E381 /* ScaleAndFade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleAndFade.swift; sourceTree = "<group>"; };
 		37586E2825DAA3070010E381 /* SectorFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectorFormView.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 			children = (
 				37DA0FD025D5250F003CFB66 /* TodoTask.swift */,
 				37DA0FD325D5251C003CFB66 /* Scheduler.swift */,
+				372979F325E27349003F6673 /* EditorAlertType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 				37DA0FD125D5250F003CFB66 /* TodoTask.swift in Sources */,
 				376BAF0325D69FF00010270F /* FoundationExtensions.swift in Sources */,
 				379F48BB25DFD44400CA4744 /*  TextView.swift in Sources */,
+				372979F425E27349003F6673 /* EditorAlertType.swift in Sources */,
 				37A7CE0925DC26010015C3DF /* ColorExtension.swift in Sources */,
 				37DA0FD425D5251C003CFB66 /* Scheduler.swift in Sources */,
 				37586E2C25DAB3780010E381 /* ClockView.swift in Sources */,

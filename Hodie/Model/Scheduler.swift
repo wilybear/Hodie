@@ -35,4 +35,37 @@ extension Scheduler : Comparable{
         let stringDate = DateFormatter.dateOnlyFormatter.string(from: date)
         return NSPredicate(format: "date_ = %@", stringDate)
     }
+    
+    func tasksInScheduler (task: TodoTask) -> [TodoTask] {
+        todoTasks.filter{ (task.startTime...task.endTime).overlaps($0.startTime...$0.endTime ) && task.objectID != $0.objectID}
+    }
+    
+    func forceInsert(task: TodoTask, context: NSManagedObjectContext){
+        for overlappedTask in tasksInScheduler(task: task){
+            todoTasks.remove(overlappedTask)
+        }
+        todoTasks.update(with: task)
+        context.saveWithTry()
+    }
+    
+    static let taskNameLimit = 15
+    static let memolimit = 50
+    
+    func checkValidation(task: TodoTask) -> EditorAlertType{
+        if task.name == "" {
+            return .nilValueInTask
+        }
+        if task.name.count > Scheduler.taskNameLimit {
+            return .tooLongText
+        }
+        if task.memo.count > Scheduler.memolimit {
+            return .tooLongMemo
+        }
+        if !tasksInScheduler(task: task).isEmpty{
+            return .overlapped
+        }
+        return .none
+    }
+    
+
 }

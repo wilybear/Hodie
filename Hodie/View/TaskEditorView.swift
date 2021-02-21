@@ -19,10 +19,7 @@ struct TaskEditorView: View {
     @State var draft: TodoTask
     @State var textData : TextData
     @State private var showingAlert = false
-    @State private var taskEditError: EditorAlertMessage = .none
-    
-    private let taskNameLimit = 15
-    private let memolimit = 50
+    @State private var alertType: EditorAlertType = .none
     
     @Binding var isNewTask: Bool
     
@@ -33,85 +30,98 @@ struct TaskEditorView: View {
         _textData = State(wrappedValue: TextData.init(taskName: task.name, taskMemo: task.memo))
     }
     
-    
     var body: some View {
         VStack{
             HStack{
-                Button(action: {
+                Button {
                     presentationMode.wrappedValue.dismiss()
-                }){
-                    Text("Cancel")
-                }
+                } label: { Text("Cancel") }
                 .padding()
+                
                 Spacer()
-                Button(action: {
-                    saveTask()
-                    presentationMode.wrappedValue.dismiss()
-                }){
-                    Text("Done")
-                }
+                
+                Button{
+                    alertType = saveTask()
+                    if saveTask() == .none{
+                        presentationMode.wrappedValue.dismiss()
+                    }else{
+                        showingAlert = true
+                    }
+                } label: { Text("Done")}
                 .padding()
+                .alert(isPresented: $showingAlert){
+                    if alertType == .overlapped{
+                        return Alert(title: Text("Alert") ,message: Text(alertType.rawValue), primaryButton: .destructive(Text("OK"), action: {
+                            scheduler.forceInsert(task: draft, context: context)
+                            presentationMode.wrappedValue.dismiss()
+                        }), secondaryButton: .cancel())
+                    }else{
+                        return Alert(title: Text("Alert"), message: Text(alertType.rawValue), dismissButton: .default(Text("OK")))
+                    }
+                }
             }
+            
             Form{
                 Section{
                     TextField("Task Name", text: $textData.taskName )
-                        .onChange(of: textData.taskName, perform: { value in
-                            if value.count > taskNameLimit {
-                                textData.taskName = String(value.prefix(taskNameLimit))
-                            }
-                        })
+                        .onChange(of: textData.taskName) { value in
+                            textData.taskName = limitedText(value: value, limit: Scheduler.taskNameLimit)
+                        }
                 }
+                
                 Section{
-                    // TODO: start time should always faster than end time
                     DatePicker("Start time", selection:$draft.startTime, displayedComponents: .hourAndMinute)
                     DatePicker("End time", selection:$draft.endTime, displayedComponents: .hourAndMinute)
                 }
-                Section(header: Text("Memo about the task")){
+                
+                Section(header: Text("Memo about the task")) {
                     TextEditor(text: $textData.taskMemo)
                         .frame(minHeight: 100, alignment: .leading)
                         .multilineTextAlignment(.leading)
-                        .onChange(of: textData.taskMemo, perform: { value in
-                            if value.count > memolimit {
-                                textData.taskMemo = String(value.prefix(memolimit))
-                            }
-                        })
+                        .onChange(of: textData.taskMemo) { value in
+                            textData.taskMemo = limitedText(value: value, limit: Scheduler.memolimit)
+                        }
                         
                 }
                 
                 Section {
                     ColorSwatchView(draftColor: $draft.color)
                 }
-                
-                
-                // TODO: little memo for todotask
+            
                 if !isNewTask {
                     Section{
-                        Button(action: {
+                        Button {
                             context.delete(draft)
                             context.saveWithTry()
                             presentationMode.wrappedValue.dismiss()
-                        }, label: {
-                            Text("Delete")
-                        })
+                        } label: { Text("Delete") }
                     }
                 }
             }
         }
+        
     }
     
     @discardableResult
-    private func saveTask()->Bool{
+    private func saveTask()->EditorAlertType{
         draft.name = textData.taskName
         draft.memo = textData.taskMemo
-        scheduler.todoTasks.update(with: draft)
-        do {
-            try context.save()
-        }catch{
-            print("vvs: \(error)")
-            return false
+        let result = scheduler.checkValidation(task: draft)
+        if result == .none{
+            scheduler.todoTasks.update(with: draft)
+            do {
+                try context.save()
+            }catch{
+                print("vvs: \(error)")
+                return .coredataError
+            }
         }
-        return true
+        return result
     }
+}
+
+private func limitedText(value: String, limit: Int) -> String {
+    value.count > limit ? String(value.prefix(limit)) : value
 }
 
 
@@ -127,9 +137,9 @@ struct ColorSwatchView: View {
     }
     
     var body: some View{
-        let columns = [
-            GridItem(.adaptive(minimum: 50))
-        ]
+        
+        let columns = [ GridItem(.adaptive(minimum: 50)) ]
+        
         LazyVGrid(columns: columns, spacing:10){
             ForEach(colors, id: \.self){ color in
                 ZStack{
@@ -141,6 +151,7 @@ struct ColorSwatchView: View {
                             draftColor = color
                         }
                         .padding(10)
+                    
                     if selectedColor.color == color.color {
                         Circle()
                             .stroke(color.color, lineWidth: 5)
@@ -152,13 +163,6 @@ struct ColorSwatchView: View {
     }
 }
 
-enum EditorAlertMessage: String{
-    case none
-    case time = "The end time is earlier than the start time."
-    case exist = "The task already exists in that time interval. Are you sure you want to delete and register this task?"
-    case nilValueInTask = "Enter a name for the task."
-    case tooLongText = "Task is to long"
-}
 
 struct TextData{
     var taskName: String
