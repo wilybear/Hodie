@@ -29,6 +29,8 @@ struct ContentView: View {
                 })
                 .padding([.leading])
                 Text(DateFormatter.dateOnlyFormatter.string(from: selectedDate))
+                    .transition(.opacity)
+                    .id("\(selectedDate)")
                     .onTapGesture {
                         partialSheetManager.showPartialSheet(content:{ DatePickerView(selectedDate: $selectedDate)})
                     }

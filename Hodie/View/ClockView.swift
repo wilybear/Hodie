@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ClockView: View {
     @ObservedObject var scheduler: Scheduler
+    @State var raidus:CGFloat = 0
     var longPressHandler: (TodoTask) -> (Void)
     
     init(_ scheduler: Scheduler,longPressAction: @escaping (TodoTask) -> (Void)){
@@ -22,26 +23,44 @@ struct ClockView: View {
                 Circle()
                     .fill(Color.black)
                     .frame(width: geometry.size.width * 0.02, height: geometry.size.height * 0.02 ,alignment: .center)
-                    
+                    .zIndex(1)
                 
                 Circle()
                     .stroke(Color.lightGray)
                     .padding()
                 
+                Arrow(radius: raidus)
+                    .rotationEffect(.init(radians: Date().asRadians))
+                    .foregroundColor(.red)
+                    .transition(.scaleAndFade)
+                    .zIndex(1)
+                    .shadow(color: Color.black.opacity(0.2),
+                            radius: 2,
+                            x: -2,
+                            y: -2)
+                    .onAppear{
+                        withAnimation(.spring()){
+                            raidus = min(geometry.size.width, geometry.size.height) / 5
+                        }
+                    }
+                
                 ForEach(scheduler.todoTasks.sorted(), id: \.self){ todoTask in
                     let task = Binding<TodoTask>(
                         get: { todoTask },
                         set: { scheduler.todoTasks.update(with: $0)})
+                    SectorFormView(todoTask: task, delay: Double.random(in: 0..<0.7))
+                        .shadow(color: Color.black.opacity(0.2),
+                                radius: 2,
+                                x: -2,
+                                y: -2)
+                        .transition(.scaleAndFade)
+                        .onLongPressGesture {
+                            longPressHandler(todoTask)
+                        }
                     
-                    SectorFormView(todoTask: task)
-                    .onLongPressGesture {
-                        longPressHandler(todoTask)
-                    }
                 }
                 .padding()
                 
-                Arrow()
-                    .rotationEffect(.init(radians: Date().asRadians))
                 
                 ZStack{
                     ForEach( 0..<24, id: \.self){ idx in
@@ -67,11 +86,15 @@ struct ClockView: View {
 
 struct Arrow: Shape {
     
+    var radius: CGFloat = 0
+    var animatableData: CGFloat {
+        get{ radius }
+        set{ radius = newValue }
+    }
     func path(in rect: CGRect) -> Path {
    
         let size = rect.width * 0.005
         let center = CGPoint(x: rect.midX, y: rect.midY)
-        let radius = min(rect.width, rect.height) / 5
         var path = Path()
         path.move(to: center)
 //        path.addLines([

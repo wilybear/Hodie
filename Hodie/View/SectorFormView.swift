@@ -9,15 +9,23 @@ import SwiftUI
 
 struct SectorFormView : View {
     @Binding var todoTask: TodoTask
-    
+    @State var delay: Double
+    @State var radius: CGFloat = 0
     var body: some View{
         //TODO: Animation
         GeometryReader{ geometry in
             ZStack{
-                SectorFormShape(todoTask: $todoTask).fill(todoTask.color.color)
-                AngledText(todoTask: $todoTask, radius: min(geometry.size.width, geometry.size.height) / 2)
+                SectorFormShape(todoTask: $todoTask,radius: radius).fill(todoTask.color.color)
+                AngledText(todoTask: $todoTask, radius: radius)
                     .bold()
                     .foregroundColor(todoTask.color.isDarkColor ? .white : .black)
+            }.onAppear{
+                DispatchQueue.main.asyncAfter(deadline: .now() + delay){
+                    withAnimation(.spring()){
+                        radius =  min(geometry.size.width, geometry.size.height) / 2
+                    }
+                }
+ 
             }
         }
     }
@@ -40,10 +48,14 @@ extension TodoTask{
 
 struct SectorFormShape: Shape {
     @Binding var todoTask: TodoTask
+    var radius: CGFloat
+    var animatableData: CGFloat {
+        get{ radius }
+        set{ radius = newValue }
+    }
 
     func path(in rect: CGRect) -> Path {
         let center = CGPoint(x: rect.midX, y: rect.midY)
-        let radius = min(rect.width, rect.height) / 2
         let start = CGPoint(
             x: center.x + radius * cos(CGFloat(todoTask.startAngle.radians)),
             y: center.y + radius * sin(CGFloat(todoTask.startAngle.radians))
