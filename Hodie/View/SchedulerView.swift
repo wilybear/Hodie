@@ -14,25 +14,7 @@ struct SchedulerView: View {
     @State private var selelctedTask: TodoTask?
     @State var isCreating: Bool = false
     
-    private var schedulerRequest: FetchRequest<Scheduler>
-    
-    private var result: FetchedResults<Scheduler> { schedulerRequest.wrappedValue }
-    
-    private var scheduler : Scheduler{
-        if result.isEmpty {
-            let scheduler = Scheduler(context: context)
-            scheduler.date = Date()
-            scheduler.name = "untitled"
-            context.saveWithTry()
-            return scheduler
-        }else{
-            return result.first!
-        }
-    }
-
-    init(selectedDate: Date){
-        schedulerRequest = FetchRequest<Scheduler>(fetchRequest: Scheduler.fetchRequest(Scheduler.predicateDate(at: selectedDate)))
-    }
+    @ObservedObject var scheduler: Scheduler
     
     var body : some View {
         VStack{
@@ -51,32 +33,12 @@ struct SchedulerView: View {
                         }){
                             TaskEditorView(scheduler: scheduler,task: $0, isNewTask: $isCreating)
                         }
-                
-                VStack {
-                    Spacer()
-                    HStack{
-                        Spacer()
-                        Button(action: {
-                            isCreating = true
-                            selelctedTask = TodoTask(context: context)
-                        }, label: {
-                            Text("+")
-                                   .font(.system(.largeTitle))
-                                   .frame(width: 66, height: 60)
-                                   .foregroundColor(Color.white)
-                                   .padding(.bottom, 7)
-                        })
-                        .background(LinearGradient(gradient: Gradient(colors: Color.BackgroundColors), startPoint: /*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/, endPoint: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/))
-                        .cornerRadius(38.5)
-                        .padding()
-                        .shadow(color: Color.black.opacity(0.3),
-                                radius: 3,
-                                x: 3,
-                                y: 3)
-                    }
-                }
+                PlusButtonView {
+                    isCreating = true
+                    selelctedTask = TodoTask(context: context)
+                }       
             }
-//            .background(LinearGradient(gradient: Gradient(colors: Color.BackgroundColors), startPoint: .top, endPoint: .bottom))
+
         }
         
     }
@@ -95,6 +57,7 @@ struct TaskInfoView : View {
         VStack(alignment: .center) {
             Text(currentTask.first?.name ?? "" )
                 .font(.title)
+                .fontWeight(.bold)
             Text(currentTask.first?.memo ?? "")
                 .font(.body)
         }

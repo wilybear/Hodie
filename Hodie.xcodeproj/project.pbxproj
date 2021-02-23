@@ -16,6 +16,10 @@
 		376BAF0325D69FF00010270F /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376BAF0225D69FF00010270F /* FoundationExtensions.swift */; };
 		376BAF0625D6A2170010270F /* SchedulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376BAF0525D6A2170010270F /* SchedulerView.swift */; };
 		376BAF0E25D6AD070010270F /* TaskEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376BAF0D25D6AD070010270F /* TaskEditorView.swift */; };
+		3798687325E3C41300FAAD39 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3798687225E3C41300FAAD39 /* ViewExtension.swift */; };
+		3798687625E3C59D00FAAD39 /* DefaultSchedulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3798687525E3C59D00FAAD39 /* DefaultSchedulerView.swift */; };
+		3798687D25E3C81200FAAD39 /* PlusButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3798687C25E3C81200FAAD39 /* PlusButtonView.swift */; };
+		3798688025E3E3CF00FAAD39 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3798687F25E3E3CF00FAAD39 /* NotificationManager.swift */; };
 		379F48AB25DD2C5F00CA4744 /* HalfModal in Frameworks */ = {isa = PBXBuildFile; productRef = 379F48AA25DD2C5F00CA4744 /* HalfModal */; };
 		379F48AF25DD327B00CA4744 /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 379F48AE25DD327B00CA4744 /* PartialSheet */; };
 		379F48B225DD4A1900CA4744 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379F48B125DD4A1900CA4744 /* DatePickerView.swift */; };
@@ -43,6 +47,10 @@
 		376BAF0225D69FF00010270F /* FoundationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FoundationExtensions.swift; path = Hodie/Extension/FoundationExtensions.swift; sourceTree = SOURCE_ROOT; };
 		376BAF0525D6A2170010270F /* SchedulerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SchedulerView.swift; path = Hodie/View/SchedulerView.swift; sourceTree = SOURCE_ROOT; };
 		376BAF0D25D6AD070010270F /* TaskEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TaskEditorView.swift; path = Hodie/View/TaskEditorView.swift; sourceTree = SOURCE_ROOT; };
+		3798687225E3C41300FAAD39 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
+		3798687525E3C59D00FAAD39 /* DefaultSchedulerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSchedulerView.swift; sourceTree = "<group>"; };
+		3798687C25E3C81200FAAD39 /* PlusButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusButtonView.swift; sourceTree = "<group>"; };
+		3798687F25E3E3CF00FAAD39 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		379F48B125DD4A1900CA4744 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		379F48BA25DFD44400CA4744 /*  TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " TextView.swift"; sourceTree = "<group>"; };
 		37A7CE0825DC26010015C3DF /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
@@ -79,6 +87,7 @@
 				37DA0FD025D5250F003CFB66 /* TodoTask.swift */,
 				37DA0FD325D5251C003CFB66 /* Scheduler.swift */,
 				372979F325E27349003F6673 /* EditorAlertType.swift */,
+				3798687F25E3E3CF00FAAD39 /* NotificationManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -90,6 +99,7 @@
 				37DA0FD725D65CBD003CFB66 /* SerializableColor.swift */,
 				37586E2025DA7E880010E381 /* NSManagedContextExtensions.swift */,
 				37A7CE0825DC26010015C3DF /* ColorExtension.swift */,
+				3798687225E3C41300FAAD39 /* ViewExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -100,12 +110,14 @@
 				379F48B825DFBE3600CA4744 /* UIKit */,
 				379F48B725DFBE0100CA4744 /* ViewModifier */,
 				37DA0F8E25D4252A003CFB66 /* ContentView.swift */,
+				3798687525E3C59D00FAAD39 /* DefaultSchedulerView.swift */,
 				376BAF0525D6A2170010270F /* SchedulerView.swift */,
 				376BAF0D25D6AD070010270F /* TaskEditorView.swift */,
 				37586E2825DAA3070010E381 /* SectorFormView.swift */,
 				37586E2B25DAB3780010E381 /* ClockView.swift */,
 				37586E2E25DAB6190010E381 /* AngledText.swift */,
 				379F48B125DD4A1900CA4744 /* DatePickerView.swift */,
+				3798687C25E3C81200FAAD39 /* PlusButtonView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -259,11 +271,15 @@
 				376BAF0325D69FF00010270F /* FoundationExtensions.swift in Sources */,
 				379F48BB25DFD44400CA4744 /*  TextView.swift in Sources */,
 				372979F425E27349003F6673 /* EditorAlertType.swift in Sources */,
+				3798687325E3C41300FAAD39 /* ViewExtension.swift in Sources */,
 				37A7CE0925DC26010015C3DF /* ColorExtension.swift in Sources */,
 				37DA0FD425D5251C003CFB66 /* Scheduler.swift in Sources */,
 				37586E2C25DAB3780010E381 /* ClockView.swift in Sources */,
+				3798687D25E3C81200FAAD39 /* PlusButtonView.swift in Sources */,
+				3798687625E3C59D00FAAD39 /* DefaultSchedulerView.swift in Sources */,
 				37DA0F8F25D4252A003CFB66 /* ContentView.swift in Sources */,
 				37DA0F9225D4252A003CFB66 /* hodie.xcdatamodeld in Sources */,
+				3798688025E3E3CF00FAAD39 /* NotificationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

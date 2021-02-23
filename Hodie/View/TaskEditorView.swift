@@ -83,6 +83,10 @@ struct TaskEditorView: View {
                         }
                         
                 }
+
+                Section{
+                    Toggle(isOn: $draft.notification){ Text("Notification") }
+                }
                 
                 Section {
                     ColorSwatchView(draftColor: $draft.color)
