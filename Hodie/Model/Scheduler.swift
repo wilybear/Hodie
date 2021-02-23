@@ -86,11 +86,12 @@ extension Scheduler : Comparable{
         var tasks:[TodoTask] = []
         for interval in divideTimeBasedOnMidnight(start: task.startTime, end: task.endTime) {
             tasks.append(contentsOf: todoTasks.filter{
-                var result = task.objectID != $0.objectID
                 for suspect in divideTimeBasedOnMidnight(start: $0.startTime, end: $0.endTime){
-                    result = interval.overlaps(suspect) && result
+                    if interval.overlaps(suspect) && task.objectID != $0.objectID {
+                        return true
+                    }
                 }
-                return result
+                return false
             })
         }
         return tasks
@@ -108,8 +109,8 @@ extension Scheduler : Comparable{
             return [(start.addingTimeInterval(1))..<end]
         }
         let midnightPM = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: start, direction: .forward)!
-        let midnightAM = Calendar.current.date(bySettingHour: 00, minute: 00, second: 00, of: end, direction: .forward)!.addingTimeInterval(86400)
-        return [(start.addingTimeInterval(1))..<midnightPM,(midnightAM.addingTimeInterval(1))..<(end.addingTimeInterval(86400))]
+        let midnightAM = Calendar.current.date(bySettingHour: 00, minute: 00, second: 00, of: end, direction: .forward)!
+        return [(start.addingTimeInterval(1))..<midnightPM,(midnightAM.addingTimeInterval(86401))..<(end.addingTimeInterval(86400)),midnightAM.addingTimeInterval(1)..<end ]
     }
     
     func forceInsert(task: TodoTask, context: NSManagedObjectContext){

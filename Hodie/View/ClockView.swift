@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct ClockView: View {
+    
     @ObservedObject var scheduler: Scheduler
     @State var raidus:CGFloat = 0
-    var longPressHandler: (TodoTask) -> (Void)
+    var onLongPress: (TodoTask) -> (Void)
     
-    init(_ scheduler: Scheduler,longPressAction: @escaping (TodoTask) -> (Void)){
+    init(_ scheduler: Scheduler, longPressAction: @escaping (TodoTask) -> (Void)){
         self.scheduler = scheduler
-        longPressHandler = longPressAction
+        onLongPress = longPressAction
     }
     
     var body: some View {
@@ -34,10 +35,7 @@ struct ClockView: View {
                     .foregroundColor(.red)
                     .transition(.scaleAndFade)
                     .zIndex(1)
-                    .shadow(color: Color.black.opacity(0.2),
-                            radius: 2,
-                            x: -2,
-                            y: -2)
+                    .shadow(color: Color.black.opacity(0.2), radius: 2, x: -2, y: -2)
                     .onAppear{
                         withAnimation(.spring()){
                             raidus = min(geometry.size.width, geometry.size.height) / 5
@@ -49,18 +47,14 @@ struct ClockView: View {
                         get: { todoTask },
                         set: { scheduler.todoTasks.update(with: $0)})
                     SectorFormView(todoTask: task, delay: Double.random(in: 0..<0.7))
-                        .shadow(color: Color.black.opacity(0.2),
-                                radius: 2,
-                                x: -2,
-                                y: -2)
+                        .shadow(color: Color.black.opacity(0.2), radius: 2, x: -2, y: -2)
                         .transition(.scaleAndFade)
                         .onLongPressGesture {
-                            longPressHandler(todoTask)
+                            onLongPress(todoTask)
                         }
                     
                 }
                 .padding()
-                
                 
                 ZStack{
                     ForEach( 0..<24, id: \.self){ idx in
@@ -91,17 +85,13 @@ struct Arrow: Shape {
         get{ radius }
         set{ radius = newValue }
     }
+    
     func path(in rect: CGRect) -> Path {
-   
         let size = rect.width * 0.005
         let center = CGPoint(x: rect.midX, y: rect.midY)
         var path = Path()
+        
         path.move(to: center)
-//        path.addLines([
-//            CGPoint(x:start.x + arrowSize, y: start.y + arrowSize/2),
-//            CGPoint(x:start.x - arrowSize, y: start.y + arrowSize/2),
-//            start
-//        ])
         path.addLines( [
             CGPoint(x: center.x , y: center.y + size),
             CGPoint(x: center.x + radius * 0.9 , y: center.y + size),

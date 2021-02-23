@@ -9,12 +9,12 @@ import SwiftUI
 import PartialSheet
 
 struct DatePickerView: View {
-    @Binding var selectedDate: Date
-    @State private var draft: Date
     
     @EnvironmentObject var partialSheetManager: PartialSheetManager
     
-    
+    @Binding var selectedDate: Date
+    @State private var draft: Date
+
     init(selectedDate : Binding<Date>) {
         self._selectedDate = selectedDate
         _draft = State(wrappedValue: selectedDate.wrappedValue)
@@ -23,29 +23,26 @@ struct DatePickerView: View {
     var body: some View {
         VStack{
             HStack{
-                Button(action: {
+                Button{
                     withAnimation{
                         partialSheetManager.closePartialSheet()
                     }
-                }){
-                    Text("Cancel")
-                }
+                } label:{ Text("Cancel")}
                 .padding()
+                
                 Spacer()
-                Button(action: {
+                
+                Button{
                     withAnimation{
                         selectedDate = draft
                         partialSheetManager.closePartialSheet()
                     }
-                }){
-                    Text("Done")
-                }
+                } label: { Text("Done") }
                 .padding()
             }
             
             DatePicker("Select Date", selection: $draft, displayedComponents: .date )
                 .datePickerStyle(GraphicalDatePickerStyle())
-           
         }
     }
 }

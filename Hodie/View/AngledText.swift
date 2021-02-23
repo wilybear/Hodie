@@ -24,25 +24,6 @@ private struct PropagateSize<V: View>: View {
     }
 }
 
-// make each character identifiable
-private struct IdentifiableCharacter: Identifiable {
-    var id: String { "\(index) \(character)" }
-    let index: Int
-    let character: Character
-}
-
-extension IdentifiableCharacter {
-    var string: String { "\(character)" }
-}
-
-extension Array {
-    subscript(safe index: Int) -> Element? {
-        indices.contains(index) ? self[index] : nil
-    }
-}
-
-// MARK: - Curved Text
-
 public struct AngledText: View {
 
 
@@ -86,23 +67,10 @@ public struct AngledText: View {
         }
         .accessibility(label: Text(text))
     }
-
-    private func textAsCharacters() -> [IdentifiableCharacter] {
-        let string =  angle.degrees < 270 && angle.degrees > 90 ? String(text.reversed()) : text
-        return string.enumerated().map(IdentifiableCharacter.init)
-    }
     
     private func rotationAngle()-> Angle{
         angle.degrees < 270 && angle.degrees > 90 ? Angle(degrees: angle.degrees - 180) : angle
     }
-
-    private func textView(char: IdentifiableCharacter) -> some View {
-        textModifier(Text(char.string))
-    }
-//
-//    private func size(at index: Int) -> CGSize {
-//        sizes[safe: index] ?? CGSize(width: 1000000, height: 0)
-//    }
 }
 
 extension AngledText {

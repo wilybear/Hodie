@@ -71,7 +71,7 @@ struct ContentView: View {
                 }
                 
                 Button {
-                  //  showingDefaultSetting = true
+                    showingDefaultSetting = true
                 } label: {
                     Text("Menu")
                 }

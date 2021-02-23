@@ -22,17 +22,18 @@ struct SchedulerView: View {
             .frame(height: 150, alignment: .center)
             
             ZStack {
-                ClockView(scheduler, longPressAction: { todoTask in
+                ClockView(scheduler) { todoTask in
                             isCreating = false
                             selelctedTask = todoTask
-                        })
-                        .padding()
-                        .sheet(item: $selelctedTask, onDismiss: {
-                            selelctedTask = nil
-                            context.rollback()  //if adding new Tasks is canceled
-                        }){
-                            TaskEditorView(scheduler: scheduler,task: $0, isNewTask: $isCreating)
-                        }
+                }
+                .padding()
+                .sheet(item: $selelctedTask, onDismiss: {
+                    selelctedTask = nil
+                    context.rollback()  //if adding new Tasks is canceled
+                }){
+                    TaskEditorView(scheduler: scheduler,task: $0, isNewTask: $isCreating)
+                }
+                
                 PlusButtonView {
                     isCreating = true
                     selelctedTask = TodoTask(context: context)
@@ -58,6 +59,7 @@ struct TaskInfoView : View {
             Text(currentTask.first?.name ?? "" )
                 .font(.title)
                 .fontWeight(.bold)
+            
             Text(currentTask.first?.memo ?? "")
                 .font(.body)
         }

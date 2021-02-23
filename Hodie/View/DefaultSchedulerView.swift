@@ -32,9 +32,11 @@ struct DefaultSchedulerView: View{
                                     .fill(todoTask.color.color)
                                     .frame(width: 40, height: 40)
                                     .padding()
+                                
                                 VStack(alignment: .leading){
                                     Text(todoTask.name).font(.title2)
                                     Text("\(todoTask.startTime_!) ~ \(todoTask.endTime_!)").font(.caption)
+                                    
                                 }
                             }.onTapGesture {
                                 isCreating = false
@@ -56,11 +58,7 @@ struct DefaultSchedulerView: View{
             }
             .navigationTitle(Text("Default Scheduler"))
             .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(leading: Button(action: {
-                presentationMode.wrappedValue.dismiss()
-            }, label: {
-                Text("Close")
-            }))
+            .navigationBarItems(leading: Button { presentationMode.wrappedValue.dismiss() } label: { Text("Close") })
         }
     }
 }

@@ -27,6 +27,7 @@ class LocalNotificationManager {
     }
     
     func scheduleNotifications() -> Void {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         for task in tasks {
             let content = UNMutableNotificationContent()
             content.title = task.name

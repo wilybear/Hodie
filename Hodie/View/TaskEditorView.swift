@@ -12,15 +12,13 @@ import Combine
 struct TaskEditorView: View {
     
     @Environment(\.presentationMode) var presentationMode
-    
-    @ObservedObject var scheduler: Scheduler
     @Environment(\.managedObjectContext) var context
+    @ObservedObject var scheduler: Scheduler
     
     @State var draft: TodoTask
     @State var textData : TextData
     @State private var showingAlert = false
     @State private var alertType: EditorAlertType = .none
-    
     @Binding var isNewTask: Bool
     
     init(scheduler: Scheduler,task: TodoTask, isNewTask: Binding<Bool>){
@@ -120,6 +118,7 @@ struct TaskEditorView: View {
                 return .coredataError
             }
         }
+        setNotification(context: context)
         return result
     }
 }
@@ -128,11 +127,22 @@ private func limitedText(value: String, limit: Int) -> String {
     value.count > limit ? String(value.prefix(limit)) : value
 }
 
+private func setNotification(context: NSManagedObjectContext){
+    let scheduler = Scheduler.fetchScheduler(at: Date(), context: context)
+    let manager = LocalNotificationManager()
+    manager.requestPermission()
+    for task in scheduler.todoTasks.filter({$0.notification}) {
+        manager.addNotification(task: task)
+    }
+    manager.scheduleNotifications()
+}
+
 
 // ColorSwatch is worte by referring to https://medium.com/swlh/creating-a-curated-color-picker-in-swiftui-18a9a86f7721
 struct ColorSwatchView: View {
     @Binding var draftColor: SerializableColor
     @State var selectedColor: SerializableColor
+    
     let colors: [SerializableColor] = Color.BrightColors.map({SerializableColor(from: $0)})
     
     init(draftColor: Binding<SerializableColor>){
