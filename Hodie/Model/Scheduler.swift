@@ -69,7 +69,6 @@ extension Scheduler : Comparable{
     var todoTasks: Set<TodoTask>{
         get{ todoTasks_ as? Set<TodoTask> ?? [] }
         set{
-            objectWillChange.send()
             todoTasks_ = newValue as NSSet}
     }
     

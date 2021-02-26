@@ -54,6 +54,10 @@ extension Double{
         return self * 2 * .pi
     }
     
+    static var radianRound: Double{
+        360 * Double.pi / 180
+    }
+    
     var asTime: Date{
         let ratio = ((self * Double(180) / .pi) + 90)/360
         let minutes = ratio * Double(1440)
@@ -82,7 +86,11 @@ extension Date{
         let currentDateComponent = Calendar(identifier: .gregorian).dateComponents([.hour, .minute], from: self)
         let minutes = (currentDateComponent.hour! * 60) + currentDateComponent.minute!
         let ratio = Double(minutes) / Double(1440)
-        return (ratio * 360 - 90) * .pi / Double(180)
+        var radians = (ratio * 360 - 90) * .pi / Double(180)
+        if radians < 0 {
+            radians += Double.radianRound
+        }
+        return radians
     }
     
     var startOfDay: Date {

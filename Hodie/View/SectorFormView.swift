@@ -18,13 +18,50 @@ struct SectorFormView : View {
     @GestureState var dragState = DragState.inactive
     
     var startRadians: Double{
-        let radians = todoTask.startTime.asRadians - dragState.radians.0
-        return radians
+        let availableRange = todoTask.availableRadians().0
+        var result: Double
+        let movedAmount = dragState.radians.0
+        if movedAmount == .zero{
+            return todoTask.startTime.asRadians
+        }
+        if availableRange.contains( movedAmount){
+            result =  todoTask.startTime.asRadians + movedAmount
+        }else{
+            if availableRange.upperBound < movedAmount {
+                result = todoTask.startTime.asRadians + availableRange.upperBound
+                
+            }else{
+                result = todoTask.startTime.asRadians + availableRange.lowerBound
+                
+            }
+        }
+        
+        return result
     }
     
     var endRadians: Double{
-        let radians = todoTask.endTime.asRadians - dragState.radians.1
-        return radians
+        let availableRange = todoTask.availableRadians().1
+        var result: Double
+        let movedAmount = dragState.radians.1
+        if movedAmount == .zero{
+            return todoTask.endTime.asRadians
+        }
+        print("drag end radians \( movedAmount)")
+        if availableRange.contains(movedAmount){
+            print(availableRange)
+            result = todoTask.endTime.asRadians + movedAmount
+        }else{
+            if availableRange.upperBound < movedAmount{
+                
+                result = todoTask.endTime.asRadians + availableRange.upperBound
+                print("upper radians \(result)")
+            }else{
+                result = todoTask.endTime.asRadians + availableRange.lowerBound
+                print("lower radians \(result)")
+            }
+        }
+        print("start radians \(result)")
+        return result.truncatingRemainder(dividingBy: .radianRound)
     }
 
     var body: some View{
@@ -63,15 +100,17 @@ struct SectorFormView : View {
                     case .first(true):
                         state = .pressing
                         
+                        
                     // Long press confirmed, dragging may begin.
                     case .second(true, let drag):
                         if let dragV = drag {
                             let radianAtPoint = pointToRadian(coordinate: size ,location: dragV.startLocation)
-                            if task.timeNearStartOrEnd(radian: radianAtPoint, size: size){
-                                state = .dragging(start:radianAtPoint - pointToRadian(coordinate: size, location: dragV.location) ,end: .zero)
-                            }else{
-                                state = .dragging(start: .zero ,end: radianAtPoint - pointToRadian(coordinate: size, location: dragV.location))
-                            }
+                            //if task.timeNearStartOrEnd(radian: radianAtPoint, size: size){
+                              //  state = .dragging(start:angle(between: dragV.startLocation, ending: dragV.location, coord: size) ,end: .zero)
+                            // }else{
+                            print("hello:\(dragV.location) startLocation:\(dragV.startLocation) size:\( angle(between: dragV.startLocation, ending: dragV.location, coord: size))")
+                                state = .dragging(start: .zero ,end: angle(between: dragV.startLocation, ending: dragV.location, coord: size))
+                            //}
                         }else{
                             state = .dragging(start: .zero, end: .zero)
                         }
@@ -136,6 +175,13 @@ private func pointToRadian(coordinate: CGSize, location: CGPoint) -> Double{
     return Double(radian)
 }
 
+func angle(between starting: CGPoint, ending: CGPoint, coord: CGSize) -> Double {
+    let v1 = CGVector(dx: starting.x - coord.width/2, dy: starting.y - coord.height/2)
+    let v2 = CGVector(dx: ending.x - coord.width/2, dy: ending.y - coord.height/2)
+    let angle = atan2(v2.dy, v2.dx) - atan2(v1.dy, v1.dx)
+    return Double(angle > 0 ? angle : angle + .pi * 2)
+}
+
 extension TodoTask{
     var startAngle: Angle{
         Angle(radians: startTime.asRadians)
@@ -165,15 +211,14 @@ struct SectorFormShape: Shape {
         let center = CGPoint(x: rect.midX, y: rect.midY)
         let startPoint = CGPoint(
             x: center.x + radius * cos(CGFloat(start)),
-            y: center.y + radius * sin(CGFloat(end))
+            y: center.y + radius * sin(CGFloat(start))
         )
         var path = Path()
         
-       // path.move(to: center)
+        path.move(to: center)
         path.addLine(to: startPoint)
         path.addArc(center: center, radius: radius, startAngle: Angle(radians: start), endAngle: Angle(radians: end), clockwise: false)
         path.addLine(to: center)
-        path.closeSubpath()
         
         return path
     }

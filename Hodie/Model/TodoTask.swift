@@ -32,13 +32,11 @@ extension TodoTask: Comparable{
     var startTime: Date{
         get{DateFormatter.timeFormatter.date(from: startTime_ ?? Date.stringOfCurrentTime)!}
         set{
-            self.objectWillChange.send()
             startTime_ = DateFormatter.timeFormatter.string(from: newValue)}
     }
     var endTime: Date{
         get{ DateFormatter.timeFormatter.date(from: endTime_ ?? Date.stringOfCurrentTime)!}
         set{
-            self.objectWillChange.send()
             endTime_ = DateFormatter.timeFormatter.string(from: newValue)
         }
     }
@@ -86,26 +84,29 @@ extension TodoTask: Comparable{
         return toStart < toEnd
     }
     
-//    func availableRadians() -> (ClosedRange<Double>, ClosedRange<Double>){
-//        let index = scheduler!.todoTasks.sorted().firstIndex(of: self)!
-//        let nextIndex = index == scheduler!.todoTasks.count - 1 ? 0 : index + 1
-//        let beforeIndex = index == 0 ? scheduler!.todoTasks.count - 1 : index - 1
-//        var nextStartRadians = scheduler!.todoTasks.sorted()[nextIndex].startTime.asRadians
-//        let beforeEndRadians = scheduler!.todoTasks.sorted()[beforeIndex].endTime.asRadians
-//        
-//        var endTimeRadians = self.endTime.addingTimeInterval(-10 * 60).asRadians
-//        let startTimeRadians = self.startTime.addingTimeInterval(-10 * 60).asRadians
-//        
-//        if beforeEndRadians > endTimeRadians{
-//            endTimeRadians += 360 * .pi / 180
-//        }
-//        
-//        if startTimeRadians > nextStartRadians{
-//            nextStartRadians += 360 * .pi / 180
-//        }
-//        
-//        return (beforeEndRadians...endTimeRadians, startTimeRadians...nextStartRadians)
-//    }
+    func availableRadians() -> (ClosedRange<Double>, ClosedRange<Double>){
+        let index = scheduler!.todoTasks.sorted().firstIndex(of: self)!
+        let nextIndex = index == scheduler!.todoTasks.count - 1 ? 0 : index + 1
+        let beforeIndex = index == 0 ? scheduler!.todoTasks.count - 1 : index - 1
+        var nextStartRadians = scheduler!.todoTasks.sorted()[nextIndex].startTime.asRadians
+        let beforeEndRadians = scheduler!.todoTasks.sorted()[beforeIndex].endTime.asRadians
+        
+        var endTimeRadians = self.endTime.addingTimeInterval(-10 * 60).asRadians
+        let startTimeRadians = self.startTime.addingTimeInterval(-10 * 60).asRadians
+        
+        let startPivot = beforeEndRadians > startTime.asRadians ? startTime.asRadians + .radianRound : startTime.asRadians
+        if startTime.asRadians > endTimeRadians{
+            endTimeRadians += .radianRound
+        }
+        
+        let endPivot = startTimeRadians > endTime.asRadians ? endTime.asRadians + .radianRound : endTime.asRadians
+        
+        if endTime.asRadians > nextStartRadians{
+            nextStartRadians += .radianRound
+        }
+        
+        return ((beforeEndRadians - startPivot)...(endTimeRadians - startTime.asRadians), (startTimeRadians - endPivot)...(nextStartRadians - endTime.asRadians))
+    }
     
     func CGPointDistanceSquared(from: CGPoint, to: CGPoint) -> CGFloat {
         return (from.x - to.x) * (from.x - to.x) + (from.y - to.y) * (from.y - to.y)
@@ -117,11 +118,15 @@ extension TodoTask: Comparable{
     
     func dragTimeValue(value: Double, isStart: Bool, context: NSManagedObjectContext){
         let amount = value.asMinuteAmount
-        objectWillChange.send()
+        let availableRange = self.availableRadians()
         if isStart{
-            startTime = startTime.addingTimeInterval(TimeInterval(amount * -60))
+            if availableRange.0.contains(value){
+                startTime = startTime.addingTimeInterval(TimeInterval(amount * -60))
+            }
         }else{
-            endTime = endTime.addingTimeInterval(TimeInterval(amount * -60))
+            if availableRange.1.contains(value){
+                endTime = endTime.addingTimeInterval(TimeInterval(amount * -60))
+            }
         }
         context.saveWithTry()
     }
