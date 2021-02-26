@@ -34,6 +34,7 @@
 		37DA0FD125D5250F003CFB66 /* TodoTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA0FD025D5250F003CFB66 /* TodoTask.swift */; };
 		37DA0FD425D5251C003CFB66 /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA0FD325D5251C003CFB66 /* Scheduler.swift */; };
 		37DA0FD825D65CBD003CFB66 /* SerializableColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA0FD725D65CBD003CFB66 /* SerializableColor.swift */; };
+		37EEB06225E6A8B5009C35D5 /* HListCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEB06125E6A8B5009C35D5 /* HListCalendarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		37DA0FD025D5250F003CFB66 /* TodoTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TodoTask.swift; path = Hodie/Model/TodoTask.swift; sourceTree = SOURCE_ROOT; };
 		37DA0FD325D5251C003CFB66 /* Scheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Scheduler.swift; path = Hodie/Model/Scheduler.swift; sourceTree = SOURCE_ROOT; };
 		37DA0FD725D65CBD003CFB66 /* SerializableColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SerializableColor.swift; path = Hodie/Extension/SerializableColor.swift; sourceTree = SOURCE_ROOT; };
+		37EEB06125E6A8B5009C35D5 /* HListCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HListCalendarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 		379F48B525DFBDD300CA4744 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				37EEB06125E6A8B5009C35D5 /* HListCalendarView.swift */,
 				379F48B725DFBE0100CA4744 /* ViewModifier */,
 				37DA0F8E25D4252A003CFB66 /* ContentView.swift */,
 				3798687525E3C59D00FAAD39 /* DefaultSchedulerView.swift */,
@@ -257,6 +260,7 @@
 				37586E2125DA7E880010E381 /* NSManagedContextExtensions.swift in Sources */,
 				379F48B225DD4A1900CA4744 /* DatePickerView.swift in Sources */,
 				37DA0FD125D5250F003CFB66 /* TodoTask.swift in Sources */,
+				37EEB06225E6A8B5009C35D5 /* HListCalendarView.swift in Sources */,
 				376BAF0325D69FF00010270F /* FoundationExtensions.swift in Sources */,
 				372979F425E27349003F6673 /* EditorAlertType.swift in Sources */,
 				3798687325E3C41300FAAD39 /* ViewExtension.swift in Sources */,

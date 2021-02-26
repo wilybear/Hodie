@@ -31,11 +31,16 @@ extension TodoTask: Comparable{
     // Date to time string, time string to Date
     var startTime: Date{
         get{DateFormatter.timeFormatter.date(from: startTime_ ?? Date.stringOfCurrentTime)!}
-        set{ startTime_ = DateFormatter.timeFormatter.string(from: newValue)}
+        set{
+            self.objectWillChange.send()
+            startTime_ = DateFormatter.timeFormatter.string(from: newValue)}
     }
     var endTime: Date{
         get{ DateFormatter.timeFormatter.date(from: endTime_ ?? Date.stringOfCurrentTime)!}
-        set{ endTime_ = DateFormatter.timeFormatter.string(from: newValue)}
+        set{
+            self.objectWillChange.send()
+            endTime_ = DateFormatter.timeFormatter.string(from: newValue)
+        }
     }
     
     var name:String{
@@ -55,16 +60,71 @@ extension TodoTask: Comparable{
         return request
     }
     
+    // wrong
     private static func predicateWithDate(of scheduler: Scheduler, at time: Date) -> NSPredicate {
-        let format = "scheduler = %@ AND endTime_ >= %@ AND startTime_ <= %@ "
-        let currentTime = DateFormatter.timeFormatter.string(from: time)
-        let args: [Any] = [scheduler,currentTime, currentTime]
+        let format = "scheduler = %@ "
+        //let currentTime = DateFormatter.timeFormatter.string(from: time)
+        let args: [Any] = [scheduler]
         return NSPredicate(format: format, argumentArray: args)
     }
     
+    // true for start, false for end
+    func timeNearStartOrEnd(radian: Double, size: CGSize) -> Bool {
+        let radius = min(size.width, size.height) / 2
+        let center = CGPoint(x:size.width/2, y: size.height/2)
+        let startPoint = CGPoint(
+            x: center.x + radius * cos(CGFloat(startAngle.radians)),
+           y: center.y + radius * sin(CGFloat(startAngle.radians)))
+        let endPoint = CGPoint(
+           x: center.x + radius * cos(CGFloat(endAngle.radians)),
+           y: center.y + radius * sin(CGFloat(endAngle.radians)))
+        let currentPoint = CGPoint(
+           x: center.x + radius * cos(CGFloat(radian)),
+           y: center.y + radius * sin(CGFloat(radian)))
+        let toStart = CGPointDistance(from: currentPoint, to: startPoint)
+        let toEnd = CGPointDistance(from: currentPoint, to: endPoint)
+        return toStart < toEnd
+    }
     
-   
+//    func availableRadians() -> (ClosedRange<Double>, ClosedRange<Double>){
+//        let index = scheduler!.todoTasks.sorted().firstIndex(of: self)!
+//        let nextIndex = index == scheduler!.todoTasks.count - 1 ? 0 : index + 1
+//        let beforeIndex = index == 0 ? scheduler!.todoTasks.count - 1 : index - 1
+//        var nextStartRadians = scheduler!.todoTasks.sorted()[nextIndex].startTime.asRadians
+//        let beforeEndRadians = scheduler!.todoTasks.sorted()[beforeIndex].endTime.asRadians
+//        
+//        var endTimeRadians = self.endTime.addingTimeInterval(-10 * 60).asRadians
+//        let startTimeRadians = self.startTime.addingTimeInterval(-10 * 60).asRadians
+//        
+//        if beforeEndRadians > endTimeRadians{
+//            endTimeRadians += 360 * .pi / 180
+//        }
+//        
+//        if startTimeRadians > nextStartRadians{
+//            nextStartRadians += 360 * .pi / 180
+//        }
+//        
+//        return (beforeEndRadians...endTimeRadians, startTimeRadians...nextStartRadians)
+//    }
+    
+    func CGPointDistanceSquared(from: CGPoint, to: CGPoint) -> CGFloat {
+        return (from.x - to.x) * (from.x - to.x) + (from.y - to.y) * (from.y - to.y)
+    }
 
+    func CGPointDistance(from: CGPoint, to: CGPoint) -> CGFloat {
+        return sqrt(CGPointDistanceSquared(from: from, to: to))
+    }
+    
+    func dragTimeValue(value: Double, isStart: Bool, context: NSManagedObjectContext){
+        let amount = value.asMinuteAmount
+        objectWillChange.send()
+        if isStart{
+            startTime = startTime.addingTimeInterval(TimeInterval(amount * -60))
+        }else{
+            endTime = endTime.addingTimeInterval(TimeInterval(amount * -60))
+        }
+        context.saveWithTry()
+    }
 }
 
 

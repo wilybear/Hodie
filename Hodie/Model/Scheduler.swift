@@ -68,7 +68,9 @@ extension Scheduler : Comparable{
 
     var todoTasks: Set<TodoTask>{
         get{ todoTasks_ as? Set<TodoTask> ?? [] }
-        set{ todoTasks_ = newValue as NSSet}
+        set{
+            objectWillChange.send()
+            todoTasks_ = newValue as NSSet}
     }
     
     var date: Date {
@@ -84,9 +86,9 @@ extension Scheduler : Comparable{
     // get tasks in schduler that are overlapping task
     func tasksInScheduler (task: TodoTask) -> [TodoTask] {
         var tasks:[TodoTask] = []
-        for interval in divideTimeBasedOnMidnight(start: task.startTime, end: task.endTime) {
+        for interval in task.startTime.divideTimeBasedOnMidnight(end: task.endTime) {
             tasks.append(contentsOf: todoTasks.filter{
-                for suspect in divideTimeBasedOnMidnight(start: $0.startTime, end: $0.endTime){
+                for suspect in $0.startTime.divideTimeBasedOnMidnight(end: $0.endTime){
                     if interval.overlaps(suspect) && task.objectID != $0.objectID {
                         return true
                     }
@@ -97,6 +99,19 @@ extension Scheduler : Comparable{
         return tasks
     }
     
+    func currentTask() -> TodoTask?{
+        let current = DateFormatter.timeFormatter.date(from:Date.stringOfCurrentTime)!
+        let currentRange = current..<current.addingTimeInterval(1)
+        return todoTasks.filter{
+            for suspect in $0.startTime.divideTimeBasedOnMidnight(end: $0.endTime){
+                if currentRange.overlaps(suspect){
+                    return true
+                }
+            }
+            return false
+        }.first ?? nil
+    }
+    
     func reset(context: NSManagedObjectContext){
         for task in todoTasks{
             context.delete(task)
@@ -104,14 +119,7 @@ extension Scheduler : Comparable{
         context.saveWithTry()
     }
     
-    private func divideTimeBasedOnMidnight(start: Date, end: Date) -> [Range<Date>]{
-        if start < end{
-            return [(start.addingTimeInterval(1))..<end]
-        }
-        let midnightPM = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: start, direction: .forward)!
-        let midnightAM = Calendar.current.date(bySettingHour: 00, minute: 00, second: 00, of: end, direction: .forward)!
-        return [(start.addingTimeInterval(1))..<midnightPM,(midnightAM.addingTimeInterval(86401))..<(end.addingTimeInterval(86400)),midnightAM.addingTimeInterval(1)..<end ]
-    }
+  
     
     func forceInsert(task: TodoTask, context: NSManagedObjectContext){
         for overlappedTask in tasksInScheduler(task: task){
@@ -133,6 +141,10 @@ extension Scheduler : Comparable{
         }
         if task.memo.count > Scheduler.memolimit {
             return .tooLongMemo
+        }
+        
+        if task.startTime == task.endTime {
+            return .same
         }
         if !tasksInScheduler(task: task).isEmpty{
             return .overlapped

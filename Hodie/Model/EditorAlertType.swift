@@ -15,4 +15,5 @@ enum EditorAlertType: String{
     case nilValueInTask = "Enter a name for the task."
     case tooLongText = "Name of the task is too long"
     case tooLongMemo = "Memo of the task is too long"
+    case same = "Start time and end time is equal."
 }

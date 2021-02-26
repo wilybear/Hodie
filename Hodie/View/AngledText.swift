@@ -29,11 +29,18 @@ public struct AngledText: View {
 
     @Binding var todoTask: TodoTask
     var radius: CGFloat
+    var start: Double
+    var end: Double
+    
     private var angle: Angle {
-        todoTask.midAngle
+        Angle(radians: start+interval)
     }
     private var text: String {
         todoTask.name
+    }
+    
+    private var interval: Double {
+        return todoTask.endTime > todoTask.startTime ? (end - start)/2 : (end - start + 360 * .pi/180)/2
     }
     internal var textModifier: (Text) -> Text = { $0 }
     internal var spacing: CGFloat = 0

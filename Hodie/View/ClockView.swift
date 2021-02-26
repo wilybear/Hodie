@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ClockView: View {
     
+    @Environment(\.presentationMode) var presentationMode
     @ObservedObject var scheduler: Scheduler
     @State var raidus:CGFloat = 0
     var onLongPress: (TodoTask) -> (Void)
@@ -20,15 +21,21 @@ struct ClockView: View {
     
     var body: some View {
         GeometryReader{ geometry in
+
             ZStack{
                 Circle()
-                    .fill(Color.black)
+                    .fill(Color.red)
                     .frame(width: geometry.size.width * 0.02, height: geometry.size.height * 0.02 ,alignment: .center)
                     .zIndex(1)
                 
                 Circle()
+                    .fill(Color.brightWhite)
+                    .padding()
+                    
+                Circle()
                     .stroke(Color.lightGray)
                     .padding()
+                
                 
                 Arrow(radius: raidus)
                     .rotationEffect(.init(radians: Date().asRadians))
@@ -48,13 +55,13 @@ struct ClockView: View {
                         set: { scheduler.todoTasks.update(with: $0)})
                     SectorFormView(todoTask: task, delay: Double.random(in: 0..<0.7))
                         .shadow(color: Color.black.opacity(0.2), radius: 2, x: -2, y: -2)
-                        .transition(.scaleAndFade)
                         .onLongPressGesture {
                             onLongPress(todoTask)
                         }
                     
                 }
                 .padding()
+                .frame(width:minSize(for: geometry.size) - clockFontSize(for: geometry.size) , height: minSize(for: geometry.size) - clockFontSize(for: geometry.size) ,alignment: .center)
                 
                 ZStack{
                     ForEach( 0..<24, id: \.self){ idx in
@@ -72,10 +79,16 @@ struct ClockView: View {
         min(size.width, size.height)
     }
     
+    private func clockFontSize(for size:CGSize) -> CGFloat{
+        min(size.width, size.height) * 0.03
+    }
+    
     private func clockFont(for size:CGSize, index:Int) -> Font{
         let time = [0, 6, 12, 18, 24]
-        return Font.system(size: min(size.width, size.height) * 0.03 ,weight: time.contains(index) ? .heavy : .light ,design: .default )
+        return Font.system(size: clockFontSize(for: size),weight: time.contains(index) ? .heavy : .light ,design: .default )
     }
+    
+    
 }
 
 struct Arrow: Shape {

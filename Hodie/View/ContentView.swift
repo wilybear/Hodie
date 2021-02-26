@@ -8,11 +8,13 @@
 import SwiftUI
 import PartialSheet
 import CoreData
+import HalfModal
 
 struct ContentView: View {
     
     @Environment(\.managedObjectContext) var context
     @State private var selectedDate: Date = Date()
+    @State private var yearAndMonth: Date = Date()
     @State private var showingDefaultSetting = false
     @State private var showingClearActionSheet = false
     
@@ -21,30 +23,38 @@ struct ContentView: View {
     // TODO: multiple scheduler is added
     var body: some View {
         VStack{
-            HStack{
+            HStack(alignment: .center){
                 
                 Button {
                     withAnimation{
-                        selectedDate = Calendar.current.date(byAdding: .day,value: -1, to: selectedDate)!
+                        yearAndMonth = Calendar.current.date(byAdding: .month ,value: -1, to: yearAndMonth)!
                     }
                 } label: {
-                    Image(systemName: "arrowtriangle.left")
+                    Image(systemName: "arrowtriangle.left.fill")
+                        .imageScale(.small)
                 }
                 .padding([.leading])
                 
-                Text(DateFormatter.dateOnlyFormatter.string(from: selectedDate))
+                Text("\(String(Calendar.current.component(.year, from: yearAndMonth))) . \(Calendar.current.component(.month, from: yearAndMonth))")
+                    .font(.body)
+                    .fontWeight(.heavy)
                     .transition(.opacity)
-                    .id("\(selectedDate)")
+                    .id("\(yearAndMonth)")
                     .onTapGesture {
-                        partialSheetManager.showPartialSheet(content:{ DatePickerView(selectedDate: $selectedDate)})
+                        withAnimation {
+                            partialSheetManager.showPartialSheet({
+                                yearAndMonth = selectedDate
+                            }, content:{ DatePickerView(selectedDate: $selectedDate)})
+                        }
                     }
-                
+             
                 Button {
                     withAnimation{
-                        selectedDate = Calendar.current.date(byAdding: .day,value: 1, to: selectedDate)!
+                        yearAndMonth = Calendar.current.date(byAdding: .month,value: 1, to: yearAndMonth)!
                     }
                 } label: {
-                    Image(systemName: "arrowtriangle.right")
+                    Image(systemName: "arrowtriangle.right.fill")
+                        .imageScale(.small)
                 }
                 
                 Spacer()
@@ -52,7 +62,7 @@ struct ContentView: View {
                 Button {
                     showingClearActionSheet = true
                 } label: {
-                    Image(systemName: "trash").imageScale(.large)
+                    Image(systemName: "trash").imageScale(.medium)
                 }
                 .actionSheet(isPresented: $showingClearActionSheet){
                     ActionSheet(title: Text("Reset"), message: Text("Do you want to reset Scheduler? "), buttons: [
@@ -69,18 +79,22 @@ struct ContentView: View {
                         .cancel()
                     ])
                 }
+                .padding()
                 
                 Button {
                     showingDefaultSetting = true
                 } label: {
-                    Text("Menu")
+                    Image(systemName: "t.circle.fill")
                 }
                 .sheet(isPresented: $showingDefaultSetting){
                     DefaultSchedulerView(scheduler: Scheduler.fetchDefaultScheduler(context: context))
                 }
+                .padding()
             }
-            .padding()
             
+            HListCalendarView(date: $selectedDate, yearAndMonth: $yearAndMonth)
+                .padding([.top,.bottom])
+                
             SchedulerView(scheduler: Scheduler.fetchScheduler(at: selectedDate, context: context))
             .onAppear{
                 whereIsMySQLite()
