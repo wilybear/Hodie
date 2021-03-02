@@ -9,9 +9,9 @@ import Foundation
 import UserNotifications
 
 class LocalNotificationManager {
-    var tasks:Set<TodoTask> = []
-    
-    func requestPermission() -> Void {
+    var tasks: Set<TodoTask> = []
+
+    func requestPermission() {
         UNUserNotificationCenter
             .current()
             .requestAuthorization(options: [.alert, .badge, .alert]) { granted, error in
@@ -21,12 +21,12 @@ class LocalNotificationManager {
                 }
         }
     }
-    
-    func addNotification(task: TodoTask) -> Void {
+
+    func addNotification(task: TodoTask) {
         tasks.update(with: task)
     }
-    
-    func scheduleNotifications() -> Void {
+
+    func scheduleNotifications() {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         for task in tasks {
             let content = UNMutableNotificationContent()
@@ -35,26 +35,26 @@ class LocalNotificationManager {
             var triggerDate = DateComponents()
             triggerDate.hour = dateComponent.hour!
             triggerDate.minute = dateComponent.minute!
-            
+
             let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
             let request = UNNotificationRequest(identifier: "\(task.objectID)", content: content, trigger: trigger)
-            
+
             UNUserNotificationCenter.current().add(request) { error in
                 guard error == nil else { return }
                 print("Scheduling notification with id: \(task.id)")
             }
         }
     }
-    
-    func schedule() -> Void {
+
+    func schedule() {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
               switch settings.authorizationStatus {
-                  case .notDetermined:
-                      self.requestPermission()
-                  case .authorized, .provisional:
-                      self.scheduleNotifications()
-                  default:
-                      break
+              case .notDetermined:
+                  self.requestPermission()
+              case .authorized, .provisional:
+                  self.scheduleNotifications()
+              default:
+                  break
             }
         }
     }

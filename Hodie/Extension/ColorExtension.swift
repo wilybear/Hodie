@@ -18,8 +18,9 @@ extension Color {
     static let brightWhite = Color("BrightWhite")
     static let brightYellow = Color("BrightYellow")
     static let lightGray = Color("LightGray")
-    
-    static let BrightColors = [brightRed, brightOrange,brightYellow,brightGreen,brightSkyBlue ,brightBlue,brightPurple, brightPink,brightWhite]
-    
+
+    static let BrightColors = [brightRed, brightOrange, brightYellow,
+                               brightGreen, brightSkyBlue, brightBlue, brightPurple, brightPink, brightWhite]
+
     static let BackgroundColors = [Color("BackgroundTop"), Color("BackgroundMid"), Color("BackgroundBottom")]
 }

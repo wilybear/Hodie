@@ -16,12 +16,13 @@
 		376BAF0325D69FF00010270F /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376BAF0225D69FF00010270F /* FoundationExtensions.swift */; };
 		376BAF0625D6A2170010270F /* SchedulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376BAF0525D6A2170010270F /* SchedulerView.swift */; };
 		376BAF0E25D6AD070010270F /* TaskEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376BAF0D25D6AD070010270F /* TaskEditorView.swift */; };
+		378B4A4C25EA43B1000D57C3 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 378B4A4B25EA43B1000D57C3 /* .swiftlint.yml */; };
+		378B4A5525EE1958000D57C3 /* HalfModal in Frameworks */ = {isa = PBXBuildFile; productRef = 378B4A5425EE1958000D57C3 /* HalfModal */; };
+		378B4A5725EE1958000D57C3 /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 378B4A5625EE1958000D57C3 /* PartialSheet */; };
 		3798687325E3C41300FAAD39 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3798687225E3C41300FAAD39 /* ViewExtension.swift */; };
 		3798687625E3C59D00FAAD39 /* DefaultSchedulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3798687525E3C59D00FAAD39 /* DefaultSchedulerView.swift */; };
 		3798687D25E3C81200FAAD39 /* PlusButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3798687C25E3C81200FAAD39 /* PlusButtonView.swift */; };
 		3798688025E3E3CF00FAAD39 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3798687F25E3E3CF00FAAD39 /* NotificationManager.swift */; };
-		379F48AB25DD2C5F00CA4744 /* HalfModal in Frameworks */ = {isa = PBXBuildFile; productRef = 379F48AA25DD2C5F00CA4744 /* HalfModal */; };
-		379F48AF25DD327B00CA4744 /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 379F48AE25DD327B00CA4744 /* PartialSheet */; };
 		379F48B225DD4A1900CA4744 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379F48B125DD4A1900CA4744 /* DatePickerView.swift */; };
 		37A7CE0925DC26010015C3DF /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A7CE0825DC26010015C3DF /* ColorExtension.swift */; };
 		37DA0F8B25D4252A003CFB66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA0F8A25D4252A003CFB66 /* AppDelegate.swift */; };
@@ -47,6 +48,7 @@
 		376BAF0225D69FF00010270F /* FoundationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FoundationExtensions.swift; path = Hodie/Extension/FoundationExtensions.swift; sourceTree = SOURCE_ROOT; };
 		376BAF0525D6A2170010270F /* SchedulerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SchedulerView.swift; path = Hodie/View/SchedulerView.swift; sourceTree = SOURCE_ROOT; };
 		376BAF0D25D6AD070010270F /* TaskEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TaskEditorView.swift; path = Hodie/View/TaskEditorView.swift; sourceTree = SOURCE_ROOT; };
+		378B4A4B25EA43B1000D57C3 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		3798687225E3C41300FAAD39 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		3798687525E3C59D00FAAD39 /* DefaultSchedulerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSchedulerView.swift; sourceTree = "<group>"; };
 		3798687C25E3C81200FAAD39 /* PlusButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusButtonView.swift; sourceTree = "<group>"; };
@@ -73,8 +75,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				379F48AF25DD327B00CA4744 /* PartialSheet in Frameworks */,
-				379F48AB25DD2C5F00CA4744 /* HalfModal in Frameworks */,
+				378B4A5725EE1958000D57C3 /* PartialSheet in Frameworks */,
+				378B4A5525EE1958000D57C3 /* HalfModal in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +104,13 @@
 				3798687225E3C41300FAAD39 /* ViewExtension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		378B4A5325EE1958000D57C3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		379F48B525DFBDD300CA4744 /* View */ = {
@@ -133,8 +142,10 @@
 		37DA0F7E25D4252A003CFB66 = {
 			isa = PBXGroup;
 			children = (
+				378B4A4B25EA43B1000D57C3 /* .swiftlint.yml */,
 				37DA0F8925D4252A003CFB66 /* Hodie */,
 				37DA0F8825D4252A003CFB66 /* Products */,
+				378B4A5325EE1958000D57C3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -178,6 +189,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 37DA0F9E25D4252B003CFB66 /* Build configuration list for PBXNativeTarget "Hodie" */;
 			buildPhases = (
+				378B4A4425EA1766000D57C3 /* Swiftlint */,
 				37DA0F8325D4252A003CFB66 /* Sources */,
 				37DA0F8425D4252A003CFB66 /* Frameworks */,
 				37DA0F8525D4252A003CFB66 /* Resources */,
@@ -188,8 +200,8 @@
 			);
 			name = Hodie;
 			packageProductDependencies = (
-				379F48AA25DD2C5F00CA4744 /* HalfModal */,
-				379F48AE25DD327B00CA4744 /* PartialSheet */,
+				378B4A5425EE1958000D57C3 /* HalfModal */,
+				378B4A5625EE1958000D57C3 /* PartialSheet */,
 			);
 			productName = hodie;
 			productReference = 37DA0F8725D4252A003CFB66 /* Hodie.app */;
@@ -236,6 +248,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				378B4A4C25EA43B1000D57C3 /* .swiftlint.yml in Resources */,
 				37DA0F9A25D4252B003CFB66 /* LaunchScreen.storyboard in Resources */,
 				37DA0F9725D4252B003CFB66 /* Preview Assets.xcassets in Resources */,
 				37DA0F9425D4252B003CFB66 /* Assets.xcassets in Resources */,
@@ -243,6 +256,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		378B4A4425EA1766000D57C3 /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint autocorrect && swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		37DA0F8325D4252A003CFB66 /* Sources */ = {
@@ -490,12 +524,12 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		379F48AA25DD2C5F00CA4744 /* HalfModal */ = {
+		378B4A5425EE1958000D57C3 /* HalfModal */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 379F48A925DD2C5F00CA4744 /* XCRemoteSwiftPackageReference "HalfModal" */;
 			productName = HalfModal;
 		};
-		379F48AE25DD327B00CA4744 /* PartialSheet */ = {
+		378B4A5625EE1958000D57C3 /* PartialSheet */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 379F48AD25DD327B00CA4744 /* XCRemoteSwiftPackageReference "PartialSheet" */;
 			productName = PartialSheet;

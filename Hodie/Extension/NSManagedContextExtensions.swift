@@ -8,11 +8,11 @@
 import Foundation
 import CoreData
 
-extension NSManagedObjectContext{
-    public func saveWithTry(){
-        do{
+extension NSManagedObjectContext {
+    public func saveWithTry() {
+        do {
             try self.save()
-        } catch{
+        } catch {
             let nserror = error as NSError
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }

@@ -10,27 +10,27 @@ import SwiftUI
 struct HListCalendarView: View {
     @Binding var date: Date
     @Binding var yearAndMonth: Date
-    
+
     var body: some View {
-        
-        VStack{
+
+        VStack {
             ScrollViewReader { scrollView in
-                ScrollView(.horizontal, showsIndicators: false){
-                    HStack{
-                        ForEach(yearAndMonth.datesOfMonth, id: \.self){ day in
-                            
-                            ZStack{
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        ForEach(yearAndMonth.datesOfMonth, id: \.self) { day in
+
+                            ZStack {
                                 DateView(date: day, selectedDate: $date)
                                 .font(.caption)
                                 .frame(width: UIScreen.main.bounds.width / 7)
-                                .onAppear{
+                                .onAppear {
                                     if isSelectedDate(day) {
-                                        withAnimation{
+                                        withAnimation {
                                             scrollView.scrollTo(day, anchor: .center)
                                         }
                                     }
                                 }
-                               
+
                             }
                         }
                     }
@@ -38,17 +38,17 @@ struct HListCalendarView: View {
             }
         }
     }
-    
+
     func isSelectedDate(_ day: Date) -> Bool {
         Calendar.current.isDate(date, inSameDayAs: day)
     }
-    
-    struct DateView: View{
+
+    struct DateView: View {
         @State var date: Date
         @Binding var selectedDate: Date
         @State private var degrees = 0.0
-        var body: some View{
-            VStack{
+        var body: some View {
+            VStack {
                 let dayData = DateType(date: date)
                 Text("\(dayData.Day)")
                 Divider()
@@ -60,29 +60,28 @@ struct HListCalendarView: View {
                                     : Circle().stroke().foregroundColor(.clear)
                     )
                     .rotation3DEffect(.degrees(degrees), axis: (x: 0, y: 1, z: 0))
-                
+
             } .onTapGesture {
-                withAnimation{
+                withAnimation {
                     self.degrees += 360
                     selectedDate = date
                 }
             }
         }
-        
+
         func isSelectedDate(_ day: Date) -> Bool {
             Calendar.current.isDate(selectedDate, inSameDayAs: day)
         }
     }
 }
 
-
-struct DateType{
+struct DateType {
     var Day: String
     var Date: String
     var Year: String
     var Month: String
     var MonthNo: String
-    
+
     init(date: Date) {
         let current = Calendar.current
         Date = String(current.component(.day, from: date))
@@ -94,4 +93,3 @@ struct DateType{
         Day = current.shortWeekdaySymbols [weekNo - 1]
     }
 }
-

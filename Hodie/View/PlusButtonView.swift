@@ -8,21 +8,21 @@
 import SwiftUI
 
 struct PlusButtonView: View {
-    
-    let onTap: ()-> (Void)
-    
-    init(action: @escaping () -> (Void)){
+
+    let onTap: () -> Void
+
+    init(action: @escaping () -> Void) {
         onTap = action
     }
-    
+
     var body: some View {
         VStack {
             Spacer()
-            
-            HStack{
+
+            HStack {
                 Spacer()
-                
-                Button{
+
+                Button {
                    onTap()
                 } label: {
                     Text("+")
@@ -31,7 +31,7 @@ struct PlusButtonView: View {
                            .foregroundColor(Color.white)
                            .padding(.bottom, 7)
                 }
-                .background(LinearGradient(gradient: Gradient(colors: Color.BackgroundColors), startPoint: /*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/, endPoint: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/))
+                .background(LinearGradient(gradient: Gradient(colors: Color.BackgroundColors), startPoint: .leading/*@END_MENU_TOKEN@*/, endPoint: .trailing/*@END_MENU_TOKEN@*/))
                 .cornerRadius(38.5)
                 .padding()
                 .shadow(color: Color.black.opacity(0.3), radius: 3, x: 3, y: 3)
@@ -39,4 +39,3 @@ struct PlusButtonView: View {
         }
     }
 }
-

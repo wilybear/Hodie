@@ -1,0 +1,9 @@
+disabled_rules:
+- force_try
+- identifier_name
+
+line_length: 180
+
+excluded:
+- Hodie/AppDelegate.swift
+- Hodie/SceneDelegate.swift

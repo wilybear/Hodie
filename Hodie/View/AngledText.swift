@@ -26,47 +26,46 @@ private struct PropagateSize<V: View>: View {
 
 public struct AngledText: View {
 
-
     @Binding var todoTask: TodoTask
     var radius: CGFloat
     var start: Double
     var end: Double
-    
+
     private var angle: Angle {
-        Angle(radians: start+interval)
+        Angle(radians: start + interval)
     }
     private var text: String {
         todoTask.name
     }
-    
+
     private var interval: Double {
-        return todoTask.endTime > todoTask.startTime ? (end - start)/2 : (end - start + 360 * .pi/180)/2
+        return todoTask.endTime > todoTask.startTime ? (end - start)/2 :(end - start + .radianRound)/2
     }
     internal var textModifier: (Text) -> Text = { $0 }
     internal var spacing: CGFloat = 0
 
     @State private var size: CGSize = CGSize(width: 10000, height: 0)
 
-    private var availableRadius: CGFloat{
+    private var availableRadius: CGFloat {
         radius - unavailableRadius
     }
-    
+
     // unavailable space for text using its height
-    private var unavailableRadius : CGFloat {
+    private var unavailableRadius: CGFloat {
         size.height / 2 / tan(CGFloat(todoTask.interval))
     }
 
     public var body: some View {
         VStack {
-            PropagateSize{
+            PropagateSize {
                 textModifier(Text(text))
             }
-            .frame(width: abs(availableRadius) , height: size.height, alignment: .center)
+            .frame(width: abs(availableRadius), height: size.height, alignment: .center)
             .rotationEffect(rotationAngle())
             // Midpoint from possible space to end
             .offset(x: cos(CGFloat(angle.radians)) * (availableRadius/2 + unavailableRadius),
                     y: sin(CGFloat(angle.radians)) * (availableRadius/2 + unavailableRadius))
-         
+
         }
         .frame(width: radius * 2, height: radius * 2)
         .onPreferenceChange(TextViewSizeKey.self) { sizes in
@@ -74,8 +73,8 @@ public struct AngledText: View {
         }
         .accessibility(label: Text(text))
     }
-    
-    private func rotationAngle()-> Angle{
+
+    private func rotationAngle() -> Angle {
         angle.degrees < 270 && angle.degrees > 90 ? Angle(degrees: angle.degrees - 180) : angle
     }
 }
@@ -109,5 +108,3 @@ extension AngledText {
         return copy
     }
 }
-
-

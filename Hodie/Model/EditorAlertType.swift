@@ -7,11 +7,11 @@
 
 import Foundation
 
-
-enum EditorAlertType: String{
+enum EditorAlertType: String {
     case none
     case coredataError = "Some error occured while saving task"
-    case overlapped = "The task already exists in that time interval. Are you sure you want to delete and register this task?"
+    case overlapped =
+            "The task already exists in that time interval. Are you sure you want to delete and register this task?"
     case nilValueInTask = "Enter a name for the task."
     case tooLongText = "Name of the task is too long"
     case tooLongMemo = "Memo of the task is too long"
