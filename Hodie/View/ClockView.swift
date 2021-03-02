@@ -12,6 +12,7 @@ struct ClockView: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var scheduler: Scheduler
     @State var raidus: CGFloat = 0
+    @Environment(\.colorScheme) var colorScheme
     var onLongPress: (TodoTask) -> Void
 
     init(_ scheduler: Scheduler, longPressAction: @escaping (TodoTask) -> Void) {
@@ -29,7 +30,7 @@ struct ClockView: View {
                     .zIndex(1)
 
                 Circle()
-                    .fill(Color.brightWhite)
+                    .fill(colorScheme == .dark ? Color.black : Color.brightWhite )
                     .padding()
 
                 Circle()

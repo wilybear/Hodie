@@ -86,8 +86,8 @@ extension Date {
         let currentDateComponent = Calendar(identifier: .gregorian).dateComponents([.hour, .minute], from: self)
         let minutes = (currentDateComponent.hour! * 60) + currentDateComponent.minute!
         let ratio = Double(minutes) / Double(1440)
-
-        return (ratio * 360 - 90) * .pi / Double(180)
+        let radian = (ratio * 360 - 90) * .pi / Double(180)
+        return radian > 0 ? radian : radian + .radianRound
     }
 
     var startOfDay: Date {

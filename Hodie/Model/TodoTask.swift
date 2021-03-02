@@ -88,11 +88,11 @@ extension TodoTask: Comparable {
         let index = scheduler!.todoTasks.sorted().firstIndex(of: self)!
         let nextIndex = index == scheduler!.todoTasks.count - 1 ? 0 : index + 1
         let beforeIndex = index == 0 ? scheduler!.todoTasks.count - 1 : index - 1
+
         var nextStartRadians = scheduler!.todoTasks.sorted()[nextIndex].startTime.asRadians
         let beforeEndRadians = scheduler!.todoTasks.sorted()[beforeIndex].endTime.asRadians
-
         var endTimeRadians = self.endTime.addingTimeInterval(-10 * 60).asRadians
-        let startTimeRadians = self.startTime.addingTimeInterval(-10 * 60).asRadians
+        let startTimeRadians = self.startTime.addingTimeInterval(10 * 60).asRadians
 
         let startPivot = beforeEndRadians > startTime.asRadians ? startTime.asRadians + .radianRound : startTime.asRadians
         if startTime.asRadians > endTimeRadians {
@@ -121,11 +121,23 @@ extension TodoTask: Comparable {
         let availableRange = self.availableRadians()
         if isStart {
             if availableRange.0.contains(value) {
-                startTime = startTime.addingTimeInterval(TimeInterval(amount * -60))
+                startTime = startTime.addingTimeInterval(TimeInterval(amount * 60))
+            } else {
+                if availableRange.0.upperBound < value {
+                    startTime = startTime.addingTimeInterval(TimeInterval(availableRange.0.upperBound.asMinuteAmount * 60))
+                } else {
+                    startTime = startTime.addingTimeInterval(TimeInterval(availableRange.0.lowerBound.asMinuteAmount * 60))
+                }
             }
         } else {
             if availableRange.1.contains(value) {
-                endTime = endTime.addingTimeInterval(TimeInterval(amount * -60))
+                endTime = endTime.addingTimeInterval(TimeInterval(amount * 60))
+            } else {
+                if availableRange.1.upperBound < value {
+                    endTime = endTime.addingTimeInterval(TimeInterval(availableRange.1.upperBound.asMinuteAmount * 60))
+                } else {
+                    endTime = endTime.addingTimeInterval(TimeInterval(availableRange.1.lowerBound.asMinuteAmount * 60))
+                }
             }
         }
         context.saveWithTry()

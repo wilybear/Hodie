@@ -19,6 +19,7 @@
 		378B4A4C25EA43B1000D57C3 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 378B4A4B25EA43B1000D57C3 /* .swiftlint.yml */; };
 		378B4A5525EE1958000D57C3 /* HalfModal in Frameworks */ = {isa = PBXBuildFile; productRef = 378B4A5425EE1958000D57C3 /* HalfModal */; };
 		378B4A5725EE1958000D57C3 /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 378B4A5625EE1958000D57C3 /* PartialSheet */; };
+		378B4A5B25EE3523000D57C3 /* Quadrant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378B4A5A25EE3523000D57C3 /* Quadrant.swift */; };
 		3798687325E3C41300FAAD39 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3798687225E3C41300FAAD39 /* ViewExtension.swift */; };
 		3798687625E3C59D00FAAD39 /* DefaultSchedulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3798687525E3C59D00FAAD39 /* DefaultSchedulerView.swift */; };
 		3798687D25E3C81200FAAD39 /* PlusButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3798687C25E3C81200FAAD39 /* PlusButtonView.swift */; };
@@ -49,6 +50,7 @@
 		376BAF0525D6A2170010270F /* SchedulerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SchedulerView.swift; path = Hodie/View/SchedulerView.swift; sourceTree = SOURCE_ROOT; };
 		376BAF0D25D6AD070010270F /* TaskEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TaskEditorView.swift; path = Hodie/View/TaskEditorView.swift; sourceTree = SOURCE_ROOT; };
 		378B4A4B25EA43B1000D57C3 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		378B4A5A25EE3523000D57C3 /* Quadrant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Quadrant.swift; path = ../../../../Quadrant.swift; sourceTree = "<group>"; };
 		3798687225E3C41300FAAD39 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		3798687525E3C59D00FAAD39 /* DefaultSchedulerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSchedulerView.swift; sourceTree = "<group>"; };
 		3798687C25E3C81200FAAD39 /* PlusButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusButtonView.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				37DA0FD325D5251C003CFB66 /* Scheduler.swift */,
 				372979F325E27349003F6673 /* EditorAlertType.swift */,
 				3798687F25E3E3CF00FAAD39 /* NotificationManager.swift */,
+				378B4A5A25EE3523000D57C3 /* Quadrant.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 				37586E2925DAA3070010E381 /* SectorFormView.swift in Sources */,
 				376BAF0E25D6AD070010270F /* TaskEditorView.swift in Sources */,
 				37586E2125DA7E880010E381 /* NSManagedContextExtensions.swift in Sources */,
+				378B4A5B25EE3523000D57C3 /* Quadrant.swift in Sources */,
 				379F48B225DD4A1900CA4744 /* DatePickerView.swift in Sources */,
 				37DA0FD125D5250F003CFB66 /* TodoTask.swift in Sources */,
 				37EEB06225E6A8B5009C35D5 /* HListCalendarView.swift in Sources */,

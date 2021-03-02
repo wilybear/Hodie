@@ -39,7 +39,7 @@ public struct AngledText: View {
     }
 
     private var interval: Double {
-        return todoTask.endTime > todoTask.startTime ? (end - start)/2 :(end - start + .radianRound)/2
+        return todoTask.endTime.asRadians > todoTask.startTime.asRadians ? (end - start)/2 :(end - start + .radianRound)/2
     }
     internal var textModifier: (Text) -> Text = { $0 }
     internal var spacing: CGFloat = 0

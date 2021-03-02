@@ -1,6 +1,7 @@
 disabled_rules:
 - force_try
 - identifier_name
+- function_body_length
 
 line_length: 180
 

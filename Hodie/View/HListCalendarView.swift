@@ -18,7 +18,6 @@ struct HListCalendarView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         ForEach(yearAndMonth.datesOfMonth, id: \.self) { day in
-
                             ZStack {
                                 DateView(date: day, selectedDate: $date)
                                 .font(.caption)
@@ -47,14 +46,23 @@ struct HListCalendarView: View {
         @State var date: Date
         @Binding var selectedDate: Date
         @State private var degrees = 0.0
+        @Environment(\.colorScheme) var colorScheme
+
+        var textColor: Color {
+            if colorScheme == .dark {
+                return date.isToday() ? .blue : .white
+            } else {
+                return date.isToday() ? .blue : .black
+            }
+        }
         var body: some View {
             VStack {
                 let dayData = DateType(date: date)
                 Text("\(dayData.Day)")
                 Divider()
                 Text(dayData.Date)
-                    .padding(1.5)
-                    .foregroundColor(date.isToday() ? .blue : .black)
+                    .padding(2)
+                    .foregroundColor(textColor)
                     .overlay(
                         isSelectedDate(date) ? Circle().stroke(lineWidth: 2).foregroundColor(.blue)
                                     : Circle().stroke().foregroundColor(.clear)

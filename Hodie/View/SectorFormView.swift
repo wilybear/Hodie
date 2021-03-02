@@ -24,15 +24,13 @@ struct SectorFormView: View {
         if movedAmount == .zero {
             return todoTask.startTime.asRadians
         }
-        if availableRange.contains( movedAmount) {
-            result =  todoTask.startTime.asRadians + movedAmount
+        if availableRange.contains(movedAmount) {
+            result = todoTask.startTime.asRadians + movedAmount
         } else {
             if availableRange.upperBound < movedAmount {
                 result = todoTask.startTime.asRadians + availableRange.upperBound
-
             } else {
                 result = todoTask.startTime.asRadians + availableRange.lowerBound
-
             }
         }
 
@@ -47,8 +45,8 @@ struct SectorFormView: View {
             return todoTask.endTime.asRadians
         }
         print("drag end radians \( movedAmount)")
+        print("available radians \(availableRange)")
         if availableRange.contains(movedAmount) {
-            print(availableRange)
             result = todoTask.endTime.asRadians + movedAmount
         } else {
             if availableRange.upperBound < movedAmount {
@@ -89,10 +87,11 @@ struct SectorFormView: View {
     private let minimumLongPressDuration = 0.5
 
     @State var isStart: Bool?
+    @State var prevLocation: CGPoint?
+    @State var clockwise: Direction = .colinear
+    @State var quadrantStack: [Quadrant] = [Quadrant]()
 
     private func sectorFormGesture(size: CGSize, task: TodoTask)-> some Gesture {
-        var prevLocation: CGPoint?
-        var direction: Direction = .colinear
         let longPressDrag = LongPressGesture(minimumDuration: minimumLongPressDuration)
             .sequenced(before: DragGesture(minimumDistance: 4, coordinateSpace: .local))
             .updating($dragState) { value, state, _ in
@@ -101,27 +100,44 @@ struct SectorFormView: View {
                     // Long press begins.
                     case .first(true):
                         state = .pressing
-                        prevLocation = nil
-                        direction = .colinear
+                        DispatchQueue.main.async {
+                            prevLocation = nil
+                            clockwise = .colinear
+                        }
                     // Long press confirmed, dragging may begin.
                     case .second(true, let drag):
                         if let dragV = drag {
-                            if let prev = prevLocation {
-                                direction = isClockwise(center: CGPoint(x: size.width/2, y: size.height/2), prev: prev, cur: dragV.location)
-                            }
-                            // if task.timeNearStartOrEnd(radian: radianAtPoint, size: size){
-                              //  state = .dragging(start:angle(between: dragV.startLocation, ending: dragV.location, coord: size) ,end: .zero)
-                            // }else{
-                            let currentAngle = angle(between: dragV.startLocation, ending: dragV.location, coord: size)
+                            let currentQuadrant = Quadrant.init(size: size, point: dragV.location)
+                            let prevQuadrant = Quadrant.init(size: size, point: prevLocation ?? dragV.location)
+                            let radianAtPoint = pointToRadian(coordinate: size, location: dragV.startLocation)
+                            print("radian ata point : \(radianAtPoint)")
 
-                            print("hello:\(dragV.location) startLocation:\(dragV.startLocation) size:\( angle(between: dragV.startLocation, ending: dragV.location, coord: size))")
-                            state = .dragging(start: .zero, end: angle(between: dragV.startLocation, ending: dragV.location, coord: size))
-                            prevLocation = dragV.location
-                            // }
+                            if prevQuadrant == currentQuadrant {
+                                if !quadrantStack.contains(currentQuadrant) {
+                                    DispatchQueue.main.async {
+                                        quadrantStack.append(currentQuadrant)
+                                    }
+                                }
+                                DispatchQueue.main.async {
+                                    while quadrantStack.contains(currentQuadrant) && quadrantStack.firstIndex(of: currentQuadrant) != quadrantStack.count - 1 {
+                                        _ = quadrantStack.popLast()
+                                    }
+                                }
+                                let intervalAngle = angle(between: dragV.startLocation, ending: dragV.location, coord: size, currentQuadrant: currentQuadrant)
+                                if task.timeNearStartOrEnd(radian: radianAtPoint, size: size) {
+                                   state = .dragging(start: intervalAngle, end: .zero)
+                                } else {
+        //                            print("angle \(intervalAngle) \n")
+                                    state = .dragging(start: .zero, end: intervalAngle)
+                                }
+                            }
+
+                            DispatchQueue.main.async {
+                                prevLocation = dragV.location
+                            }
                         } else {
                             state = .dragging(start: .zero, end: .zero)
                         }
-
                     // Dragging ended or the long press cancelled.
                     default:
                         state = .inactive
@@ -133,8 +149,9 @@ struct SectorFormView: View {
                     guard case .second(true, let drag?) = value else { return }
                     let radianAtPoint = pointToRadian(coordinate: size, location: drag.startLocation)
                     task.dragTimeValue(
-                        value: radianAtPoint - pointToRadian(coordinate: size, location: drag.location),
+                        value: angle(between: drag.startLocation, ending: drag.location, coord: size, currentQuadrant: .init(size: size, point: drag.location)),
                         isStart: task.timeNearStartOrEnd(radian: radianAtPoint, size: size), context: context)
+                    quadrantStack.removeAll()
                 }
             }
         return longPressDrag
@@ -174,6 +191,42 @@ struct SectorFormView: View {
         }
     }
 
+    func angle(between starting: CGPoint, ending: CGPoint, coord: CGSize, currentQuadrant: Quadrant ) -> Double {
+        let start = CGVector(dx: starting.x - coord.width/2, dy: starting.y - coord.height/2)
+        let end = CGVector(dx: ending.x - coord.width/2, dy: ending.y - coord.height/2)
+        var startLocationAngle = Double(atan2(start.dy, start.dx))
+        var endLocationAngle = Double(atan2(end.dy, end.dx))
+        var isLeft: Bool
+        if startLocationAngle <= 0 {
+            startLocationAngle += .radianRound
+        }
+        if endLocationAngle <= 0 {
+            endLocationAngle += .radianRound
+        }
+
+        if quadrantStack.count < 2 {
+            if quadrantStack.first == .four && 0 <= endLocationAngle && endLocationAngle <= .pi / 2 {
+                isLeft = false
+            } else {
+                isLeft = startLocationAngle > endLocationAngle
+            }
+        } else {
+            isLeft = currentQuadrant.isFromLeft(stack: quadrantStack)
+        }
+
+   //     print("start: \(startLocationAngle), end:\(endLocationAngle), isLeft:\(isLeft) , \(quadrantStack)   angle")
+        if endLocationAngle < startLocationAngle && !isLeft {
+            endLocationAngle += .radianRound
+        }
+
+        if endLocationAngle > startLocationAngle && isLeft {
+            startLocationAngle += .radianRound
+        }
+
+     //   print("result start: \(startLocationAngle), end:\(endLocationAngle), isLeft:\(isLeft)   angle")
+        return endLocationAngle - startLocationAngle
+    }
+
 }
 
 private func pointToRadian(coordinate: CGSize, location: CGPoint) -> Double {
@@ -182,21 +235,6 @@ private func pointToRadian(coordinate: CGSize, location: CGPoint) -> Double {
     let x = atan2(dy, dx)
     let radian = x > 0 ? x : 2 * .pi + x
     return Double(radian)
-}
-
-func angle(between starting: CGPoint, ending: CGPoint, coord: CGSize) -> Double {
-    let v1 = CGVector(dx: starting.x - coord.width/2, dy: starting.y - coord.height/2)
-    let v2 = CGVector(dx: ending.x - coord.width/2, dy: ending.y - coord.height/2)
-    var v1Angle = Double(atan2(v1.dy, v1.dx))
-    if v1Angle <= 0 {
-        v1Angle += .radianRound
-    }
-    var v2Angle = Double(atan2(v2.dy, v2.dx))
-    if v2Angle <= 0 {
-        v2Angle += .radianRound
-    }
-
-    return v2Angle - v1Angle
 }
 
 func isClockwise(center: CGPoint, prev: CGPoint, cur: CGPoint) -> Direction {
@@ -225,7 +263,7 @@ extension TodoTask {
         return Angle(radians: startTime.asRadians +  interval)
     }
     var interval: Double {
-        return endTime > startTime ? (endTime.asRadians - startTime.asRadians)/2 : (endTime.asRadians - startTime.asRadians + 360 * .pi/180)/2
+        return endTime.asRadians > startTime.asRadians ? (endTime.asRadians - startTime.asRadians)/2 : (endTime.asRadians - startTime.asRadians + 360 * .pi/180)/2
     }
 }
 
