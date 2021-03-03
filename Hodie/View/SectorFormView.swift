@@ -12,9 +12,9 @@ struct SectorFormView: View {
     @Environment(\.managedObjectContext) var context
     @Binding var todoTask: TodoTask
     @State var delay: Double
+    @State var scale: CGFloat = 1.0
 
     @State var radius: CGFloat = 0
-
     @GestureState var dragState = DragState.inactive
 
     var startRadians: Double {
@@ -72,8 +72,7 @@ struct SectorFormView: View {
                     .foregroundColor(todoTask.color.isDarkColor ? .white : .black)
                     .font(.caption2)
             }
-            .transition(.scaleAndFade)
-            .scaleEffect(dragState.isActive ? 1.2 : 1)
+            .scaleEffect(scale)
             .gesture(sectorFormGesture(size: geometry.size, task: todoTask))
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
@@ -88,7 +87,6 @@ struct SectorFormView: View {
 
     @State var isStart: Bool?
     @State var prevLocation: CGPoint?
-    @State var clockwise: Direction = .colinear
     @State var quadrantStack: [Quadrant] = [Quadrant]()
 
     private func sectorFormGesture(size: CGSize, task: TodoTask)-> some Gesture {
@@ -102,7 +100,9 @@ struct SectorFormView: View {
                         state = .pressing
                         DispatchQueue.main.async {
                             prevLocation = nil
-                            clockwise = .colinear
+                            withAnimation(.spring()) {
+                                scale = 1.2
+                            }
                         }
                     // Long press confirmed, dragging may begin.
                     case .second(true, let drag):
@@ -152,6 +152,7 @@ struct SectorFormView: View {
                         value: angle(between: drag.startLocation, ending: drag.location, coord: size, currentQuadrant: .init(size: size, point: drag.location)),
                         isStart: task.timeNearStartOrEnd(radian: radianAtPoint, size: size), context: context)
                     quadrantStack.removeAll()
+                    scale = 1.0
                 }
             }
         return longPressDrag

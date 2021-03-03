@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		372979F425E27349003F6673 /* EditorAlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372979F325E27349003F6673 /* EditorAlertType.swift */; };
 		37586E2125DA7E880010E381 /* NSManagedContextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37586E2025DA7E880010E381 /* NSManagedContextExtensions.swift */; };
-		37586E2625DAA1C40010E381 /* ScaleAndFade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37586E2525DAA1C40010E381 /* ScaleAndFade.swift */; };
 		37586E2925DAA3070010E381 /* SectorFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37586E2825DAA3070010E381 /* SectorFormView.swift */; };
 		37586E2C25DAB3780010E381 /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37586E2B25DAB3780010E381 /* ClockView.swift */; };
 		37586E2F25DAB6190010E381 /* AngledText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37586E2E25DAB6190010E381 /* AngledText.swift */; };
@@ -19,13 +17,16 @@
 		378B4A4C25EA43B1000D57C3 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 378B4A4B25EA43B1000D57C3 /* .swiftlint.yml */; };
 		378B4A5525EE1958000D57C3 /* HalfModal in Frameworks */ = {isa = PBXBuildFile; productRef = 378B4A5425EE1958000D57C3 /* HalfModal */; };
 		378B4A5725EE1958000D57C3 /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 378B4A5625EE1958000D57C3 /* PartialSheet */; };
-		378B4A5B25EE3523000D57C3 /* Quadrant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378B4A5A25EE3523000D57C3 /* Quadrant.swift */; };
 		3798687325E3C41300FAAD39 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3798687225E3C41300FAAD39 /* ViewExtension.swift */; };
 		3798687625E3C59D00FAAD39 /* DefaultSchedulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3798687525E3C59D00FAAD39 /* DefaultSchedulerView.swift */; };
 		3798687D25E3C81200FAAD39 /* PlusButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3798687C25E3C81200FAAD39 /* PlusButtonView.swift */; };
-		3798688025E3E3CF00FAAD39 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3798687F25E3E3CF00FAAD39 /* NotificationManager.swift */; };
 		379F48B225DD4A1900CA4744 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379F48B125DD4A1900CA4744 /* DatePickerView.swift */; };
 		37A7CE0925DC26010015C3DF /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A7CE0825DC26010015C3DF /* ColorExtension.swift */; };
+		37D345E425EF90C700E84AB9 /* EditorAlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D345E025EF90C700E84AB9 /* EditorAlertType.swift */; };
+		37D345E525EF90C700E84AB9 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D345E125EF90C700E84AB9 /* NotificationManager.swift */; };
+		37D345E625EF90C700E84AB9 /* TodoTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D345E225EF90C700E84AB9 /* TodoTask.swift */; };
+		37D345E725EF90C700E84AB9 /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D345E325EF90C700E84AB9 /* Scheduler.swift */; };
+		37D345EE25EF911000E84AB9 /* Quadrant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D345ED25EF911000E84AB9 /* Quadrant.swift */; };
 		37DA0F8B25D4252A003CFB66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA0F8A25D4252A003CFB66 /* AppDelegate.swift */; };
 		37DA0F8D25D4252A003CFB66 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA0F8C25D4252A003CFB66 /* SceneDelegate.swift */; };
 		37DA0F8F25D4252A003CFB66 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA0F8E25D4252A003CFB66 /* ContentView.swift */; };
@@ -33,16 +34,12 @@
 		37DA0F9425D4252B003CFB66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37DA0F9325D4252B003CFB66 /* Assets.xcassets */; };
 		37DA0F9725D4252B003CFB66 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37DA0F9625D4252B003CFB66 /* Preview Assets.xcassets */; };
 		37DA0F9A25D4252B003CFB66 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37DA0F9825D4252B003CFB66 /* LaunchScreen.storyboard */; };
-		37DA0FD125D5250F003CFB66 /* TodoTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA0FD025D5250F003CFB66 /* TodoTask.swift */; };
-		37DA0FD425D5251C003CFB66 /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA0FD325D5251C003CFB66 /* Scheduler.swift */; };
 		37DA0FD825D65CBD003CFB66 /* SerializableColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA0FD725D65CBD003CFB66 /* SerializableColor.swift */; };
 		37EEB06225E6A8B5009C35D5 /* HListCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEB06125E6A8B5009C35D5 /* HListCalendarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		372979F325E27349003F6673 /* EditorAlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorAlertType.swift; sourceTree = "<group>"; };
 		37586E2025DA7E880010E381 /* NSManagedContextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedContextExtensions.swift; sourceTree = "<group>"; };
-		37586E2525DAA1C40010E381 /* ScaleAndFade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleAndFade.swift; sourceTree = "<group>"; };
 		37586E2825DAA3070010E381 /* SectorFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectorFormView.swift; sourceTree = "<group>"; };
 		37586E2B25DAB3780010E381 /* ClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockView.swift; sourceTree = "<group>"; };
 		37586E2E25DAB6190010E381 /* AngledText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngledText.swift; sourceTree = "<group>"; };
@@ -50,13 +47,16 @@
 		376BAF0525D6A2170010270F /* SchedulerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SchedulerView.swift; path = Hodie/View/SchedulerView.swift; sourceTree = SOURCE_ROOT; };
 		376BAF0D25D6AD070010270F /* TaskEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TaskEditorView.swift; path = Hodie/View/TaskEditorView.swift; sourceTree = SOURCE_ROOT; };
 		378B4A4B25EA43B1000D57C3 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
-		378B4A5A25EE3523000D57C3 /* Quadrant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Quadrant.swift; path = ../../../../Quadrant.swift; sourceTree = "<group>"; };
 		3798687225E3C41300FAAD39 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		3798687525E3C59D00FAAD39 /* DefaultSchedulerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSchedulerView.swift; sourceTree = "<group>"; };
 		3798687C25E3C81200FAAD39 /* PlusButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusButtonView.swift; sourceTree = "<group>"; };
-		3798687F25E3E3CF00FAAD39 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		379F48B125DD4A1900CA4744 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		37A7CE0825DC26010015C3DF /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		37D345E025EF90C700E84AB9 /* EditorAlertType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorAlertType.swift; sourceTree = "<group>"; };
+		37D345E125EF90C700E84AB9 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		37D345E225EF90C700E84AB9 /* TodoTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoTask.swift; sourceTree = "<group>"; };
+		37D345E325EF90C700E84AB9 /* Scheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scheduler.swift; sourceTree = "<group>"; };
+		37D345ED25EF911000E84AB9 /* Quadrant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quadrant.swift; sourceTree = "<group>"; };
 		37DA0F8725D4252A003CFB66 /* Hodie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hodie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37DA0F8A25D4252A003CFB66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Hodie/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
 		37DA0F8C25D4252A003CFB66 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = Hodie/SceneDelegate.swift; sourceTree = SOURCE_ROOT; };
@@ -66,8 +66,6 @@
 		37DA0F9625D4252B003CFB66 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		37DA0F9925D4252B003CFB66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		37DA0F9B25D4252B003CFB66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		37DA0FD025D5250F003CFB66 /* TodoTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TodoTask.swift; path = Hodie/Model/TodoTask.swift; sourceTree = SOURCE_ROOT; };
-		37DA0FD325D5251C003CFB66 /* Scheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Scheduler.swift; path = Hodie/Model/Scheduler.swift; sourceTree = SOURCE_ROOT; };
 		37DA0FD725D65CBD003CFB66 /* SerializableColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SerializableColor.swift; path = Hodie/Extension/SerializableColor.swift; sourceTree = SOURCE_ROOT; };
 		37EEB06125E6A8B5009C35D5 /* HListCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HListCalendarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,18 +83,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		376BAF0A25D6A9920010270F /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				37DA0FD025D5250F003CFB66 /* TodoTask.swift */,
-				37DA0FD325D5251C003CFB66 /* Scheduler.swift */,
-				372979F325E27349003F6673 /* EditorAlertType.swift */,
-				3798687F25E3E3CF00FAAD39 /* NotificationManager.swift */,
-				378B4A5A25EE3523000D57C3 /* Quadrant.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		376BAF0B25D6AA760010270F /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -120,7 +106,6 @@
 			isa = PBXGroup;
 			children = (
 				37EEB06125E6A8B5009C35D5 /* HListCalendarView.swift */,
-				379F48B725DFBE0100CA4744 /* ViewModifier */,
 				37DA0F8E25D4252A003CFB66 /* ContentView.swift */,
 				3798687525E3C59D00FAAD39 /* DefaultSchedulerView.swift */,
 				376BAF0525D6A2170010270F /* SchedulerView.swift */,
@@ -134,12 +119,16 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		379F48B725DFBE0100CA4744 /* ViewModifier */ = {
+		37D345DF25EF90C700E84AB9 /* Model&ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				37586E2525DAA1C40010E381 /* ScaleAndFade.swift */,
+				37D345E025EF90C700E84AB9 /* EditorAlertType.swift */,
+				37D345E125EF90C700E84AB9 /* NotificationManager.swift */,
+				37D345E225EF90C700E84AB9 /* TodoTask.swift */,
+				37D345E325EF90C700E84AB9 /* Scheduler.swift */,
+				37D345ED25EF911000E84AB9 /* Quadrant.swift */,
 			);
-			path = ViewModifier;
+			path = "Model&ViewModel";
 			sourceTree = "<group>";
 		};
 		37DA0F7E25D4252A003CFB66 = {
@@ -163,8 +152,8 @@
 		37DA0F8925D4252A003CFB66 /* Hodie */ = {
 			isa = PBXGroup;
 			children = (
+				37D345DF25EF90C700E84AB9 /* Model&ViewModel */,
 				376BAF0B25D6AA760010270F /* Extension */,
-				376BAF0A25D6A9920010270F /* Model */,
 				379F48B525DFBDD300CA4744 /* View */,
 				37DA0F8A25D4252A003CFB66 /* AppDelegate.swift */,
 				37DA0F8C25D4252A003CFB66 /* SceneDelegate.swift */,
@@ -288,28 +277,27 @@
 			files = (
 				37DA0FD825D65CBD003CFB66 /* SerializableColor.swift in Sources */,
 				37DA0F8B25D4252A003CFB66 /* AppDelegate.swift in Sources */,
+				37D345E525EF90C700E84AB9 /* NotificationManager.swift in Sources */,
 				37DA0F8D25D4252A003CFB66 /* SceneDelegate.swift in Sources */,
 				376BAF0625D6A2170010270F /* SchedulerView.swift in Sources */,
-				37586E2625DAA1C40010E381 /* ScaleAndFade.swift in Sources */,
 				37586E2F25DAB6190010E381 /* AngledText.swift in Sources */,
 				37586E2925DAA3070010E381 /* SectorFormView.swift in Sources */,
 				376BAF0E25D6AD070010270F /* TaskEditorView.swift in Sources */,
+				37D345EE25EF911000E84AB9 /* Quadrant.swift in Sources */,
 				37586E2125DA7E880010E381 /* NSManagedContextExtensions.swift in Sources */,
-				378B4A5B25EE3523000D57C3 /* Quadrant.swift in Sources */,
 				379F48B225DD4A1900CA4744 /* DatePickerView.swift in Sources */,
-				37DA0FD125D5250F003CFB66 /* TodoTask.swift in Sources */,
 				37EEB06225E6A8B5009C35D5 /* HListCalendarView.swift in Sources */,
+				37D345E725EF90C700E84AB9 /* Scheduler.swift in Sources */,
 				376BAF0325D69FF00010270F /* FoundationExtensions.swift in Sources */,
-				372979F425E27349003F6673 /* EditorAlertType.swift in Sources */,
 				3798687325E3C41300FAAD39 /* ViewExtension.swift in Sources */,
 				37A7CE0925DC26010015C3DF /* ColorExtension.swift in Sources */,
-				37DA0FD425D5251C003CFB66 /* Scheduler.swift in Sources */,
+				37D345E425EF90C700E84AB9 /* EditorAlertType.swift in Sources */,
+				37D345E625EF90C700E84AB9 /* TodoTask.swift in Sources */,
 				37586E2C25DAB3780010E381 /* ClockView.swift in Sources */,
 				3798687D25E3C81200FAAD39 /* PlusButtonView.swift in Sources */,
 				3798687625E3C59D00FAAD39 /* DefaultSchedulerView.swift in Sources */,
 				37DA0F8F25D4252A003CFB66 /* ContentView.swift in Sources */,
 				37DA0F9225D4252A003CFB66 /* hodie.xcdatamodeld in Sources */,
-				3798688025E3E3CF00FAAD39 /* NotificationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

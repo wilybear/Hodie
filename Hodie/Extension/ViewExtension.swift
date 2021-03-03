@@ -27,4 +27,13 @@ extension View {
             }
         }
     }
+
+    @ViewBuilder
+    func `conditionalIf`<Transform: View>(_ condition: Bool, transform: (Self) -> Transform) -> some View {
+    if condition {
+        transform(self)
+    } else {
+        self
+        }
+    }
 }

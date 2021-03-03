@@ -11,26 +11,32 @@ struct HListCalendarView: View {
     @Binding var date: Date
     @Binding var yearAndMonth: Date
 
-    var body: some View {
+    var isCurrentMonth: Bool {
+        yearAndMonth.datesOfMonth.contains(date)
+    }
 
+    var body: some View {
         VStack {
-            ScrollViewReader { scrollView in
+            ScrollViewReader { scrollview in
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         ForEach(yearAndMonth.datesOfMonth, id: \.self) { day in
-                            ZStack {
-                                DateView(date: day, selectedDate: $date)
+                            DateView(date: day, selectedDate: $date)
                                 .font(.caption)
                                 .frame(width: UIScreen.main.bounds.width / 7)
                                 .onAppear {
-                                    if isSelectedDate(day) {
-                                        withAnimation {
-                                            scrollView.scrollTo(day, anchor: .center)
+                                    withAnimation {
+                                        if isCurrentMonth {
+                                            if isSelectedDate(day) {
+                                                scrollview.scrollTo(day, anchor: .center)
+                                            }
+                                        } else {
+                                            if yearAndMonth.datesOfMonth.first == day {
+                                                scrollview.scrollTo(day, anchor: .center)
+                                            }
                                         }
                                     }
                                 }
-
-                            }
                         }
                     }
                 }.animation(.spring())
@@ -59,17 +65,22 @@ struct HListCalendarView: View {
             VStack {
                 let dayData = DateType(date: date)
                 Text("\(dayData.Day)")
+                    .font(.caption)
+                    .fontWeight(.bold)
                 Divider()
                 Text(dayData.Date)
-                    .padding(2)
+                    .font(.body)
+                    .padding(4)
                     .foregroundColor(textColor)
                     .overlay(
-                        isSelectedDate(date) ? Circle().stroke(lineWidth: 2).foregroundColor(.blue)
+                        isSelectedDate(date) ? Circle().stroke(lineWidth: 1).foregroundColor(.blue)
+
                                     : Circle().stroke().foregroundColor(.clear)
                     )
                     .rotation3DEffect(.degrees(degrees), axis: (x: 0, y: 1, z: 0))
 
-            } .onTapGesture {
+            }
+            .onTapGesture {
                 withAnimation {
                     self.degrees += 360
                     selectedDate = date

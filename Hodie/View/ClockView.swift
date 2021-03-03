@@ -13,11 +13,17 @@ struct ClockView: View {
     @ObservedObject var scheduler: Scheduler
     @State var raidus: CGFloat = 0
     @Environment(\.colorScheme) var colorScheme
+    @Binding var editMode: Bool
     var onLongPress: (TodoTask) -> Void
+    var onTap: (TodoTask) -> Void
 
-    init(_ scheduler: Scheduler, longPressAction: @escaping (TodoTask) -> Void) {
+    @State private var textViewRect: CGRect = CGRect()
+
+    init(_ scheduler: Scheduler, editMode: Binding<Bool>, longPressAction: @escaping (TodoTask) -> Void, tapAction: @escaping (TodoTask) -> Void) {
         self.scheduler = scheduler
+        self._editMode = editMode
         onLongPress = longPressAction
+        onTap = tapAction
     }
 
     var body: some View {
@@ -35,12 +41,11 @@ struct ClockView: View {
 
                 Circle()
                     .stroke(Color.lightGray)
-                    .padding()
+                    .padding(clockFontSize(for: geometry.size) * 1.3)
 
                 Arrow(radius: raidus)
                     .rotationEffect(.init(radians: Date().asRadians))
                     .foregroundColor(.red)
-                    .transition(.scaleAndFade)
                     .zIndex(1)
                     .shadow(color: Color.black.opacity(0.2), radius: 2, x: -2, y: -2)
                     .onAppear {
@@ -58,7 +63,9 @@ struct ClockView: View {
                         .onLongPressGesture {
                             onLongPress(todoTask)
                         }
-
+                        .conditionalIf(!editMode) {
+                            $0.gesture( tapGesture(task: todoTask), including: GestureMask.gesture)
+                        }
                 }
                 .padding()
                 .frame(width: minSize(for: geometry.size) - clockFontSize(for: geometry.size),
@@ -70,9 +77,16 @@ struct ClockView: View {
                             .frame(maxWidth: minSize(for: geometry.size), maxHeight: minSize(for: geometry.size), alignment: .top)
                             .rotationEffect(.degrees( 15 * Double(idx)))
                             .font(clockFont(for: geometry.size, index: idx))
+                            .background(GeometryGetter(rect: $textViewRect))
                     }
                 }
             }
+        }
+    }
+
+    private func tapGesture(task: TodoTask) -> some Gesture {
+        TapGesture().onEnded {
+            onTap(task)
         }
     }
 
@@ -116,5 +130,19 @@ struct Arrow: Shape {
         ])
 
         return path
+    }
+}
+
+struct GeometryGetter: View {
+    @Binding var rect: CGRect
+
+    var body: some View {
+        GeometryReader { (g) -> Path in
+            print("width: \(g.size.width), height: \(g.size.height)")
+            DispatchQueue.main.async { // avoids warning: 'Modifying state during view update.' Doesn't look very reliable, but works.
+                self.rect = g.frame(in: .global)
+            }
+            return Path() // could be some other dummy view
+        }
     }
 }

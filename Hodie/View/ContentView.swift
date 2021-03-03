@@ -21,6 +21,7 @@ struct ContentView: View {
     @EnvironmentObject var partialSheetManager: PartialSheetManager
 
     var body: some View {
+        ZStack {
         VStack {
             HStack(alignment: .center) {
 
@@ -99,6 +100,7 @@ struct ContentView: View {
                 whereIsMySQLite()
                 setNotification(context: context)
             }
+        }
         }
         .addPartialSheet()
     }

@@ -13,6 +13,7 @@ struct SchedulerView: View {
     @Environment(\.managedObjectContext) var context
     @State private var selelctedTask: TodoTask?
     @State var isNewTask: Bool = false
+    @State var editMode: Bool = false
 
     @ObservedObject var scheduler: Scheduler
 
@@ -21,10 +22,12 @@ struct SchedulerView: View {
            TaskInfoView(scheduler: scheduler)
 
             ZStack {
-                ClockView(scheduler) { todoTask in
+                ClockView(scheduler, editMode: $editMode, longPressAction: { todoTask in
                             isNewTask = false
                             selelctedTask = todoTask
-                }
+                }, tapAction: { _ in
+
+                })
                 .padding()
 
                 PlusButtonView {

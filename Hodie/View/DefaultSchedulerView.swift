@@ -18,35 +18,27 @@ struct DefaultSchedulerView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                VStack {
-                    Text("Tasks registered with Default Scheduler are automatically registered when a new scheduler is created.")
-                        .font(.caption)
-                        .padding(5)
+                List {
+                    ForEach(scheduler.todoTasks.sorted(), id: \.self) { todoTask in
+                        HStack {
+                            RoundedRectangle(cornerRadius: 10.0)
+                                .fill(todoTask.color.color)
+                                .frame(width: 40, height: 40)
+                                .padding()
 
-                    Divider()
+                            VStack(alignment: .leading) {
+                                Text(todoTask.name).font(.title2)
+                                Text("\(todoTask.startTime_!) ~ \(todoTask.endTime_!)").font(.caption)
 
-                    List {
-                        ForEach(scheduler.todoTasks.sorted(), id: \.self) { todoTask in
-                            HStack {
-                                RoundedRectangle(cornerRadius: 10.0)
-                                    .fill(todoTask.color.color)
-                                    .frame(width: 40, height: 40)
-                                    .padding()
-
-                                VStack(alignment: .leading) {
-                                    Text(todoTask.name).font(.title2)
-                                    Text("\(todoTask.startTime_!) ~ \(todoTask.endTime_!)").font(.caption)
-
-                                }
-                            }.onTapGesture {
-                                isCreating = false
-                                selelctedTask = todoTask
                             }
-                        }.sheet(item: $selelctedTask, onDismiss: {
-                            selelctedTask = nil
-                            context.rollback()  // if adding new Tasks is canceled
-                        }, content: { TaskEditorView(scheduler: scheduler, task: $0, isNewTask: $isCreating) })
-                    }
+                        }.onTapGesture {
+                            isCreating = false
+                            selelctedTask = todoTask
+                        }
+                    }.sheet(item: $selelctedTask, onDismiss: {
+                        selelctedTask = nil
+                        context.rollback()  // if adding new Tasks is canceled
+                    }, content: { TaskEditorView(scheduler: scheduler, task: $0, isNewTask: $isCreating) })
                 }
 
                 PlusButtonView {
@@ -54,9 +46,10 @@ struct DefaultSchedulerView: View {
                     selelctedTask = TodoTask(context: context)
                 }
             }
-            .navigationTitle(Text("Default Scheduler"))
+            .navigationTitle(Text("Saved Tasks"))
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading: Button { presentationMode.wrappedValue.dismiss() } label: { Text("Close") })
+
         }
     }
 }
