@@ -80,13 +80,13 @@ struct ContentView: View {
                         GradientIcon(size: iconSize(size: geometry.size), systemName: "tray.2.fill")
                     }
                     .actionSheet(isPresented: $showingClearActionSheet) {
-                        ActionSheet(title: Text("Reset"), message: Text("Do you want to reset Scheduler? "), buttons: [
-                            .default(Text("Bring tasks from saved Task")) {
+                        ActionSheet(title: Text(LocalizedStringKey("Management")), message: Text("Management options"), buttons: [
+                            .default(Text(LocalizedStringKey("Management_bring"))) {
                                 withAnimation(.spring()) {
                                     Scheduler.fetchScheduler(at: selectedDate, context: context).copyDefaultScheduler(context: context)
                                 }
                             },
-                            .default(Text("Clear Scheduler")) {
+                            .default(Text(LocalizedStringKey("Management_clear"))) {
                                 withAnimation(.spring()) {
                                     Scheduler.fetchScheduler(at: selectedDate, context: context).reset(context: context)
                                 }

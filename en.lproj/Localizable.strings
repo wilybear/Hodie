@@ -5,4 +5,39 @@
   Created by 김현식 on 2021/03/04.
   
 */
-"overlapped" = "The task already exists in that time interval. Are you sure you want to delete and register this task?"
+
+/*-- Editor Alert Types --*/
+"overlapped" = "The task already exists in that time interval. Are you sure you want to delete and register this task?";
+"coredataError" = "Some error occured while saving task";
+"nilValueInTask" = "Enter a name for the task.";
+"tooLongText" = "Name of the task is too long";
+"tooLongMemo" = "Memo of the task is too long";
+"same" = "Start time and end time is equal.";
+
+/*-- General Button --*/
+"Cancel" = "Cancel";
+"Done" = "Done";
+"Alert" = "Alert";
+"OK" = "OK";
+"NO" = "NO";
+"Close" = "Close";
+
+/*-- Task Editor --*/
+"Task Name" = "Task Name";
+"Start time" = "Start time";
+"End time" = "End time";
+"Memo about the task" = "Memo about the task";
+"Notification" = "Notification";
+"Delete" = "Delete";
+
+/*-- Management --*/
+"Management" = "Management";
+"Management options" = "Management options";
+"Management_bring" = "Bring tasks from saved Task";
+"Management_clear" = "Clear Scheduler";
+
+/*-- Saved Tasks --*/
+"Saved Tasks" = "Saved Tasks";
+
+/*-- Edit mode --*/
+"Edit_mode_guide" = "You can modify task by long press and dragging it.";

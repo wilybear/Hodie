@@ -83,9 +83,10 @@ struct TaskInfoView: View {
     var body: some View {
         VStack(alignment: .center) {
             if editMode.isEditMode {
-                Text("You can modify task by long press and dragging it.")
+                Text(LocalizedStringKey("Edit_mode_guide"))
                     .font(.body)
                     .multilineTextAlignment(.center)
+                    .minimumScaleFactor(0.3)
             } else {
                 Text(task?.name ?? "" )
                     .font(.title)
@@ -94,6 +95,7 @@ struct TaskInfoView: View {
 
                 Text(task?.memo ?? "")
                     .font(.body)
+                    .minimumScaleFactor(0.5)
             }
         }
         .padding()

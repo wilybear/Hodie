@@ -16,7 +16,6 @@ extension TodoTask: Comparable {
         startTime_ = DateFormatter.timeFormatter.string(from: Date())
         endTime_ = DateFormatter.timeFormatter.string(from: Date().addingTimeInterval(3600))
         color_ = SerializableColor.init(from: Color.brightRed)
-        print("awake from insert is called")
     }
 
     public static func < (lhs: TodoTask, rhs: TodoTask) -> Bool {

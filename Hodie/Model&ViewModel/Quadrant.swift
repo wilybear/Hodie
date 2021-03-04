@@ -36,7 +36,6 @@ enum Quadrant {
         } else if newPoint.x <= 0 && newPoint.y > 0 {
             self = .two
         } else {
-            print("some error")
             self = .error
         }
     }

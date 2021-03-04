@@ -9,11 +9,10 @@ import SwiftUI
 
 enum EditorAlertType: String {
     case none
-    case coredataError = "Some error occured while saving task"
-    case overlapped =
-            "The task already exists in that time interval. Are you sure you want to delete and register this task?"
-    case nilValueInTask = "Enter a name for the task."
-    case tooLongText = "Name of the task is too long"
-    case tooLongMemo = "Memo of the task is too long"
-    case same = "Start time and end time is equal."
+    case coredataError
+    case overlapped
+    case nilValueInTask
+    case tooLongText
+    case tooLongMemo
+    case same
 }

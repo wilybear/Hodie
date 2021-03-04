@@ -33,7 +33,7 @@ struct TaskEditorView: View {
             HStack {
                 Button {
                     presentationMode.wrappedValue.dismiss()
-                } label: { Text("Cancel") }
+                } label: { Text(LocalizedStringKey("Cancel")) }
                 .padding()
 
                 Spacer()
@@ -45,34 +45,34 @@ struct TaskEditorView: View {
                     } else {
                         showingAlert = true
                     }
-                } label: { Text("Done")}
+                } label: { Text(LocalizedStringKey("Done"))}
                 .padding()
                 .alert(isPresented: $showingAlert) {
                     if alertType == .overlapped {
-                        return Alert(title: Text("Alert"), message: Text(alertType.rawValue), primaryButton: .destructive(Text("OK"), action: {
+                        return Alert(title: Text(LocalizedStringKey("Alert")), message: Text(LocalizedStringKey(alertType.rawValue)), primaryButton: .destructive(Text(LocalizedStringKey("OK")), action: {
                             scheduler.forceInsert(task: draft, context: context)
                             presentationMode.wrappedValue.dismiss()
                         }), secondaryButton: .cancel())
                     } else {
-                        return Alert(title: Text("Alert"), message: Text(alertType.rawValue), dismissButton: .default(Text("OK")))
+                        return Alert(title: Text(LocalizedStringKey("Alert")), message: Text(LocalizedStringKey(alertType.rawValue)), dismissButton: .default(Text(LocalizedStringKey("OK"))))
                     }
                 }
             }
 
             Form {
                 Section {
-                    TextField("Task Name", text: $textData.taskName )
+                    TextField(LocalizedStringKey("Task Name"), text: $textData.taskName )
                         .onChange(of: textData.taskName) { value in
                             textData.taskName = limitedText(value: value, limit: Scheduler.taskNameLimit)
                         }
                 }
 
                 Section {
-                    DatePicker("Start time", selection: $draft.startTime, displayedComponents: .hourAndMinute)
-                    DatePicker("End time", selection: $draft.endTime, displayedComponents: .hourAndMinute)
+                    DatePicker(LocalizedStringKey("Start time"), selection: $draft.startTime, displayedComponents: .hourAndMinute)
+                    DatePicker(LocalizedStringKey("End time"), selection: $draft.endTime, displayedComponents: .hourAndMinute)
                 }
 
-                Section(header: Text("Memo about the task")) {
+                Section(header: Text(LocalizedStringKey("Memo about the task"))) {
                     TextEditor(text: $textData.taskMemo)
                         .frame(minHeight: 100, alignment: .leading)
                         .multilineTextAlignment(.leading)
@@ -83,7 +83,7 @@ struct TaskEditorView: View {
                 }
 
                 Section {
-                    Toggle(isOn: $draft.notification) { Text("Notification") }
+                    Toggle(isOn: $draft.notification) { Text(LocalizedStringKey("Notification")) }
                         .onReceive([self.draft.notification].publisher.first()) { value in
                             if value {
                                 let manager = LocalNotificationManager()
@@ -102,7 +102,7 @@ struct TaskEditorView: View {
                             context.delete(draft)
                             context.saveWithTry()
                             presentationMode.wrappedValue.dismiss()
-                        } label: { Text("Delete") }
+                        } label: { Text(LocalizedStringKey("Delete")) }
                     }
                 }
             }
@@ -120,7 +120,6 @@ struct TaskEditorView: View {
             do {
                 try context.save()
             } catch {
-                print("vvs: \(error)")
                 return .coredataError
             }
         }

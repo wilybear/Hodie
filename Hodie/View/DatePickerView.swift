@@ -27,7 +27,7 @@ struct DatePickerView: View {
                     withAnimation {
                         partialSheetManager.closePartialSheet()
                     }
-                } label: { Text("Cancel")}
+                } label: { Text(LocalizedStringKey("Cancel"))}
                 .padding()
 
                 Spacer()
@@ -37,7 +37,7 @@ struct DatePickerView: View {
                         selectedDate = draft
                         partialSheetManager.closePartialSheet()
                     }
-                } label: { Text("Done") }
+                } label: { Text(LocalizedStringKey("Done")) }
                 .padding()
             }
 
