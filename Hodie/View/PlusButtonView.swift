@@ -31,7 +31,7 @@ struct PlusButtonView: View {
                            .foregroundColor(Color.white)
                            .padding(.bottom, 7)
                 }
-                .background(LinearGradient(gradient: Gradient(colors: Color.BackgroundColors), startPoint: .leading/*@END_MENU_TOKEN@*/, endPoint: .trailing/*@END_MENU_TOKEN@*/))
+                .background(Color.blueGradient)
                 .cornerRadius(38.5)
                 .padding()
                 .shadow(color: Color.black.opacity(0.3), radius: 3, x: 3, y: 3)

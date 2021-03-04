@@ -84,6 +84,12 @@ struct TaskEditorView: View {
 
                 Section {
                     Toggle(isOn: $draft.notification) { Text("Notification") }
+                        .onReceive([self.draft.notification].publisher.first()) { value in
+                            if value {
+                                let manager = LocalNotificationManager()
+                                manager.requestPermission()
+                            }
+                        }
                 }
 
                 Section {
@@ -118,23 +124,12 @@ struct TaskEditorView: View {
                 return .coredataError
             }
         }
-        setNotification(context: context)
         return result
     }
 }
 
 private func limitedText(value: String, limit: Int) -> String {
     value.count > limit ? String(value.prefix(limit)) : value
-}
-
-private func setNotification(context: NSManagedObjectContext) {
-    let scheduler = Scheduler.fetchScheduler(at: Date(), context: context)
-    let manager = LocalNotificationManager()
-    manager.requestPermission()
-    for task in scheduler.todoTasks.filter({$0.notification}) {
-        manager.addNotification(task: task)
-    }
-    manager.scheduleNotifications()
 }
 
 // ColorSwatch is worte by referring to https://medium.com/swlh/creating-a-curated-color-picker-in-swiftui-18a9a86f7721

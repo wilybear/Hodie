@@ -17,92 +17,118 @@ struct ContentView: View {
     @State private var yearAndMonth: Date = Date()
     @State private var showingDefaultSetting = false
     @State private var showingClearActionSheet = false
-
-    @EnvironmentObject var partialSheetManager: PartialSheetManager
+    @EnvironmentObject var isEditMode: EditTask
 
     var body: some View {
-        ZStack {
-        VStack {
-            HStack(alignment: .center) {
+        GeometryReader { geometry in
+            VStack {
+                HStack(alignment: .center) {
 
-                Button {
-                    withAnimation {
-                        yearAndMonth = Calendar.current.date(byAdding: .month, value: -1, to: yearAndMonth)!
-                    }
-                } label: {
-                    Image(systemName: "arrowtriangle.left.fill")
-                        .imageScale(.small)
-                }
-                .padding([.leading])
-
-                Text("\(String(Calendar.current.component(.year, from: yearAndMonth))) . \(Calendar.current.component(.month, from: yearAndMonth))")
-                    .font(.body)
-                    .fontWeight(.heavy)
-                    .transition(.opacity)
-                    .id("\(yearAndMonth)")
-                    .onTapGesture {
+                    Button {
                         withAnimation {
-                            partialSheetManager.showPartialSheet({
-                                yearAndMonth = selectedDate
-                            }, content: { DatePickerView(selectedDate: $selectedDate)})
+                            yearAndMonth = Calendar.current.date(byAdding: .month, value: -1, to: yearAndMonth)!
+                        }
+                    } label: {
+                        Image(systemName: "arrowtriangle.left.fill")
+                            .imageScale(.medium)
+                    }
+                    .padding([.leading])
+
+                    Text("\(String(Calendar.current.component(.year, from: yearAndMonth))) . \(Calendar.current.component(.month, from: yearAndMonth))")
+                        .font(.body)
+                        .fontWeight(.heavy)
+                        .transition(.opacity)
+                        .id("\(yearAndMonth)")
+                        .onTapGesture {
+                            withAnimation {
+                  //            showingDatePicker = true
+                            }
+                        }
+    //                    .sheet(isPresented: $showingDatePicker, onDismiss: {
+    //                        yearAndMonth = selectedDate
+    //                    }, content: {
+    //                        DatePickerView(selectedDate: $selectedDate)
+    //                    })
+
+                    Button {
+                        withAnimation {
+                            yearAndMonth = Calendar.current.date(byAdding: .month, value: 1, to: yearAndMonth)!
+                        }
+                    } label: {
+                        Image(systemName: "arrowtriangle.right.fill")
+                            .imageScale(.medium)
+                    }
+
+                    Spacer()
+
+                    Button {
+                        withAnimation {
+                            isEditMode.isEditMode.toggle()
+                        }
+                    } label: {
+                        if isEditMode.isEditMode {
+                            GradientIcon(size: iconSize(size: geometry.size), systemName: "lock.open.fill")
+                        } else {
+                            GradientIcon(size: iconSize(size: geometry.size), systemName: "lock.fill")
                         }
                     }
+                    .padding([.top, .bottom, .leading])
 
-                Button {
-                    withAnimation {
-                        yearAndMonth = Calendar.current.date(byAdding: .month, value: 1, to: yearAndMonth)!
+                    Button {
+                        showingClearActionSheet = true
+                    } label: {
+                        GradientIcon(size: iconSize(size: geometry.size), systemName: "tray.2.fill")
                     }
-                } label: {
-                    Image(systemName: "arrowtriangle.right.fill")
-                        .imageScale(.small)
+                    .actionSheet(isPresented: $showingClearActionSheet) {
+                        ActionSheet(title: Text("Reset"), message: Text("Do you want to reset Scheduler? "), buttons: [
+                            .default(Text("Bring tasks from saved Task")) {
+                                withAnimation(.spring()) {
+                                    Scheduler.fetchScheduler(at: selectedDate, context: context).copyDefaultScheduler(context: context)
+                                }
+                            },
+                            .default(Text("Clear Scheduler")) {
+                                withAnimation(.spring()) {
+                                    Scheduler.fetchScheduler(at: selectedDate, context: context).reset(context: context)
+                                }
+                            },
+                            .cancel()
+                        ])
+                    }
+                    .padding([.top, .bottom])
+                    .padding([.leading], 10)
+
+                    Button {
+                        showingDefaultSetting = true
+                    } label: {
+                        GradientIcon(size: iconSize(size: geometry.size), systemName: "list.dash")
+                    }
+                    .sheet(isPresented: $showingDefaultSetting) {
+                        DefaultSchedulerView(scheduler: Scheduler.fetchDefaultScheduler(context: context))
+                    }
+                    .padding([.top, .bottom, .trailing])
+                    .padding([.leading], 10)
                 }
 
-                Spacer()
+                HListCalendarView(date: $selectedDate, yearAndMonth: $yearAndMonth)
+                    .padding([.top, .bottom])
 
-                Button {
-                    showingClearActionSheet = true
-                } label: {
-                    Image(systemName: "trash").imageScale(.medium)
-                }
-                .actionSheet(isPresented: $showingClearActionSheet) {
-                    ActionSheet(title: Text("Reset"), message: Text("Do you want to reset Scheduler? "), buttons: [
-                        .default(Text("Reset to default")) {
-                            withAnimation(.spring()) {
-                                context.delete( Scheduler.fetchScheduler(at: selectedDate, context: context))
-                            }
-                        },
-                        .default(Text("Clear Scheduler")) {
-                            withAnimation(.spring()) {
-                                Scheduler.fetchScheduler(at: selectedDate, context: context).reset(context: context)
-                            }
-                        },
-                        .cancel()
-                    ])
-                }
-                .padding()
+                SchedulerView(scheduler: Scheduler.fetchScheduler(at: selectedDate, context: context))
+                    .environmentObject(isEditMode)
 
-                Button {
-                    showingDefaultSetting = true
-                } label: {
-                    Image(systemName: "t.circle.fill")
                 }
-                .sheet(isPresented: $showingDefaultSetting) {
-                    DefaultSchedulerView(scheduler: Scheduler.fetchDefaultScheduler(context: context))
+                .onAppear {
+                    whereIsMySQLite()
+                    setNotification(context: context)
                 }
-                .padding()
-            }
-
-            HListCalendarView(date: $selectedDate, yearAndMonth: $yearAndMonth)
-                .padding([.top, .bottom])
-
-            SchedulerView(scheduler: Scheduler.fetchScheduler(at: selectedDate, context: context))
-            .onAppear {
-                whereIsMySQLite()
+            .onDisappear {
                 setNotification(context: context)
             }
+
         }
-        }
-        .addPartialSheet()
+    }
+
+    private func iconSize(size: CGSize) -> CGFloat {
+        size.width / 15
     }
 }
 
@@ -126,4 +152,17 @@ private func setNotification(context: NSManagedObjectContext) {
         manager.addNotification(task: task)
     }
     manager.scheduleNotifications()
+}
+
+struct GradientIcon: View {
+
+    var size: CGFloat
+    var systemName: String
+
+    var body: some View {
+        Color.iconGradient
+            .mask(Image(systemName: systemName)
+                    .imageScale(.large)
+            ).frame(width: size, height: size)
+    }
 }

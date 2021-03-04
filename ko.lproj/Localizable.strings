@@ -1,0 +1,9 @@
+/* 
+  Localizable.strings
+  Hodie
+
+  Created by 김현식 on 2021/03/04.
+  
+*/
+
+"overlapped" = "해당 시간에 이미 일정이 존재합니다. 일정을 삭제하고 새로 등록하시겠습니까?"

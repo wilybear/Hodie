@@ -48,22 +48,27 @@ extension Scheduler: Comparable {
             return scheduler
         } else {
             let scheduler = Scheduler(context: context)
-            let defaultScheduler = Scheduler.fetchDefaultScheduler(context: context)
             scheduler.date = date
             scheduler.name = "untitled"
-            for task in defaultScheduler.todoTasks {
-                let newTask = TodoTask(context: context)
-                newTask.color_ = task.color_
-                newTask.endTime_ = task.endTime_
-                newTask.memo_ = task.memo_
-                newTask.name_ = task.name_
-                newTask.startTime_ = task.startTime_
-                newTask.notification = task.notification
-                scheduler.addToTodoTasks_(newTask)
-            }
             context.saveWithTry()
             return scheduler
         }
+    }
+
+    func copyDefaultScheduler(context: NSManagedObjectContext) {
+        let defaultScheduler = Scheduler.fetchDefaultScheduler(context: context)
+        self.reset(context: context)
+        for task in defaultScheduler.todoTasks {
+            let newTask = TodoTask(context: context)
+            newTask.color_ = task.color_
+            newTask.endTime_ = task.endTime_
+            newTask.memo_ = task.memo_
+            newTask.name_ = task.name_
+            newTask.startTime_ = task.startTime_
+            newTask.notification = task.notification
+            self.addToTodoTasks_(newTask)
+        }
+        context.saveWithTry()
     }
 
     var todoTasks: Set<TodoTask> {
@@ -115,6 +120,7 @@ extension Scheduler: Comparable {
         for task in todoTasks {
             context.delete(task)
         }
+        todoTasks.removeAll()
         context.saveWithTry()
     }
 

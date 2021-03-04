@@ -39,7 +39,7 @@ public struct AngledText: View {
     }
 
     private var interval: Double {
-        return todoTask.endTime.asRadians > todoTask.startTime.asRadians ? (end - start)/2 :(end - start + .radianRound)/2
+        return start < end ? (end - start)/2 :(end - start + .radianRound)/2
     }
     internal var textModifier: (Text) -> Text = { $0 }
     internal var spacing: CGFloat = 0
@@ -60,6 +60,9 @@ public struct AngledText: View {
             PropagateSize {
                 textModifier(Text(text))
             }
+            .font(.system(size: radius * 0.1))
+            .lineLimit(1)
+            .minimumScaleFactor(0.3)
             .frame(width: abs(availableRadius), height: size.height, alignment: .center)
             .rotationEffect(rotationAngle())
             // Midpoint from possible space to end

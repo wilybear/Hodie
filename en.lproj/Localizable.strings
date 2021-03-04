@@ -1,0 +1,8 @@
+/* 
+  Localizable.strings
+  Hodie
+
+  Created by 김현식 on 2021/03/04.
+  
+*/
+"overlapped" = "The task already exists in that time interval. Are you sure you want to delete and register this task?"

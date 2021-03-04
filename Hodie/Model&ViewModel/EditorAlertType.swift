@@ -5,7 +5,7 @@
 //  Created by 김현식 on 2021/02/21.
 //
 
-import Foundation
+import SwiftUI
 
 enum EditorAlertType: String {
     case none

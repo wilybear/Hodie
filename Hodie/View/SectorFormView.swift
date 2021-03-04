@@ -67,10 +67,9 @@ struct SectorFormView: View {
             ZStack {
                 SectorFormShape(todoTask: $todoTask, radius: radius, start: startRadians, end: endRadians).fill(todoTask.color.color)
 
-                AngledText(todoTask: $todoTask, radius: radius, start: todoTask.startTime.asRadians, end: todoTask.endTime.asRadians )
+                AngledText(todoTask: $todoTask, radius: radius, start: startRadians, end: endRadians )
                     .bold()
                     .foregroundColor(todoTask.color.isDarkColor ? .white : .black)
-                    .font(.caption2)
             }
             .scaleEffect(scale)
             .gesture(sectorFormGesture(size: geometry.size, task: todoTask))
@@ -83,7 +82,7 @@ struct SectorFormView: View {
             }
         }
     }
-    private let minimumLongPressDuration = 0.5
+    private let minimumLongPressDuration: Double = 0.1
 
     @State var isStart: Bool?
     @State var prevLocation: CGPoint?
@@ -91,7 +90,7 @@ struct SectorFormView: View {
 
     private func sectorFormGesture(size: CGSize, task: TodoTask)-> some Gesture {
         let longPressDrag = LongPressGesture(minimumDuration: minimumLongPressDuration)
-            .sequenced(before: DragGesture(minimumDistance: 4, coordinateSpace: .local))
+            .sequenced(before: DragGesture(minimumDistance: 2, coordinateSpace: .local))
             .updating($dragState) { value, state, _ in
                 withAnimation {
                     switch value {
@@ -100,13 +99,17 @@ struct SectorFormView: View {
                         state = .pressing
                         DispatchQueue.main.async {
                             prevLocation = nil
-                            withAnimation(.spring()) {
-                                scale = 1.2
-                            }
+
                         }
                     // Long press confirmed, dragging may begin.
                     case .second(true, let drag):
                         if let dragV = drag {
+                            DispatchQueue.main.async {
+                                withAnimation(.spring()) {
+                                    scale = 1.2
+                                }
+                            }
+
                             let currentQuadrant = Quadrant.init(size: size, point: dragV.location)
                             let prevQuadrant = Quadrant.init(size: size, point: prevLocation ?? dragV.location)
                             let radianAtPoint = pointToRadian(coordinate: size, location: dragV.startLocation)
@@ -146,6 +149,8 @@ struct SectorFormView: View {
             }
             .onEnded { value in
                 withAnimation {
+                        print("ral \(value)")
+
                     guard case .second(true, let drag?) = value else { return }
                     let radianAtPoint = pointToRadian(coordinate: size, location: drag.startLocation)
                     task.dragTimeValue(

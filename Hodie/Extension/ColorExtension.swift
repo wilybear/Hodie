@@ -23,4 +23,7 @@ extension Color {
                                brightGreen, brightSkyBlue, brightBlue, brightPurple, brightPink, brightWhite]
 
     static let BackgroundColors = [Color("BackgroundTop"), Color("BackgroundMid"), Color("BackgroundBottom")]
+
+    static let blueGradient = LinearGradient(gradient: Gradient(colors: Color.BackgroundColors), startPoint: .leading, endPoint: .trailing)
+    static let iconGradient = LinearGradient(gradient: Gradient(colors: [Color("BackgroundTop"), Color("BackgroundMid"), Color("BackgourndLast")]), startPoint: .top, endPoint: .bottom)
 }

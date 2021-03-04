@@ -13,15 +13,15 @@ struct ClockView: View {
     @ObservedObject var scheduler: Scheduler
     @State var raidus: CGFloat = 0
     @Environment(\.colorScheme) var colorScheme
-    @Binding var editMode: Bool
+    @EnvironmentObject var editMode: EditTask
+
     var onLongPress: (TodoTask) -> Void
     var onTap: (TodoTask) -> Void
 
     @State private var textViewRect: CGRect = CGRect()
 
-    init(_ scheduler: Scheduler, editMode: Binding<Bool>, longPressAction: @escaping (TodoTask) -> Void, tapAction: @escaping (TodoTask) -> Void) {
+    init(_ scheduler: Scheduler, longPressAction: @escaping (TodoTask) -> Void, tapAction: @escaping (TodoTask) -> Void) {
         self.scheduler = scheduler
-        self._editMode = editMode
         onLongPress = longPressAction
         onTap = tapAction
     }
@@ -60,16 +60,12 @@ struct ClockView: View {
                         set: { scheduler.todoTasks.update(with: $0)})
                     SectorFormView(todoTask: task, delay: Double.random(in: 0..<0.7))
                         .shadow(color: Color.black.opacity(0.2), radius: 2, x: -2, y: -2)
-                        .onLongPressGesture {
-                            onLongPress(todoTask)
-                        }
-                        .conditionalIf(!editMode) {
+                        .conditionalIf(!editMode.isEditMode) {
                             $0.gesture( tapGesture(task: todoTask), including: GestureMask.gesture)
                         }
                 }
-                .padding()
-                .frame(width: minSize(for: geometry.size) - clockFontSize(for: geometry.size),
-                       height: minSize(for: geometry.size) - clockFontSize(for: geometry.size), alignment: .center)
+                .frame(width: minSize(for: geometry.size) - clockFontSize(for: geometry.size) * 2.7,
+                       height: minSize(for: geometry.size) - clockFontSize(for: geometry.size) * 2.7, alignment: .center)
 
                 ZStack {
                     ForEach( 0..<24, id: \.self) { idx in
@@ -85,9 +81,11 @@ struct ClockView: View {
     }
 
     private func tapGesture(task: TodoTask) -> some Gesture {
-        TapGesture().onEnded {
+        TapGesture().onEnded { _ in
             onTap(task)
-        }
+        }.simultaneously(with: LongPressGesture().onEnded {_ in
+            onLongPress(task)
+        })
     }
 
     private func minSize(for size: CGSize) -> CGFloat {

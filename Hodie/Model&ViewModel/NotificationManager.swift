@@ -32,7 +32,11 @@ class LocalNotificationManager {
             let content = UNMutableNotificationContent()
             content.title = task.name
             let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: task.startTime)
+            let dateComponentForDay = Calendar.current.dateComponents([.year, .month, .day], from: Date())
             var triggerDate = DateComponents()
+            triggerDate.year = dateComponentForDay.year!
+            triggerDate.month = dateComponentForDay.month!
+            triggerDate.day = dateComponentForDay.day!
             triggerDate.hour = dateComponent.hour!
             triggerDate.minute = dateComponent.minute!
 
