@@ -112,7 +112,7 @@ struct ContentView: View {
                 HListCalendarView(date: $selectedDate, yearAndMonth: $yearAndMonth)
                     .padding([.top, .bottom])
 
-                SchedulerView(scheduler: Scheduler.fetchScheduler(at: selectedDate, context: context))
+                SchedulerView(scheduler: Scheduler.fetchScheduler(at: selectedDate, context: context), context: context)
                     .environmentObject(isEditMode)
 
                 }

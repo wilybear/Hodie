@@ -16,36 +16,24 @@ struct SchedulerView: View {
     @State var isNewTask: Bool = false
     @EnvironmentObject var editMode: EditTask
     @ObservedObject var scheduler: Scheduler
-    @FetchRequest var tasks: FetchedResults<TodoTask>
+    @ObservedObject var taskInfoModel: TasKInfoModel
 
-    var currentTask: TodoTask? {
-        let current = DateFormatter.timeFormatter.date(from: Date.stringOfCurrentTime)!
-        let currentRange = current..<current.addingTimeInterval(1)
-        return tasks.filter {
-            for suspect in $0.startTime.divideTimeBasedOnMidnight(end: $0.endTime) {
-                if currentRange.overlaps(suspect) {
-                    return true
-                }
-            }
-            return false
-        }.first ?? nil
-    }
-
-    init(scheduler: Scheduler) {
+    init(scheduler: Scheduler, context: NSManagedObjectContext) {
         self.scheduler = scheduler
-        let request = TodoTask.fetchRequest(scheduler: scheduler, time: Date())
-        _tasks = FetchRequest(fetchRequest: request)
+        _tappedTask = State(wrappedValue: nil)
+        taskInfoModel = TasKInfoModel(scheduler: scheduler, context: context)
     }
 
     var body : some View {
         VStack {
-            TaskInfoView(task: Binding<TodoTask?>(get: {
-                if tappedTask != nil {
-                    return tappedTask
-                } else {
-                    return currentTask
-                }
-            }, set: {_ in }))
+//            TaskInfoView(task: Binding<TodoTask?>(get: {
+//                if tappedTask != nil {
+//                    return tappedTask
+//                } else {
+//                    return currentTask
+//                }
+//            }, set: {_ in }))
+            TaskInfoView(taskInfoModel: taskInfoModel)
 
             ZStack {
                 ClockView(scheduler, longPressAction: { todoTask in
@@ -53,7 +41,7 @@ struct SchedulerView: View {
                             selelctedTask = todoTask
                 }, tapAction: { todoTask in
                     withAnimation {
-                        tappedTask = todoTask
+                        taskInfoModel.task = todoTask
                     }
                 })
                 .padding()
@@ -65,9 +53,6 @@ struct SchedulerView: View {
             }
 
         }
-        .onAppear {
-            tappedTask = nil
-        }
         .sheet(item: $selelctedTask, onDismiss: {
             selelctedTask = nil
             context.rollback()  // if adding new Tasks is canceled
@@ -76,9 +61,32 @@ struct SchedulerView: View {
     }
 }
 
+class TasKInfoModel: ObservableObject {
+    @Published var task: TodoTask?
+    var scheduler: Scheduler
+    var context: NSManagedObjectContext
+
+    init(scheduler: Scheduler, context: NSManagedObjectContext) {
+        self.scheduler = scheduler
+        self.context = context
+        let current = DateFormatter.timeFormatter.date(from: Date.stringOfCurrentTime)!
+        let currentRange = current..<current.addingTimeInterval(1)
+        let request = TodoTask.fetchRequest(scheduler: scheduler, time: Date())
+        let tasks = (try? context.fetch(request))
+        task = tasks!.filter {
+            for suspect in $0.startTime.divideTimeBasedOnMidnight(end: $0.endTime) {
+                if currentRange.overlaps(suspect) {
+                        return true
+                    }
+                }
+                return false
+         }.first ?? nil
+    }
+}
+
 struct TaskInfoView: View {
     @EnvironmentObject var editMode: EditTask
-    @Binding var task: TodoTask?
+    @ObservedObject var taskInfoModel: TasKInfoModel
 
     var body: some View {
         VStack(alignment: .center) {
@@ -88,12 +96,12 @@ struct TaskInfoView: View {
                     .multilineTextAlignment(.center)
                     .minimumScaleFactor(0.3)
             } else {
-                Text(task?.name ?? "" )
+                Text(taskInfoModel.task?.name ?? "" )
                     .font(.title)
                     .fontWeight(.bold)
                     .padding([.bottom])
 
-                Text(task?.memo ?? "")
+                Text(taskInfoModel.task?.memo ?? "")
                     .font(.body)
                     .minimumScaleFactor(0.5)
             }

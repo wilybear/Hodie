@@ -19,26 +19,31 @@ struct DefaultSchedulerView: View {
         NavigationView {
             ZStack {
                 List {
-                    ForEach(scheduler.todoTasks.sorted(), id: \.self) { todoTask in
-                        HStack {
-                            RoundedRectangle(cornerRadius: 10.0)
-                                .fill(todoTask.color.color)
-                                .frame(width: 40, height: 40)
-                                .padding()
+                    VStack(alignment: .leading) {
+                        ForEach(scheduler.todoTasks.sorted(), id: \.self) { todoTask in
+                            HStack {
+                                RoundedRectangle(cornerRadius: 10.0)
+                                    .fill(todoTask.color.color)
+                                    .frame(width: 40, height: 40)
+                                    .padding([.leading, .trailing])
 
-                            VStack(alignment: .leading) {
-                                Text(todoTask.name).font(.title2)
-                                Text("\(todoTask.startTime_!) ~ \(todoTask.endTime_!)").font(.caption)
+                                VStack(alignment: .leading) {
+                                    Text(todoTask.name).font(.title2)
+                                    Text("\(todoTask.startTime_!) ~ \(todoTask.endTime_!)").font(.caption)
 
+                                }
+                                Spacer()
+                            }.onTapGesture {
+                                isCreating = false
+                                selelctedTask = todoTask
                             }
-                        }.onTapGesture {
-                            isCreating = false
-                            selelctedTask = todoTask
-                        }
-                    }.sheet(item: $selelctedTask, onDismiss: {
-                        selelctedTask = nil
-                        context.rollback()  // if adding new Tasks is canceled
-                    }, content: { TaskEditorView(scheduler: scheduler, task: $0, isNewTask: $isCreating) })
+                            Divider()
+                        }.sheet(item: $selelctedTask, onDismiss: {
+                            selelctedTask = nil
+                            context.rollback()  // if adding new Tasks is canceled
+                        }, content: { TaskEditorView(scheduler: scheduler, task: $0, isNewTask: $isCreating) })
+                    }
+
                 }
 
                 PlusButtonView {

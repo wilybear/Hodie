@@ -81,7 +81,7 @@ struct ClockView: View {
     }
 
     private func tapGesture(task: TodoTask) -> some Gesture {
-        TapGesture().onEnded { _ in
+        TapGesture().onEnded {
             onTap(task)
         }.simultaneously(with: LongPressGesture().onEnded {_ in
             onLongPress(task)

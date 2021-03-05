@@ -29,6 +29,14 @@
 		37D345EE25EF911000E84AB9 /* Quadrant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D345ED25EF911000E84AB9 /* Quadrant.swift */; };
 		37D345F125EF917D00E84AB9 /* EditTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D345F025EF917D00E84AB9 /* EditTask.swift */; };
 		37D345F725F0DA7A00E84AB9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37D345F925F0DA7A00E84AB9 /* Localizable.strings */; };
+		37D3460425F0E85700E84AB9 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37D3460325F0E85700E84AB9 /* WidgetKit.framework */; };
+		37D3460625F0E85700E84AB9 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37D3460525F0E85700E84AB9 /* SwiftUI.framework */; };
+		37D3460925F0E85700E84AB9 /* HodieWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D3460825F0E85700E84AB9 /* HodieWidget.swift */; };
+		37D3460C25F0E85800E84AB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37D3460B25F0E85800E84AB9 /* Assets.xcassets */; };
+		37D3460E25F0E85800E84AB9 /* HodieWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 37D3460A25F0E85700E84AB9 /* HodieWidget.intentdefinition */; };
+		37D3460F25F0E85800E84AB9 /* HodieWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 37D3460A25F0E85700E84AB9 /* HodieWidget.intentdefinition */; };
+		37D3461225F0E85800E84AB9 /* HodieWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 37D3460225F0E85700E84AB9 /* HodieWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		37D3461E25F239F800E84AB9 /* ConcentricOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 37D3461D25F239F800E84AB9 /* ConcentricOnboarding */; };
 		37DA0F8B25D4252A003CFB66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA0F8A25D4252A003CFB66 /* AppDelegate.swift */; };
 		37DA0F8D25D4252A003CFB66 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA0F8C25D4252A003CFB66 /* SceneDelegate.swift */; };
 		37DA0F8F25D4252A003CFB66 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA0F8E25D4252A003CFB66 /* ContentView.swift */; };
@@ -39,6 +47,30 @@
 		37DA0FD825D65CBD003CFB66 /* SerializableColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DA0FD725D65CBD003CFB66 /* SerializableColor.swift */; };
 		37EEB06225E6A8B5009C35D5 /* HListCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEB06125E6A8B5009C35D5 /* HListCalendarView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		37D3461025F0E85800E84AB9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 37DA0F7F25D4252A003CFB66 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 37D3460125F0E85700E84AB9;
+			remoteInfo = HodieWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		37D3461625F0E85800E84AB9 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				37D3461225F0E85800E84AB9 /* HodieWidgetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		37586E2025DA7E880010E381 /* NSManagedContextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedContextExtensions.swift; sourceTree = "<group>"; };
@@ -63,6 +95,14 @@
 		37D345F825F0DA7A00E84AB9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37D345FB25F0DA9F00E84AB9 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		37D345FC25F0DA9F00E84AB9 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		37D3460225F0E85700E84AB9 /* HodieWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HodieWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		37D3460325F0E85700E84AB9 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		37D3460525F0E85700E84AB9 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		37D3460825F0E85700E84AB9 /* HodieWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HodieWidget.swift; sourceTree = "<group>"; };
+		37D3460A25F0E85700E84AB9 /* HodieWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = HodieWidget.intentdefinition; sourceTree = "<group>"; };
+		37D3460B25F0E85800E84AB9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		37D3460D25F0E85800E84AB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		37D3461925F0E96900E84AB9 /* Hodie.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hodie.entitlements; sourceTree = "<group>"; };
 		37DA0F8725D4252A003CFB66 /* Hodie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hodie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37DA0F8A25D4252A003CFB66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Hodie/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
 		37DA0F8C25D4252A003CFB66 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = Hodie/SceneDelegate.swift; sourceTree = SOURCE_ROOT; };
@@ -77,10 +117,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		37D345FF25F0E85700E84AB9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37D3460625F0E85700E84AB9 /* SwiftUI.framework in Frameworks */,
+				37D3460425F0E85700E84AB9 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		37DA0F8425D4252A003CFB66 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37D3461E25F239F800E84AB9 /* ConcentricOnboarding in Frameworks */,
 				378B4A5725EE1958000D57C3 /* PartialSheet in Frameworks */,
 				378B4A5525EE1958000D57C3 /* HalfModal in Frameworks */,
 			);
@@ -104,6 +154,8 @@
 		378B4A5325EE1958000D57C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				37D3460325F0E85700E84AB9 /* WidgetKit.framework */,
+				37D3460525F0E85700E84AB9 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -138,12 +190,24 @@
 			path = "Model&ViewModel";
 			sourceTree = "<group>";
 		};
+		37D3460725F0E85700E84AB9 /* HodieWidget */ = {
+			isa = PBXGroup;
+			children = (
+				37D3460825F0E85700E84AB9 /* HodieWidget.swift */,
+				37D3460A25F0E85700E84AB9 /* HodieWidget.intentdefinition */,
+				37D3460B25F0E85800E84AB9 /* Assets.xcassets */,
+				37D3460D25F0E85800E84AB9 /* Info.plist */,
+			);
+			path = HodieWidget;
+			sourceTree = "<group>";
+		};
 		37DA0F7E25D4252A003CFB66 = {
 			isa = PBXGroup;
 			children = (
 				37D345F925F0DA7A00E84AB9 /* Localizable.strings */,
 				378B4A4B25EA43B1000D57C3 /* .swiftlint.yml */,
 				37DA0F8925D4252A003CFB66 /* Hodie */,
+				37D3460725F0E85700E84AB9 /* HodieWidget */,
 				37DA0F8825D4252A003CFB66 /* Products */,
 				378B4A5325EE1958000D57C3 /* Frameworks */,
 			);
@@ -153,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				37DA0F8725D4252A003CFB66 /* Hodie.app */,
+				37D3460225F0E85700E84AB9 /* HodieWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -160,6 +225,7 @@
 		37DA0F8925D4252A003CFB66 /* Hodie */ = {
 			isa = PBXGroup;
 			children = (
+				37D3461925F0E96900E84AB9 /* Hodie.entitlements */,
 				37D345DF25EF90C700E84AB9 /* Model&ViewModel */,
 				376BAF0B25D6AA760010270F /* Extension */,
 				379F48B525DFBDD300CA4744 /* View */,
@@ -185,6 +251,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		37D3460125F0E85700E84AB9 /* HodieWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 37D3461325F0E85800E84AB9 /* Build configuration list for PBXNativeTarget "HodieWidgetExtension" */;
+			buildPhases = (
+				37D345FE25F0E85700E84AB9 /* Sources */,
+				37D345FF25F0E85700E84AB9 /* Frameworks */,
+				37D3460025F0E85700E84AB9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HodieWidgetExtension;
+			productName = HodieWidgetExtension;
+			productReference = 37D3460225F0E85700E84AB9 /* HodieWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		37DA0F8625D4252A003CFB66 /* Hodie */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 37DA0F9E25D4252B003CFB66 /* Build configuration list for PBXNativeTarget "Hodie" */;
@@ -193,15 +276,18 @@
 				37DA0F8325D4252A003CFB66 /* Sources */,
 				37DA0F8425D4252A003CFB66 /* Frameworks */,
 				37DA0F8525D4252A003CFB66 /* Resources */,
+				37D3461625F0E85800E84AB9 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				37D3461125F0E85800E84AB9 /* PBXTargetDependency */,
 			);
 			name = Hodie;
 			packageProductDependencies = (
 				378B4A5425EE1958000D57C3 /* HalfModal */,
 				378B4A5625EE1958000D57C3 /* PartialSheet */,
+				37D3461D25F239F800E84AB9 /* ConcentricOnboarding */,
 			);
 			productName = hodie;
 			productReference = 37DA0F8725D4252A003CFB66 /* Hodie.app */;
@@ -213,9 +299,12 @@
 		37DA0F7F25D4252A003CFB66 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1230;
+				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1230;
 				TargetAttributes = {
+					37D3460125F0E85700E84AB9 = {
+						CreatedOnToolsVersion = 12.4;
+					};
 					37DA0F8625D4252A003CFB66 = {
 						CreatedOnToolsVersion = 12.3;
 					};
@@ -234,17 +323,27 @@
 			packageReferences = (
 				379F48A925DD2C5F00CA4744 /* XCRemoteSwiftPackageReference "HalfModal" */,
 				379F48AD25DD327B00CA4744 /* XCRemoteSwiftPackageReference "PartialSheet" */,
+				37D3461C25F239F800E84AB9 /* XCRemoteSwiftPackageReference "ConcentricOnboarding" */,
 			);
 			productRefGroup = 37DA0F8825D4252A003CFB66 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				37DA0F8625D4252A003CFB66 /* Hodie */,
+				37D3460125F0E85700E84AB9 /* HodieWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		37D3460025F0E85700E84AB9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37D3460C25F0E85800E84AB9 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		37DA0F8525D4252A003CFB66 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -281,6 +380,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		37D345FE25F0E85700E84AB9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37D3460E25F0E85800E84AB9 /* HodieWidget.intentdefinition in Sources */,
+				37D3460925F0E85700E84AB9 /* HodieWidget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		37DA0F8325D4252A003CFB66 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -302,6 +410,7 @@
 				376BAF0325D69FF00010270F /* FoundationExtensions.swift in Sources */,
 				3798687325E3C41300FAAD39 /* ViewExtension.swift in Sources */,
 				37A7CE0925DC26010015C3DF /* ColorExtension.swift in Sources */,
+				37D3460F25F0E85800E84AB9 /* HodieWidget.intentdefinition in Sources */,
 				37D345E425EF90C700E84AB9 /* EditorAlertType.swift in Sources */,
 				37D345E625EF90C700E84AB9 /* TodoTask.swift in Sources */,
 				37586E2C25DAB3780010E381 /* ClockView.swift in Sources */,
@@ -313,6 +422,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		37D3461125F0E85800E84AB9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 37D3460125F0E85700E84AB9 /* HodieWidgetExtension */;
+			targetProxy = 37D3461025F0E85800E84AB9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		37D345F925F0DA7A00E84AB9 /* Localizable.strings */ = {
@@ -336,6 +453,50 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		37D3461425F0E85800E84AB9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6YNXK75768;
+				INFOPLIST_FILE = HodieWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = edu.wilybear.hodie.HodieWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		37D3461525F0E85800E84AB9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6YNXK75768;
+				INFOPLIST_FILE = HodieWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = edu.wilybear.hodie.HodieWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		37DA0F9C25D4252B003CFB66 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -457,8 +618,10 @@
 		37DA0F9F25D4252B003CFB66 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Hodie/Hodie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"hodie/Preview Content\"";
 				DEVELOPMENT_TEAM = 6YNXK75768;
@@ -478,8 +641,10 @@
 		37DA0FA025D4252B003CFB66 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Hodie/Hodie.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"hodie/Preview Content\"";
 				DEVELOPMENT_TEAM = 6YNXK75768;
@@ -499,6 +664,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		37D3461325F0E85800E84AB9 /* Build configuration list for PBXNativeTarget "HodieWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37D3461425F0E85800E84AB9 /* Debug */,
+				37D3461525F0E85800E84AB9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		37DA0F8225D4252A003CFB66 /* Build configuration list for PBXProject "Hodie" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -536,6 +710,14 @@
 				minimumVersion = 2.1.11;
 			};
 		};
+		37D3461C25F239F800E84AB9 /* XCRemoteSwiftPackageReference "ConcentricOnboarding" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/ConcentricOnboarding.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.6;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -548,6 +730,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 379F48AD25DD327B00CA4744 /* XCRemoteSwiftPackageReference "PartialSheet" */;
 			productName = PartialSheet;
+		};
+		37D3461D25F239F800E84AB9 /* ConcentricOnboarding */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 37D3461C25F239F800E84AB9 /* XCRemoteSwiftPackageReference "ConcentricOnboarding" */;
+			productName = ConcentricOnboarding;
 		};
 /* End XCSwiftPackageProductDependency section */
 
