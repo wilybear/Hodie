@@ -7,7 +7,6 @@
 
 import SwiftUI
 import CoreData
-import PartialSheet
 
 struct SchedulerView: View {
     @Environment(\.managedObjectContext) var context

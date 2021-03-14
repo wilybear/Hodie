@@ -6,11 +6,8 @@
 //
 
 import SwiftUI
-import PartialSheet
 
 struct DatePickerView: View {
-
-    @EnvironmentObject var partialSheetManager: PartialSheetManager
 
     @Binding var selectedDate: Date
     @State private var draft: Date
@@ -25,7 +22,6 @@ struct DatePickerView: View {
             HStack {
                 Button {
                     withAnimation {
-                        partialSheetManager.closePartialSheet()
                     }
                 } label: { Text(LocalizedStringKey("Cancel"))}
                 .padding()
@@ -35,7 +31,6 @@ struct DatePickerView: View {
                 Button {
                     withAnimation {
                         selectedDate = draft
-                        partialSheetManager.closePartialSheet()
                     }
                 } label: { Text(LocalizedStringKey("Done")) }
                 .padding()

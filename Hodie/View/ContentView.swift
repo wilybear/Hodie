@@ -6,9 +6,7 @@
 //
 
 import SwiftUI
-import PartialSheet
 import CoreData
-import HalfModal
 
 struct ContentView: View {
 
