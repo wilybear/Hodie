@@ -136,7 +136,6 @@ struct GeometryGetter: View {
 
     var body: some View {
         GeometryReader { (g) -> Path in
-            print("width: \(g.size.width), height: \(g.size.height)")
             DispatchQueue.main.async { // avoids warning: 'Modifying state during view update.' Doesn't look very reliable, but works.
                 self.rect = g.frame(in: .global)
             }

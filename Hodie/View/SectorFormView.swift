@@ -44,21 +44,16 @@ struct SectorFormView: View {
         if movedAmount == .zero {
             return todoTask.endTime.asRadians
         }
-        print("drag end radians \( movedAmount)")
-        print("available radians \(availableRange)")
         if availableRange.contains(movedAmount) {
             result = todoTask.endTime.asRadians + movedAmount
         } else {
             if availableRange.upperBound < movedAmount {
 
                 result = todoTask.endTime.asRadians + availableRange.upperBound
-                print("upper radians \(result)")
             } else {
                 result = todoTask.endTime.asRadians + availableRange.lowerBound
-                print("lower radians \(result)")
             }
         }
-        print("start radians \(result)")
         return result.truncatingRemainder(dividingBy: .radianRound)
     }
 
@@ -113,7 +108,6 @@ struct SectorFormView: View {
                             let currentQuadrant = Quadrant.init(size: size, point: dragV.location)
                             let prevQuadrant = Quadrant.init(size: size, point: prevLocation ?? dragV.location)
                             let radianAtPoint = pointToRadian(coordinate: size, location: dragV.startLocation)
-                            print("radian ata point : \(radianAtPoint)")
 
                             if prevQuadrant == currentQuadrant {
                                 if !quadrantStack.contains(currentQuadrant) {
@@ -130,7 +124,6 @@ struct SectorFormView: View {
                                 if task.timeNearStartOrEnd(radian: radianAtPoint, size: size) {
                                    state = .dragging(start: intervalAngle, end: .zero)
                                 } else {
-        //                            print("angle \(intervalAngle) \n")
                                     state = .dragging(start: .zero, end: intervalAngle)
                                 }
                             }
@@ -157,7 +150,11 @@ struct SectorFormView: View {
                         value: angle(between: drag.startLocation, ending: drag.location, coord: size, currentQuadrant: .init(size: size, point: drag.location)),
                         isStart: task.timeNearStartOrEnd(radian: radianAtPoint, size: size), context: context)
                     quadrantStack.removeAll()
-                    scale = 1.0
+                    DispatchQueue.main.async {
+                        withAnimation {
+                            scale = 1.0
+                        }
+                    }
                 }
             }
         return longPressDrag
@@ -220,7 +217,6 @@ struct SectorFormView: View {
             isLeft = currentQuadrant.isFromLeft(stack: quadrantStack)
         }
 
-   //     print("start: \(startLocationAngle), end:\(endLocationAngle), isLeft:\(isLeft) , \(quadrantStack)   angle")
         if endLocationAngle < startLocationAngle && !isLeft {
             endLocationAngle += .radianRound
         }
@@ -229,7 +225,6 @@ struct SectorFormView: View {
             startLocationAngle += .radianRound
         }
 
-     //   print("result start: \(startLocationAngle), end:\(endLocationAngle), isLeft:\(isLeft)   angle")
         return endLocationAngle - startLocationAngle
     }
 

@@ -141,7 +141,7 @@ func whereIsMySQLite() {
         .replacingOccurrences(of: "file://", with: "")
         .removingPercentEncoding
 
-    print("check out lLLL\(path ?? "Not found")")
+    print("check out \(path ?? "Not found")")
 }
 
 private func setNotification(context: NSManagedObjectContext) {

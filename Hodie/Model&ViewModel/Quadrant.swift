@@ -65,7 +65,6 @@ enum Quadrant {
     }
 
     func isFromLeft(stack: [Quadrant]) -> Bool {
-        print("angle isLeft: \(self)")
         switch stack[0] {
         case .one:
             return stack[1] == (.four)

@@ -12,7 +12,7 @@ struct HListCalendarView: View {
     @Binding var yearAndMonth: Date
 
     var isCurrentMonth: Bool {
-        yearAndMonth.datesOfMonth.contains(date)
+        yearAndMonth.datesOfMonth.contains(date.startOfDay)
     }
 
     var body: some View {

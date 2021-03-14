@@ -79,7 +79,6 @@ struct TaskEditorView: View {
                         .onChange(of: textData.taskMemo) { value in
                             textData.taskMemo = limitedText(value: value, limit: Scheduler.memolimit)
                         }
-
                 }
 
                 Section {
@@ -107,7 +106,13 @@ struct TaskEditorView: View {
                 }
             }
         }
+        .onTapGesture {
+            endEditing()
+        }
 
+    }
+    private func endEditing() {
+            UIApplication.shared.endEditing()
     }
 
     @discardableResult
